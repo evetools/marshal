@@ -552,9 +552,15 @@ public class Reader {
 	protected PyBase loadBuffer() throws IOException {
 		final int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
-
+		
 		// check for size is lame need a proper method
-		if ((bytes[0] == 0x78) && (bytes.length > 10)) {
+		if (bytes[0] == 0x78) {
+			
+			String str = new String(bytes);
+			
+			System.out.println("zlib");
+			System.out.println(str.toString());
+			
 			final byte[] zlibbytes = new byte[bytes.length + 1];
 
 			for (int loop = 0; loop < bytes.length; loop++) {
@@ -567,7 +573,8 @@ public class Reader {
 
 			boolean success = false;
 			final ZStream zstream = new ZStream();
-
+			int res = 0;
+			
 			while (!success) {
 
 				zout = new byte[zlen];
@@ -584,12 +591,17 @@ public class Reader {
 				while ((zstream.total_out < zlen)
 						&& (zstream.total_in < zlibbytes.length)) {
 					zstream.avail_in = zstream.avail_out = 1;
-					if (zstream.inflate(JZlib.Z_NO_FLUSH) == JZlib.Z_STREAM_END) {
+					res = zstream.inflate(JZlib.Z_NO_FLUSH);
+					if (res == JZlib.Z_STREAM_END) {
 						success = true;
 						break;
 					}
+					
+					if (res == JZlib.Z_DATA_ERROR) {
+						return new PyBuffer(bytes);
+					}
 				}
-
+				
 				if (zstream.total_out < zlen) {
 					break;
 				}
