@@ -1,0 +1,14 @@
+Copyright (C)2011 by Gregor Anders
+All rights reserved.
+
+This sortware is a EVE Online cache/bulkdata reading library written in JAVA.
+
+I would like to thank Jamie "Entity" van den Berge for providing usefull 
+information.
+
+If you want a full functional tool for handling EVE Online cache/bulkdata 
+please use reverence - https://github.com/ntt/reverence.
+
+Content of Strings.java copied from reverence.
+
+EVE Online is a registered trademark of CCP hf.
