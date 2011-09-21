@@ -6,7 +6,7 @@ import java.net.URL;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.github.evetools.marshal.reader.MarketOrderBests;
+import com.github.evetools.marshal.reader.MarketOrdersHistory;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -21,13 +21,14 @@ public class MarketOrdersHistoryTest {
 	@Test
 	public void testRead() throws Exception {
 		
-		URL url = this.getClass().getResource("/15f9.cache");
+		URL url = this.getClass().getResource("/5533.cache");
 		File file = new File(url.getFile());
 		
 		Assert.assertTrue(file.isFile());
 		
-		MarketOrderBests marketOrderBests = new MarketOrderBests(file);		
-		marketOrderBests.read();
+		MarketOrdersHistory marketOrdersHistory = new MarketOrdersHistory(file);		
+		marketOrdersHistory.read();
+
 	}
 
 }
