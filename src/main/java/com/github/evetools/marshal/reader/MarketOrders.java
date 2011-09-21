@@ -14,6 +14,14 @@ import com.github.evetools.marshal.python.PyPackedRow;
 import com.github.evetools.marshal.python.PyString;
 import com.github.evetools.marshal.python.PyTuple;
 
+/**
+ * Copyright (C)2011 by Gregor Anders
+ * All rights reserved.
+ *
+ * This code is free software; you can redistribute it and/or modify
+ * it under the terms of the BSD license (see the file LICENSE.txt
+ * included with the distribution).
+ */
 public class MarketOrders {
 
 	private Reader reader;
