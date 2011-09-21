@@ -47,6 +47,11 @@ public class PyDict extends PyBase {
 	public PyBase get(Object key) {
 		return this.map.get(key);
 	}
+	
+	public PyBase get(String key) {
+		return this.map.get(new PyString(key));
+	}
+
 
 	@Override
 	public int hashCode() {
