@@ -30,7 +30,7 @@ public class MarketOrderBests {
 
 	private long timestamp;
 
-	public class MarketOrderHistory {
+	public static class MarketOrderHistory {
 
 		private double volRemaining;
 		private short typeID;

@@ -33,7 +33,7 @@ public class MarketOrders {
 
 	private long timestamp;
 
-	public class MarketOrder {
+	public static class MarketOrder {
 
 		private boolean bid;
 
