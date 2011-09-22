@@ -13,6 +13,7 @@ import com.github.evetools.marshal.python.PyObjectEx;
 import com.github.evetools.marshal.python.PyPackedRow;
 import com.github.evetools.marshal.python.PyString;
 import com.github.evetools.marshal.python.PyTuple;
+import java.io.InputStream;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -25,22 +26,22 @@ import com.github.evetools.marshal.python.PyTuple;
 public class MarketOrdersHistory {
 
 	private Reader reader;
-	
+
 	private long regionID;
-	
+
 	private long typeID;
-	
+
 	private long timestamp;
 
 	public class MarketOrderHistory {
-		
+
 		private long avgPrice;
 		private long highPrice;
 		private long lowPrice;
-		
+
 		private long orders;
 		private long volume;
-		
+
 		private long historyDate;
 
 		public long getAvgPrice() {
@@ -90,15 +91,15 @@ public class MarketOrdersHistory {
 		public void setHistoryDate(long historyDate) {
 			this.historyDate = historyDate;
 		}
-		
-		
-		
-		
+
+
+
+
 	};
-	
+
 	private Collection<MarketOrderHistory> entries;
-	
-	
+
+
 	public Reader getReader() {
 		return reader;
 	}
@@ -119,12 +120,15 @@ public class MarketOrdersHistory {
 		return entries;
 	}
 
-	public MarketOrdersHistory(File file) throws Exception {		
+	public MarketOrdersHistory(InputStream inputStream) throws Exception {
+		this.reader = new Reader(inputStream);
+	}
+	public MarketOrdersHistory(File file) throws Exception {
 		this.reader = new Reader(file);
 	}
-	
+
 	public void read() throws Exception {
-		
+
 		PyBase pyBase = this.reader.read();
 
 		PyTuple tuple1 = pyBase.asTuple();
@@ -134,17 +138,17 @@ public class MarketOrdersHistory {
 		PyList list = null;
 		PyObjectEx objectEx = null;
 		PyString string = null;
-		
+
 		if (tuple1 == null) {
 			throw new RuntimeException("Invalid element: " + pyBase.getType());
 		}
-		
+
 		tuple2 = tuple1.get(0).asTuple();
-		
+
 		if (tuple2 == null) {
 			throw new RuntimeException("Invalid element: " + tuple1.get(0).getType());
 		}
-		
+
 		if (tuple2.get(0).isString()) {
 			string = tuple2.get(0).asString();
 		} else if (tuple2.get(0).isBuffer()) {
@@ -152,15 +156,15 @@ public class MarketOrdersHistory {
 		} else {
 			string = null;
 		}
-		
+
 		if (string == null) {
 			throw new RuntimeException("Invalid element: " + tuple2.get(0).getType());
 		}
-		
+
 		if (!string.toString().equals("marketProxy")) {
 			throw new RuntimeException("Invalid element content: " + string + " expeced: marketProxy");
 		}
-		
+
 		if (tuple2.get(1).isString()) {
 			string = tuple2.get(1).asString();
 		} else if (tuple2.get(1).isBuffer()) {
@@ -168,17 +172,17 @@ public class MarketOrdersHistory {
 		} else {
 			string = null;
 		}
-		
+
 		if (string == null) {
 			throw new RuntimeException("Invalid element: " + tuple2.get(1).getType());
 		}
-		
+
 		if (!string.toString().equals("GetOldPriceHistory")) {
 			throw new RuntimeException("Invalid element content: " + string + " expeced: GetOldPriceHistory");
 		}
-		
+
 		switch (tuple2.get(2).getType()) {
-		
+
 		case INT8:
 			this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
 			break;
@@ -194,9 +198,9 @@ public class MarketOrdersHistory {
 		default:
 			throw new RuntimeException("Invalid element: " + tuple2.getType());
 		}
-		
+
 		switch (tuple2.get(3).getType()) {
-		
+
 		case INT8:
 			this.typeID = tuple2.get(3).asByte().getValue() & 0xFF;
 			break;
@@ -212,79 +216,79 @@ public class MarketOrdersHistory {
 		default:
 			throw new RuntimeException("Invalid element: " + tuple2.getType());
 		}
-		
+
 		dict = tuple1.get(1).asDict();
-		
+
 		if (dict == null) {
 			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
 		}
-		
+
 		base = dict.get(new PyString("version"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
 		}
-		
+
 		list = base.asList();
 
 		if (list == null) {
 			throw new RuntimeException("Invalid element: " + base.getType());
 		}
-		
+
 		if (list.get(0).asLong() == null) {
 			throw new RuntimeException("Invalid element: " + list.get(0).getType());
 		}
-		
+
 		this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong().getValue());
-		
+
 		base = dict.get(new PyString("lret"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
 		}
-		
+
 		objectEx = base.asObjectEx();
-		
+
 		if (objectEx == null) {
 			throw new RuntimeException("Invalid element: " + base.getType());
 		}
-		
+
 		this.entries = new ArrayList<MarketOrdersHistory.MarketOrderHistory>();
-		
+
 		this.read(objectEx);
 	}
-	
+
 	protected void read(PyObjectEx object) throws Exception {
-		
+
 		if (object == null) {
 			throw new NullPointerException("invalid PyObjectEx");
 		}
-		
+
 		PyList list = object.getList();
 
 		for (Iterator<PyBase> iterator = list.iterator(); iterator.hasNext();) {
 			PyBase type = (PyBase) iterator.next();
-			
+
 			if (!type.isPackedRow()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
 			}
-			
+
 			this.read(type.asPackedRow());
 		}
 	}
-	
+
 	protected void read(PyPackedRow object) throws Exception {
-		
+
 		if (object == null) {
 			throw new NullPointerException("invalid PyPackedRow");
 		}
-		
+
 		PyDict dict = object.getColumns();
-		
+
 		if (dict == null) {
 			throw new NullPointerException("Empty PyPackedRow");
 		}
-		
+
 		MarketOrderHistory entry = new MarketOrderHistory();
 		entry.setAvgPrice(dict.get("avgPrice").asLong().getValue());
 		entry.setHighPrice(dict.get("highPrice").asLong().getValue());
@@ -292,7 +296,7 @@ public class MarketOrdersHistory {
 		entry.setOrders(dict.get("orders").asInt().getValue());
 		entry.setVolume(dict.get("volume").asLong().getValue());
 		entry.setHistoryDate(dict.get("historyDate").asLong().getValue());
-		
+
 		this.entries.add(entry);
-	}	
+	}
 }

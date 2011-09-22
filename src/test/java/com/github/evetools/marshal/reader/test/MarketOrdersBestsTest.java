@@ -1,12 +1,9 @@
 package com.github.evetools.marshal.reader.test;
 
-import java.io.File;
-import java.net.URL;
-
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
-
 import com.github.evetools.marshal.reader.MarketOrderBests;
+import java.io.InputStream;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -20,13 +17,9 @@ public class MarketOrdersBestsTest {
 
 	@Test
 	public void testRead() throws Exception {
-		
-		URL url = this.getClass().getResource("/15f9.cache");
-		File file = new File(url.getFile());
-		
-		Assert.assertTrue(file.isFile());
-		
-		MarketOrderBests marketOrderBests = new MarketOrderBests(file);		
+		InputStream in = MarketOrdersBestsTest.class.getResourceAsStream("/15f9.cache");
+		assertNotNull(in);
+		MarketOrderBests marketOrderBests = new MarketOrderBests(in);
 		marketOrderBests.read();
 	}
 

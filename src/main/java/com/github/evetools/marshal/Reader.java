@@ -1,17 +1,5 @@
 package com.github.evetools.marshal;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Map;
-import java.util.HashMap;
-
-
 import com.github.evetools.marshal.python.PyBase;
 import com.github.evetools.marshal.python.PyBool;
 import com.github.evetools.marshal.python.PyBuffer;
@@ -33,6 +21,18 @@ import com.github.evetools.marshal.python.PyString;
 import com.github.evetools.marshal.python.PyTuple;
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -503,24 +503,22 @@ public class Reader {
 	}
 
 	public Reader(File file) throws IOException {
+		this(new FileInputStream(file));
+	}
 
-		final FileInputStream stream = new FileInputStream(file);
+	public Reader(InputStream stream) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		if (file.length() > Integer.MAX_VALUE) {
-			throw new IOException(file.getAbsolutePath() + " too large");
-		}
+		final byte[] bytes = new byte[4096];
 
-		final byte[] bytes = new byte[(int) file.length()];
-
-		if (stream.read(bytes, 0, (int) file.length()) != file.length()) {
-			stream.close();
-			throw new IOException(file.getAbsolutePath()
-					+ " could not be read into memory");
+		int read = -1;
+		while (0 <= (read = stream.read(bytes))) {
+			baos.write(bytes, 0, read);
 		}
 
 		stream.close();
 
-		this.buffer = new Buffer(bytes);
+		this.buffer = new Buffer(baos.toByteArray());
 	}
 
 	protected PyDBRowDescriptor toDBRowDescriptor(PyBase base)

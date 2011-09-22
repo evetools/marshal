@@ -13,6 +13,7 @@ import com.github.evetools.marshal.python.PyObjectEx;
 import com.github.evetools.marshal.python.PyPackedRow;
 import com.github.evetools.marshal.python.PyString;
 import com.github.evetools.marshal.python.PyTuple;
+import java.io.InputStream;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -25,39 +26,39 @@ import com.github.evetools.marshal.python.PyTuple;
 public class MarketOrders {
 
 	private Reader reader;
-	
+
 	private long regionID;
-	
+
 	private long typeID;
-	
+
 	private long timestamp;
 
 	public class MarketOrder {
-		
+
 		private boolean bid;
-		
+
 		private int typeID;
-		
+
 		private short range;
-		
+
 		private long price;
-		
+
 		private long  orderID;
-		
+
 		private long  issueDate;
-		
+
 		private int stationID;
-		
+
 		private int regionID;
-		
+
 		private short duration;
-		
+
 		private int jumps;
-		
+
 		private long minVolume;
-		
+
 		private long volEntered;
-		
+
 		private double volRemaining;
 
 		public boolean isBid() {
@@ -174,13 +175,13 @@ public class MarketOrders {
 					+ minVolume + ", volEntered=" + volEntered
 					+ ", volRemaining=" + volRemaining + "]";
 		}
-		
-		
+
+
 	};
-	
+
 	private Collection<MarketOrder> orders;
-	
-	
+
+
 	public Reader getReader() {
 		return reader;
 	}
@@ -201,12 +202,16 @@ public class MarketOrders {
 		return orders;
 	}
 
-	public MarketOrders(File file) throws Exception {		
+	public MarketOrders(File file) throws Exception {
 		this.reader = new Reader(file);
 	}
-	
+
+	public MarketOrders(InputStream inputStream) throws Exception {
+		this.reader = new Reader(inputStream);
+	}
+
 	public void read() throws Exception {
-		
+
 		PyBase pyBase = this.reader.read();
 
 		PyTuple tuple1 = pyBase.asTuple();
@@ -215,17 +220,17 @@ public class MarketOrders {
 		PyBase base = null;
 		PyList list = null;
 		PyString string = null;
-		
+
 		if (tuple1 == null) {
 			throw new RuntimeException("Invalid element: " + pyBase.getType());
 		}
-		
+
 		tuple2 = tuple1.get(0).asTuple();
-		
+
 		if (tuple2 == null) {
 			throw new RuntimeException("Invalid element: " + tuple1.get(0).getType());
 		}
-		
+
 		if (tuple2.get(0).isString()) {
 			string = tuple2.get(0).asString();
 		} else if (tuple2.get(0).isBuffer()) {
@@ -233,15 +238,15 @@ public class MarketOrders {
 		} else {
 			string = null;
 		}
-		
+
 		if (string == null) {
 			throw new RuntimeException("Invalid element: " + tuple2.get(0).getType());
 		}
-		
+
 		if (!string.toString().equals("marketProxy")) {
 			throw new RuntimeException("Invalid element content: " + string + " expeced: marketProxy");
 		}
-		
+
 		if (tuple2.get(1).isString()) {
 			string = tuple2.get(1).asString();
 		} else if (tuple2.get(1).isBuffer()) {
@@ -249,17 +254,17 @@ public class MarketOrders {
 		} else {
 			string = null;
 		}
-		
+
 		if (string == null) {
 			throw new RuntimeException("Invalid element: " + tuple2.get(1).getType());
 		}
-		
+
 		if (!string.toString().equals("GetOrders")) {
 			throw new RuntimeException("Invalid element content: " + string + " expeced: GetOrders");
 		}
-		
+
 		switch (tuple2.get(2).getType()) {
-		
+
 		case INT8:
 			this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
 			break;
@@ -275,9 +280,9 @@ public class MarketOrders {
 		default:
 			throw new RuntimeException("Invalid element: " + tuple2.getType());
 		}
-		
+
 		switch (tuple2.get(3).getType()) {
-		
+
 		case INT8:
 			this.typeID = tuple2.get(3).asByte().getValue() & 0xFF;
 			break;
@@ -293,91 +298,91 @@ public class MarketOrders {
 		default:
 			throw new RuntimeException("Invalid element: " + tuple2.getType());
 		}
-		
+
 		dict = tuple1.get(1).asDict();
-		
+
 		if (dict == null) {
 			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
 		}
-		
+
 		base = dict.get(new PyString("version"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
 		}
-		
+
 		list = base.asList();
 
 		if (list == null) {
 			throw new RuntimeException("Invalid element: " + base.getType());
 		}
-		
+
 		if (list.get(0).asLong() == null) {
 			throw new RuntimeException("Invalid element: " + list.get(0).getType());
 		}
-		
+
 		this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong().getValue());
-		
+
 		base = dict.get(new PyString("lret"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
 		}
-		
+
 		list = base.asList();
-		
+
 		if (list == null) {
 			throw new RuntimeException("Invalid element: " + base.getType());
 		}
-		
+
 		if (list.size() != 2) {
 			throw new RuntimeException("Invalid list size: " + list.size());
 		}
-		
+
 		this.orders = new ArrayList<MarketOrders.MarketOrder>();
-		
+
 		for (Iterator<PyBase> iterator = list.iterator(); iterator.hasNext();) {
 			PyBase type = (PyBase) iterator.next();
-			
+
 			if (!type.isObjectEx()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
 			}
-			
+
 			this.read(type.asObjectEx());
 		}
 	}
-	
+
 	protected void read(PyObjectEx object) throws Exception {
-		
+
 		if (object == null) {
 			throw new NullPointerException("invalid PyObjectEx");
 		}
-		
+
 		PyList list = object.getList();
 
 		for (Iterator<PyBase> iterator = list.iterator(); iterator.hasNext();) {
 			PyBase type = (PyBase) iterator.next();
-			
+
 			if (!type.isPackedRow()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
 			}
-			
+
 			this.read(type.asPackedRow());
 		}
 	}
-	
+
 	protected void read(PyPackedRow object) throws Exception {
-		
+
 		if (object == null) {
 			throw new NullPointerException("invalid PyPackedRow");
 		}
-		
+
 		PyDict dict = object.getColumns();
-		
+
 		if (dict == null) {
 			throw new NullPointerException("Empty PyPackedRow");
 		}
-		
+
 		MarketOrder order = new MarketOrder();
 		order.setBid(dict.get("bid").asBool().getValue());
 		order.setTypeID(dict.get("typeID").asInt().getValue());
@@ -391,7 +396,7 @@ public class MarketOrders {
 		order.setMinVolume(dict.get("minVolume").asInt().getValue());
 		order.setVolEntered(dict.get("volEntered").asInt().getValue());
 		order.setVolRemaining(dict.get("volRemaining").asDouble().getValue());
-		
+
 		this.orders.add(order);
-	}	
+	}
 }

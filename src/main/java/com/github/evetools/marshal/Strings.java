@@ -10,13 +10,13 @@ package com.github.evetools.marshal;
  */
 public final class Strings {
 
-  private Strings() {
-    throw new AssertionError("This constructor must not be called, this class is a static utility class.");
-  }
+	private Strings() {
+		throw new AssertionError("This constructor must not be called, this class is a static utility class.");
+	}
 
-  public static String get(int i) {
-    return STRINGS[i];
-  }
+	public static String get(int i) {
+		return STRINGS[i];
+	}
 
 	private final static String[] STRINGS = {
 			"invalid strings index - null",
