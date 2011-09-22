@@ -8,9 +8,17 @@ package com.github.evetools.marshal;
  * it under the terms of the BSD license (see the file LICENSE.txt
  * included with the distribution).
  */
-public class Strings {
+public final class Strings {
 
-	public final static String[] strings = {
+  private Strings() {
+    throw new AssertionError("This constructor must not be called, this class is a static utility class.");
+  }
+
+  public static String get(int i) {
+    return STRINGS[i];
+  }
+
+	private final static String[] STRINGS = {
 			"invalid strings index - null",
 			"*corpid",
 			"*locationid",
