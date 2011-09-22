@@ -560,7 +560,7 @@ public class Reader {
 			System.out.println(str.toString());
 
 			final byte[] zlibbytes = new byte[bytes.length + 1];
-      System.arraycopy(bytes, 0, zlibbytes, 0, bytes.length);
+			System.arraycopy(bytes, 0, zlibbytes, 0, bytes.length);
 			zlibbytes[zlibbytes.length - 1] = 0;
 
 			int zlen = zlibbytes.length * 2;
