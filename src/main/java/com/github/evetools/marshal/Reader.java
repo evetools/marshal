@@ -48,7 +48,7 @@ public class Reader {
 
 		private final ByteBuffer buffer;
 
-		public Buffer(byte[] bytes) {
+		Buffer(byte[] bytes) {
 			this.buffer = ByteBuffer.wrap(bytes);
 			this.buffer.order(ByteOrder.LITTLE_ENDIAN);
 		}
