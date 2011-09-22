@@ -498,7 +498,7 @@ public class Reader {
 
 	private int type;
 
-	protected Reader(Buffer buffer) throws IOException {
+	private Reader(Buffer buffer) throws IOException {
 		this.buffer = buffer;
 	}
 
