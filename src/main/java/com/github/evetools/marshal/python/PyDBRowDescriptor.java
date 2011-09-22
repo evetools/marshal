@@ -34,24 +34,24 @@ public class PyDBRowDescriptor extends PyBase {
 		this.size = 0;
 
 		this.dbtypes = new HashMap<Integer, PyDBRowDescriptor.DBRowType>();
-		this.dbtypes.put(new Integer(2), DBRowType.INT16);
-		this.dbtypes.put(new Integer(3), DBRowType.INT32);
-		this.dbtypes.put(new Integer(5), DBRowType.DOUBLE);
-		this.dbtypes.put(new Integer(6), DBRowType.CURRENCY);
-		this.dbtypes.put(new Integer(11), DBRowType.BOOL);
-		this.dbtypes.put(new Integer(17), DBRowType.UINT8);
-		this.dbtypes.put(new Integer(20), DBRowType.INT64);
-		this.dbtypes.put(new Integer(64), DBRowType.WINFILETIME);
-		this.dbtypes.put(new Integer(129), DBRowType.STRING);
-		this.dbtypes.put(new Integer(130), DBRowType.STRING);
+		this.dbtypes.put(Integer.valueOf(2), DBRowType.INT16);
+		this.dbtypes.put(Integer.valueOf(3), DBRowType.INT32);
+		this.dbtypes.put(Integer.valueOf(5), DBRowType.DOUBLE);
+		this.dbtypes.put(Integer.valueOf(6), DBRowType.CURRENCY);
+		this.dbtypes.put(Integer.valueOf(11), DBRowType.BOOL);
+		this.dbtypes.put(Integer.valueOf(17), DBRowType.UINT8);
+		this.dbtypes.put(Integer.valueOf(20), DBRowType.INT64);
+		this.dbtypes.put(Integer.valueOf(64), DBRowType.WINFILETIME);
+		this.dbtypes.put(Integer.valueOf(129), DBRowType.STRING);
+		this.dbtypes.put(Integer.valueOf(130), DBRowType.STRING);
 
 		this.typeMap = new TreeMap<Integer, ArrayList<PyBase>>();
-		this.typeMap.put(new Integer(0), new ArrayList<PyBase>()); // 64
-		this.typeMap.put(new Integer(1), new ArrayList<PyBase>()); // 32
-		this.typeMap.put(new Integer(2), new ArrayList<PyBase>()); // 16
-		this.typeMap.put(new Integer(3), new ArrayList<PyBase>()); // 8
-		this.typeMap.put(new Integer(4), new ArrayList<PyBase>()); // bool
-		this.typeMap.put(new Integer(5), new ArrayList<PyBase>()); // String
+		this.typeMap.put(Integer.valueOf(0), new ArrayList<PyBase>()); // 64
+		this.typeMap.put(Integer.valueOf(1), new ArrayList<PyBase>()); // 32
+		this.typeMap.put(Integer.valueOf(2), new ArrayList<PyBase>()); // 16
+		this.typeMap.put(Integer.valueOf(3), new ArrayList<PyBase>()); // 8
+		this.typeMap.put(Integer.valueOf(4), new ArrayList<PyBase>()); // bool
+		this.typeMap.put(Integer.valueOf(5), new ArrayList<PyBase>()); // String
 
 		this.init(object);
 	}
@@ -100,34 +100,34 @@ public class PyDBRowDescriptor extends PyBase {
 					dbtype = (((PyShort) info.get(1)).getValue());
 				}
 
-				if (!this.dbtypes.containsKey(new Integer(dbtype))) {
+				if (!this.dbtypes.containsKey(Integer.valueOf(dbtype))) {
 					throw new IOException("Invalid DBRowType: " + dbtype);
 				}
 
-				switch (this.dbtypes.get(new Integer(dbtype))) {
+				switch (this.dbtypes.get(Integer.valueOf(dbtype))) {
 				case UINT8:
 					this.size += 1;
-					this.typeMap.get(new Integer(3)).add(type);
+					this.typeMap.get(Integer.valueOf(3)).add(type);
 					break;
 				case INT16:
 					this.size += 2;
-					this.typeMap.get(new Integer(2)).add(type);
+					this.typeMap.get(Integer.valueOf(2)).add(type);
 					break;
 				case INT32:
 					this.size += 4;
-					this.typeMap.get(new Integer(1)).add(type);
+					this.typeMap.get(Integer.valueOf(1)).add(type);
 					break;
 				case DOUBLE:
 				case INT64:
 				case WINFILETIME:
 				case CURRENCY:
 					this.size += 8;
-					this.typeMap.get(new Integer(0)).add(type);
+					this.typeMap.get(Integer.valueOf(0)).add(type);
 					break;
 				case BOOL:
 					if (boolcount == 0) {
 						this.size += 1;
-						this.typeMap.get(new Integer(4)).add(type);
+						this.typeMap.get(Integer.valueOf(4)).add(type);
 					}
 					boolcount++;
 					if (boolcount == 8) {
@@ -135,7 +135,7 @@ public class PyDBRowDescriptor extends PyBase {
 					}
 					break;
 				case STRING:
-					this.typeMap.get(new Integer(5)).add(type);
+					this.typeMap.get(Integer.valueOf(5)).add(type);
 					break;
 				default:
 					throw new IOException("Not implemented DBRowType: "

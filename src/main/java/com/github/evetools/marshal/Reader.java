@@ -755,7 +755,7 @@ public class Reader {
 
 		final Buffer outbuf = new Buffer(out);
 
-		ArrayList<PyBase> list = desc.getTypeMap().get(new Integer(0));
+		ArrayList<PyBase> list = desc.getTypeMap().get(Integer.valueOf(0));
 
 		for (final PyBase pyBase : list) {
 			final PyTuple tuple = pyBase.asTuple();
@@ -766,28 +766,28 @@ public class Reader {
 			}
 		}
 
-		list = desc.getTypeMap().get(new Integer(1));
+		list = desc.getTypeMap().get(Integer.valueOf(1));
 
 		for (final PyBase pyBase : list) {
 			final PyTuple tuple = pyBase.asTuple();
 			base.put(tuple.get(0), new PyInt(outbuf.readInt()));
 		}
 
-		list = desc.getTypeMap().get(new Integer(2));
+		list = desc.getTypeMap().get(Integer.valueOf(2));
 
 		for (final PyBase pyBase : list) {
 			final PyTuple tuple = pyBase.asTuple();
 			base.put(tuple.get(0), new PyShort(outbuf.readShort()));
 		}
 
-		list = desc.getTypeMap().get(new Integer(3));
+		list = desc.getTypeMap().get(Integer.valueOf(3));
 
 		for (final PyBase pyBase : list) {
 			final PyTuple tuple = pyBase.asTuple();
 			base.put(tuple.get(0), new PyByte(outbuf.readByte()));
 		}
 
-		list = desc.getTypeMap().get(new Integer(4));
+		list = desc.getTypeMap().get(Integer.valueOf(4));
 
 		int boolcount = 0;
 		int boolvalue = 0;
@@ -809,7 +809,7 @@ public class Reader {
 			}
 		}
 
-		list = desc.getTypeMap().get(new Integer(5));
+		list = desc.getTypeMap().get(Integer.valueOf(5));
 
 		for (final PyBase pyBase : list) {
 			final PyTuple tuple = pyBase.asTuple();
@@ -834,10 +834,10 @@ public class Reader {
 			if ((pyBase.isGlobal())
 					&& (pyBase.asGlobal().getValue().endsWith(
 							"blue.DBRowDescriptor"))) {
-				this.shared.put(new Integer(this.sharedBuffer.readInt()),
+				this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()),
 						this.latest);
 			} else {
-				this.shared.put(new Integer(this.sharedBuffer.readInt()), pyBase);
+				this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyBase);
 			}
 		}
 
@@ -845,7 +845,7 @@ public class Reader {
 	}
 
 	protected PyBase loadReference() throws IOException {
-		return this.shared.get(new Integer(this.length()));
+		return this.shared.get(Integer.valueOf(this.length()));
 	}
 
 	protected PyBase loadShort() throws IOException {
