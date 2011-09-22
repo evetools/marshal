@@ -213,7 +213,7 @@ public class MarketOrderBests {
 		PyDict dict = object.getDict();
 
 		for (Iterator<PyBase> iterator = dict.keySet().iterator(); iterator.hasNext();) {
-			PyBase type = (PyBase) iterator.next();
+			PyBase type = iterator.next();
 
 			if (!type.isPackedRow()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
