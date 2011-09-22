@@ -674,22 +674,17 @@ public class Reader {
 	}
 
 	protected PyBase loadList(int size) throws IOException {
-
 		final PyList tuple = new PyList();
-
 		PyBase base = null;
-
-		while (size > 0) {
+		int curSize = size;
+		while (curSize > 0) {
 			base = this.loadPy();
-
 			if (base == null) {
 				throw new IOException("null element in list found");
 			}
-
 			tuple.add(base);
-			size--;
+			curSize--;
 		}
-
 		return tuple;
 	}
 
@@ -889,22 +884,17 @@ public class Reader {
 	}
 
 	protected PyBase loadTuple(int size) throws IOException {
-
 		final PyTuple tuple = new PyTuple();
-
 		PyBase base = null;
-
-		while (size > 0) {
+		int curSize = size;
+		while (curSize > 0) {
 			base = this.loadPy();
-
 			if (base == null) {
 				throw new IOException("null element in tuple found");
 			}
-
 			tuple.add(base);
-			size--;
+			curSize--;
 		}
-
 		return tuple;
 	}
 
