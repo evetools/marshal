@@ -546,7 +546,7 @@ public class Reader {
 			zlibbytes[zlibbytes.length - 1] = 0;
 
 			int zlen = zlibbytes.length * 2;
-			byte[] zout = new byte[zlen];
+			byte[] zout;
 
 			boolean success = false;
 			final ZStream zstream = new ZStream();
