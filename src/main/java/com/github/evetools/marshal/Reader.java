@@ -539,13 +539,7 @@ public class Reader {
 		final int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
 
-		// check for size is lame need a proper method
 		if (bytes[0] == 0x78) {
-
-			String str = new String(bytes);
-
-			System.out.println("zlib");
-			System.out.println(str.toString());
 
 			final byte[] zlibbytes = new byte[bytes.length + 1];
 			System.arraycopy(bytes, 0, zlibbytes, 0, bytes.length);
