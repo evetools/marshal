@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyBuffer extends PyBase {
 
-	protected byte[] value;
+	private byte[] value;
 
 	public PyBuffer(byte[] bytes) {
 		super(types.BUFFER);
