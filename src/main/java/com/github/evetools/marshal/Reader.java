@@ -53,10 +53,6 @@ public class Reader {
 			this.buffer.order(ByteOrder.LITTLE_ENDIAN);
 		}
 
-		private void advancePosition(int size) {
-			this.buffer.position(this.buffer.position() + size);
-		}
-
 		public final int length() {
 			return this.buffer.array().length;
 		}
@@ -91,27 +87,19 @@ public class Reader {
 		}
 
 		public final double readDouble() {
-			final double value = this.buffer.asDoubleBuffer().get();
-			this.advancePosition(8);
-			return value;
+			return this.buffer.getDouble();
 		}
 
 		public final int readInt() {
-			final int value = this.buffer.asIntBuffer().get();
-			this.advancePosition(4);
-			return value;
+			return this.buffer.getInt();
 		}
 
 		public final long readLong() {
-			final long value = this.buffer.asLongBuffer().get();
-			this.advancePosition(8);
-			return value;
+			return this.buffer.getLong();
 		}
 
 		public final short readShort() {
-			final short value = this.buffer.asShortBuffer().get();
-			this.advancePosition(2);
-			return value;
+			return this.buffer.getShort();
 		}
 	}
 
