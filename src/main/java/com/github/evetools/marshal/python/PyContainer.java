@@ -42,12 +42,7 @@ abstract public class PyContainer extends PyBase {
 		this.container.clear();
 	}
 
-	@Override
-	public Object clone() {
-		return this.container.clone();
-	}
-
-	public boolean contains(Object o) {
+	public boolean contains(PyBase o) {
 		return this.container.contains(o);
 	}
 
@@ -122,7 +117,7 @@ abstract public class PyContainer extends PyBase {
 		return this.container.remove(index);
 	}
 
-	public boolean remove(Object o) {
+	public boolean remove(PyBase o) {
 		return this.container.remove(o);
 	}
 
