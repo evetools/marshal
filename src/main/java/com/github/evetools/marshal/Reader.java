@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Hashtable;
 import java.util.Map;
+import java.util.HashMap;
 
 
 import com.github.evetools.marshal.python.PyBase;
@@ -44,7 +44,7 @@ import com.jcraft.jzlib.ZStream;
  */
 public class Reader {
 
-	private class Buffer {
+	private static class Buffer {
 
 		private final ByteBuffer buffer;
 
@@ -53,7 +53,7 @@ public class Reader {
 			this.buffer.order(ByteOrder.LITTLE_ENDIAN);
 		}
 
-		private final void advancePosition(int size) {
+		private void advancePosition(int size) {
 			this.buffer.position(this.buffer.position() + size);
 		}
 
@@ -498,7 +498,7 @@ public class Reader {
 
 	private int type;
 
-	protected Reader(Buffer buffer) throws IOException {
+	private Reader(Buffer buffer) throws IOException {
 		this.buffer = buffer;
 	}
 
@@ -552,20 +552,17 @@ public class Reader {
 	protected PyBase loadBuffer() throws IOException {
 		final int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
-		
+
 		// check for size is lame need a proper method
 		if (bytes[0] == 0x78) {
-			
+
 			String str = new String(bytes);
-			
+
 			System.out.println("zlib");
 			System.out.println(str.toString());
-			
-			final byte[] zlibbytes = new byte[bytes.length + 1];
 
-			for (int loop = 0; loop < bytes.length; loop++) {
-				zlibbytes[loop] = bytes[loop];
-			}
+			final byte[] zlibbytes = new byte[bytes.length + 1];
+      System.arraycopy(bytes, 0, zlibbytes, 0, bytes.length);
 			zlibbytes[zlibbytes.length - 1] = 0;
 
 			int zlen = zlibbytes.length * 2;
@@ -574,7 +571,7 @@ public class Reader {
 			boolean success = false;
 			final ZStream zstream = new ZStream();
 			int res = 0;
-			
+
 			while (!success) {
 
 				zout = new byte[zlen];
@@ -596,12 +593,12 @@ public class Reader {
 						success = true;
 						break;
 					}
-					
+
 					if (res == JZlib.Z_DATA_ERROR) {
 						return new PyBuffer(bytes);
 					}
 				}
-				
+
 				if (zstream.total_out < zlen) {
 					break;
 				}
@@ -730,7 +727,7 @@ public class Reader {
 	protected PyBase loadNone() throws IOException {
 		return new PyNone();
 	}
-	
+
 	protected PyBase loadMarker() throws IOException {
 		return new PyMarker();
 	}
@@ -884,7 +881,7 @@ public class Reader {
 	}
 
 	protected PyBase loadString0() throws IOException {
-		return new PyString(new String(""));
+		return new PyString("");
 	}
 
 	protected PyBase loadString1() throws IOException {
@@ -892,7 +889,7 @@ public class Reader {
 	}
 
 	protected PyBase loadStringRef() throws IOException {
-		return new PyString(Strings.strings[this.length()]);
+		return new PyString(Strings.get(this.length()));
 	}
 
 	protected PyBase loadSubStream() throws IOException {
@@ -937,7 +934,7 @@ public class Reader {
 	protected PyBase loadTuple2() throws IOException {
 		return this.loadTuple(2);
 	}
-	
+
 	protected PyBase loadUnicode() throws IOException {
 		return new PyString(new String(this.buffer.readBytes(this.length() * 2)));
 	}
@@ -977,7 +974,7 @@ public class Reader {
 		this.buffer.readByte();
 		final int size = this.buffer.readInt();
 
-		this.shared = new Hashtable<Integer, PyBase>(size);
+		this.shared = new HashMap<Integer, PyBase>(size);
 
 		final int offset = this.buffer.length() - (size * 4);
 
