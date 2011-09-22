@@ -44,7 +44,7 @@ import com.jcraft.jzlib.ZStream;
  */
 public class Reader {
 
-	private class Buffer {
+	private static class Buffer {
 
 		private final ByteBuffer buffer;
 
