@@ -2,7 +2,7 @@ package com.github.evetools.marshal.python;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
@@ -33,7 +33,7 @@ public class PyDBRowDescriptor extends PyBase {
 
 		this.size = 0;
 
-		this.dbtypes = new Hashtable<Integer, PyDBRowDescriptor.DBRowType>();
+		this.dbtypes = new HashMap<Integer, PyDBRowDescriptor.DBRowType>();
 		this.dbtypes.put(new Integer(2), DBRowType.INT16);
 		this.dbtypes.put(new Integer(3), DBRowType.INT32);
 		this.dbtypes.put(new Integer(5), DBRowType.DOUBLE);
