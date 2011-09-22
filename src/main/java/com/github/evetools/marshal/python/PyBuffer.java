@@ -14,7 +14,8 @@ public class PyBuffer extends PyBase {
 
 	public PyBuffer(byte[] bytes) {
 		super(types.BUFFER);
-		this.value = bytes;
+		this.value = new byte[bytes.length];
+		System.arraycopy(bytes, 0, this.value, 0, bytes.length);
 	}
 
 	@Override
