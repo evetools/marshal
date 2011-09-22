@@ -567,7 +567,8 @@ public class Reader {
 
 				while ((zstream.total_out < zlen)
 						&& (zstream.total_in < zlibbytes.length)) {
-					zstream.avail_in = zstream.avail_out = 1;
+					zstream.avail_in = 1;
+					zstream.avail_out = 1;
 					res = zstream.inflate(JZlib.Z_NO_FLUSH);
 					if (res == JZlib.Z_STREAM_END) {
 						success = true;
