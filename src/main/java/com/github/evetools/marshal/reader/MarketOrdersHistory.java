@@ -261,7 +261,7 @@ public class MarketOrdersHistory {
 	protected void read(PyObjectEx object) throws Exception {
 
 		if (object == null) {
-			throw new NullPointerException("invalid PyObjectEx");
+			throw new IllegalArgumentException("invalid PyObjectEx");
 		}
 
 		PyList list = object.getList();
@@ -280,13 +280,13 @@ public class MarketOrdersHistory {
 	protected void read(PyPackedRow object) throws Exception {
 
 		if (object == null) {
-			throw new NullPointerException("invalid PyPackedRow");
+			throw new IllegalArgumentException("invalid PyPackedRow");
 		}
 
 		PyDict dict = object.getColumns();
 
 		if (dict == null) {
-			throw new NullPointerException("Empty PyPackedRow");
+			throw new IllegalArgumentException("Empty PyPackedRow");
 		}
 
 		MarketOrderHistory entry = new MarketOrderHistory();
