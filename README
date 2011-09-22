@@ -1,9 +1,9 @@
 Copyright (C)2011 by Gregor Anders
 All rights reserved.
 
-This sortware is a EVE Online cache/bulkdata reading library written in JAVA.
+This sortware is a EVE Online cache/bulkdata reading library written in Java.
 
-I would like to thank Jamie "Entity" van den Berge for providing usefull 
+I would like to thank Jamie "Entity" van den Berge for providing useful 
 information.
 
 If you want a full functional tool for handling EVE Online cache/bulkdata 
