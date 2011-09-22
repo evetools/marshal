@@ -1,5 +1,7 @@
 package com.github.evetools.marshal.python;
 
+import com.google.common.base.Objects;
+
 /**
  * Copyright (C)2011 by Gregor Anders
  * All rights reserved.
@@ -50,11 +52,7 @@ public class PyString extends PyBase {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result)
-				+ ((this.string == null) ? 0 : this.string.hashCode());
-		return result;
+		return Objects.hashCode(string);
 	}
 
 	@Override
