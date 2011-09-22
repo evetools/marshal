@@ -13,6 +13,9 @@ import java.io.File;
  * included with the distribution).
  */
 public class App {
+	private App() {
+		throw new AssertionError("Utility class constructor: App should never ne called.");
+	}
 
 	public static void main(String[] args) {
 
