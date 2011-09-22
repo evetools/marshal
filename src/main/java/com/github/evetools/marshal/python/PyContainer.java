@@ -50,10 +50,6 @@ public abstract class PyContainer extends PyBase {
 		return this.container.containsAll(c);
 	}
 
-	public void ensureCapacity(int minCapacity) {
-		this.container.ensureCapacity(minCapacity);
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -152,10 +148,6 @@ public abstract class PyContainer extends PyBase {
 	@Override
 	public String toString() {
 		return this.container.toString();
-	}
-
-	public void trimToSize() {
-		this.container.trimToSize();
 	}
 
 	@Override
