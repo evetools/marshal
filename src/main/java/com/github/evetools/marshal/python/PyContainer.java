@@ -14,7 +14,7 @@ import java.util.ListIterator;
  * it under the terms of the BSD license (see the file LICENSE.txt
  * included with the distribution).
  */
-abstract public class PyContainer extends PyBase {
+public abstract class PyContainer extends PyBase {
 
 	protected ArrayList<PyBase> container = new ArrayList<PyBase>();
 

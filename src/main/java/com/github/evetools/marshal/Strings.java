@@ -18,7 +18,7 @@ public final class Strings {
 		return STRINGS[i];
 	}
 
-	private final static String[] STRINGS = {
+	private static final String[] STRINGS = {
 			"invalid strings index - null",
 			"*corpid",
 			"*locationid",

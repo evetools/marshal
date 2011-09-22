@@ -8,18 +8,18 @@ package com.github.evetools.marshal.python;
  * it under the terms of the BSD license (see the file LICENSE.txt
  * included with the distribution).
  */
-abstract public class PyBase {
+public abstract class PyBase {
 
 	public static enum types {
 		BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, PACKEDROW, STRING, TUPLE, UNKNOWN
 	};
-	
+
 	public static long convertWindowsTime(long timeStamp) {
 		 return (timeStamp/10000L) - 11644473600000L;
 	}
 
 	private types type = types.UNKNOWN;
-    
+
 	protected PyBase(types type) {
 		this.type = type;
 	}
@@ -215,7 +215,7 @@ abstract public class PyBase {
 			return null;
 		}
 	}
-	
+
 	public boolean isBuffer() {
 		return (this.type == types.BUFFER);
 	}
@@ -228,7 +228,7 @@ abstract public class PyBase {
 		}
 	}
 
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
