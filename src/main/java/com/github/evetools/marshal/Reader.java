@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Hashtable;
 import java.util.Map;
+import java.util.HashMap;
 
 
 import com.github.evetools.marshal.python.PyBase;
@@ -881,7 +881,7 @@ public class Reader {
 	}
 
 	protected PyBase loadString0() throws IOException {
-		return new PyString(new String(""));
+		return new PyString("");
 	}
 
 	protected PyBase loadString1() throws IOException {
@@ -974,7 +974,7 @@ public class Reader {
 		this.buffer.readByte();
 		final int size = this.buffer.readInt();
 
-		this.shared = new Hashtable<Integer, PyBase>(size);
+		this.shared = new HashMap<Integer, PyBase>(size);
 
 		final int offset = this.buffer.length() - (size * 4);
 
