@@ -53,7 +53,7 @@ public class Reader {
 			this.buffer.order(ByteOrder.LITTLE_ENDIAN);
 		}
 
-		private final void advancePosition(int size) {
+		private void advancePosition(int size) {
 			this.buffer.position(this.buffer.position() + size);
 		}
 
