@@ -889,7 +889,7 @@ public class Reader {
 	}
 
 	protected PyBase loadStringRef() throws IOException {
-		return new PyString(Strings.strings[this.length()]);
+		return new PyString(Strings.get(this.length()));
 	}
 
 	protected PyBase loadSubStream() throws IOException {
