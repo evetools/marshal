@@ -480,6 +480,8 @@ public class Reader {
 
 	private Map<Integer, PyBase> shared;
 	
+	private Map<PyBase, PyDBRowDescriptor> descriptors;
+	
 	private Buffer sharedBuffer;
 
 	private int type;
@@ -765,7 +767,11 @@ public class Reader {
 
 		final PyPackedRow base = new PyPackedRow(head, new PyBuffer(bytes));
 
-		final PyDBRowDescriptor desc = this.toDBRowDescriptor(head);
+		if (!this.descriptors.containsKey(head)) {
+			this.descriptors.put(head, this.toDBRowDescriptor(head));
+		}
+		
+		PyDBRowDescriptor desc = this.descriptors.get(head);
 
 		size = desc.size();
 
@@ -861,7 +867,7 @@ public class Reader {
 
 		return pyBase;
 	}
-	
+
 	private PyBase loadReference() throws IOException {
 		PyBase pyBase = this.shared.get(Integer.valueOf(this.length()));
 		
@@ -969,6 +975,7 @@ public class Reader {
 
 		this.shared = new HashMap<Integer, PyBase>(size);
 		this.objects = new Stack<PyBase>();
+		this.descriptors = new HashMap<PyBase, PyDBRowDescriptor>(size);
 
 		final int offset = this.buffer.length() - (size * 4);
 

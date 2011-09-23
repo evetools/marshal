@@ -34,26 +34,8 @@ public class PyObjectEx extends PyBase {
 		this.dict = new PyDict();
 	}
 	
-	public PyBuffer getName() {
-		
-		PyTuple header = this.head.asTuple();
-		PyTuple tuple = header;
-		
-		if (header == null) {
-			throw new RuntimeException("Invalid element: " + this.head.getType());
-		}
-
-		if (tuple.get(0).isGlobal()) {
-			return tuple.get(0).asGlobal();
-		} else if (tuple.get(0).isBuffer()) {
-			return tuple.get(0).asBuffer();
-		} else if (tuple.get(0).isTuple()) {
-			return tuple.get(0).asTuple().get(0).asBuffer();
-		} else if (tuple.get(0).isObjectEx()) {
-			return tuple.get(0).asObjectEx().getName();
-		} else {
-			throw new RuntimeException("Invalid element: " + tuple.get(0).getType());
-		}
+	public boolean isReduce() {
+		return reduce;
 	}
 
 	@Override
