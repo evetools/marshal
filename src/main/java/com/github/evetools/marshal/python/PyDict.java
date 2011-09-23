@@ -1,7 +1,7 @@
 package com.github.evetools.marshal.python;
 
 import java.util.Collection;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,18 +20,18 @@ public class PyDict extends PyBase {
 
 	public PyDict() {
 		super(types.DICT);
-		this.map = new Hashtable<PyBase, PyBase>();
+		this.map = new HashMap<PyBase, PyBase>();
 	}
 
 	public void clear() {
 		this.map.clear();
 	}
 
-	public boolean containsKey(Object key) {
+	public boolean containsKey(PyBase key) {
 		return this.map.containsKey(key);
 	}
 
-	public boolean containsValue(Object value) {
+	public boolean containsValue(PyBase value) {
 		return this.map.containsValue(value);
 	}
 
@@ -44,7 +44,7 @@ public class PyDict extends PyBase {
 		return this.map.equals(o);
 	}
 
-	public PyBase get(Object key) {
+	public PyBase get(PyBase key) {
 		return this.map.get(key);
 	}
 
@@ -74,7 +74,7 @@ public class PyDict extends PyBase {
 		this.map.putAll(m);
 	}
 
-	public PyBase remove(Object key) {
+	public PyBase remove(PyBase key) {
 		return this.map.remove(key);
 	}
 

@@ -32,11 +32,11 @@ public class PyPackedRow extends PyBase {
 		this.columns.clear();
 	}
 
-	public boolean containsKey(Object key) {
+	public boolean containsKey(PyBase key) {
 		return this.columns.containsKey(key);
 	}
 
-	public boolean containsValue(Object value) {
+	public boolean containsValue(PyBase value) {
 		return this.columns.containsValue(value);
 	}
 
@@ -49,7 +49,7 @@ public class PyPackedRow extends PyBase {
 		return this.columns.equals(o);
 	}
 
-	public PyBase get(Object key) {
+	public PyBase get(PyBase key) {
 		return this.columns.get(key);
 	}
 
@@ -86,7 +86,7 @@ public class PyPackedRow extends PyBase {
 		this.columns.putAll(m);
 	}
 
-	public PyBase remove(Object key) {
+	public PyBase remove(PyBase key) {
 		return this.columns.remove(key);
 	}
 
