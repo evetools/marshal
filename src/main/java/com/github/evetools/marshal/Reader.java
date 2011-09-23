@@ -480,8 +480,6 @@ public class Reader {
 
 	private Map<Integer, PyBase> shared;
 	
-	private Map<PyGlobal, PyBase> globals;
-
 	private Buffer sharedBuffer;
 
 	private int type;
@@ -648,14 +646,7 @@ public class Reader {
 
 	private PyBase loadGlobal() throws IOException {
 		final byte[] bytes = this.buffer.readBytes(this.length());
-		PyGlobal global = new PyGlobal(bytes);
-		PyBase object = this.objects.peek();
-		if (object == null) {
-			throw new IOException("Global loaded but no object present");
-		}
-		this.globals.put(global, object);
-		
-		return global;
+		return new PyGlobal(bytes);
 	}
 
 	private PyBase loadInstance() throws IOException {
@@ -855,20 +846,24 @@ public class Reader {
 		this.type = (this.type & 0x3f);
 
 		final PyBase pyBase = this.loadMethods[this.type].read();
-
+		PyBase pyShared = null;
+		
 		if (sharedPy) {
-			this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyBase);
+			
+			if (pyBase.isGlobal()) {
+				pyShared = this.objects.peek();
+			} else {
+				pyShared = pyBase;
+			}
+			
+			this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyShared);
 		}
 
 		return pyBase;
 	}
-
+	
 	private PyBase loadReference() throws IOException {
 		PyBase pyBase = this.shared.get(Integer.valueOf(this.length()));
-		
-		if (pyBase.isGlobal()) {
-			return this.globals.get(pyBase);
-		}
 		
 		return pyBase;
 	}
@@ -973,7 +968,6 @@ public class Reader {
 		final int size = this.buffer.readInt();
 
 		this.shared = new HashMap<Integer, PyBase>(size);
-		this.globals = new HashMap<PyGlobal, PyBase>();
 		this.objects = new Stack<PyBase>();
 
 		final int offset = this.buffer.length() - (size * 4);

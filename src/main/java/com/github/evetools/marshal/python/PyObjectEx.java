@@ -42,20 +42,15 @@ public class PyObjectEx extends PyBase {
 		if (header == null) {
 			throw new RuntimeException("Invalid element: " + this.head.getType());
 		}
-		
-		if (!this.reduce) {
-			tuple = header.get(0).asTuple();
-			if (tuple == null) {
-				throw new RuntimeException("Invalid element: " + header.get(0).getType());
-			}
-		}
-		
+
 		if (tuple.get(0).isGlobal()) {
 			return tuple.get(0).asGlobal();
 		} else if (tuple.get(0).isBuffer()) {
 			return tuple.get(0).asBuffer();
 		} else if (tuple.get(0).isTuple()) {
 			return tuple.get(0).asTuple().get(0).asBuffer();
+		} else if (tuple.get(0).isObjectEx()) {
+			return tuple.get(0).asObjectEx().getName();
 		} else {
 			throw new RuntimeException("Invalid element: " + tuple.get(0).getType());
 		}
