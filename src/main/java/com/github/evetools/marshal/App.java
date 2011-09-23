@@ -44,7 +44,7 @@ public class App {
 			PyBase pyBase = reader.read();
 
 			PyDumpVisitor visitor = new PyDumpVisitor();
-			pyBase.visit(visitor);
+			//pyBase.visit(visitor);
 
 		} catch (final Exception e) {
 			System.out.println("Could not decode " + fileName + ".");

@@ -329,7 +329,7 @@ public class Reader {
 	/* 0x22 */new IRead() {
 		@Override
 		public PyBase read() throws IOException {
-			return Reader.this.loadObjectEx();
+			return Reader.this.loadObjectReduce();
 		}
 	},
 	/* 0x23 */new IRead() {
@@ -480,6 +480,8 @@ public class Reader {
 	private int position;
 
 	private Map<Integer, PyBase> shared;
+	
+	private Map<PyGlobal, PyBase> globals;
 
 	private Buffer sharedBuffer;
 
@@ -645,11 +647,26 @@ public class Reader {
 
 	private PyBase loadGlobal() throws IOException {
 		final byte[] bytes = this.buffer.readBytes(this.length());
-		return new PyGlobal(bytes);
+		PyGlobal global = new PyGlobal(bytes);
+		if (this.latest == null) {
+			throw new IOException("Global loaded but no object present");
+		}
+		this.globals.put(global, this.latest);
+		this.latest = null;
+		
+		return global;
 	}
 
 	private PyBase loadInstance() throws IOException {
-		return new PyObject(this.loadPy(), this.loadPy());
+		PyObject object = new PyObject();
+		this.latest = object;
+		
+		PyBase head = this.loadPy();
+		object.setHead(head);
+		PyBase content = this.loadPy();
+		object.setContent(content);
+		
+		return object;
 	}
 
 	private PyBase loadInt() throws IOException {
@@ -712,9 +729,17 @@ public class Reader {
 				+ Integer.toHexString(this.type) + " at: " + this.position);
 	}
 
+	private PyBase loadObjectReduce() throws IOException {
+		return loadObjectEx(true);
+	}
+	
 	private PyBase loadObjectEx() throws IOException {
+		return loadObjectEx(false);
+	}
+	
+	private PyBase loadObjectEx(boolean reduce) throws IOException {
 
-		final PyObjectEx objectex = new PyObjectEx();
+		final PyObjectEx objectex = new PyObjectEx(reduce);
 
 		this.latest = objectex;
 
@@ -829,22 +854,20 @@ public class Reader {
 		final PyBase pyBase = this.loadMethods[this.type].read();
 
 		if (sharedPy) {
-			// this is a dirty hack and maybe leads to errors
-			if ((pyBase.isGlobal())
-					&& (pyBase.asGlobal().toString().equals(
-							"blue.DBRowDescriptor"))) {
-				this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()),
-						this.latest);
-			} else {
-				this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyBase);
-			}
+			this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyBase);
 		}
 
 		return pyBase;
 	}
 
 	private PyBase loadReference() throws IOException {
-		return this.shared.get(Integer.valueOf(this.length()));
+		PyBase pyBase = this.shared.get(Integer.valueOf(this.length()));
+		
+		if (pyBase.isGlobal()) {
+			return this.globals.get(pyBase);
+		}
+		
+		return pyBase;
 	}
 
 	private PyBase loadShort() throws IOException {
@@ -947,6 +970,7 @@ public class Reader {
 		final int size = this.buffer.readInt();
 
 		this.shared = new HashMap<Integer, PyBase>(size);
+		this.globals = new HashMap<PyGlobal, PyBase>();
 
 		final int offset = this.buffer.length() - (size * 4);
 

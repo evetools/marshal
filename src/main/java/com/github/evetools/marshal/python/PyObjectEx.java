@@ -15,12 +15,50 @@ public class PyObjectEx extends PyBase {
 	private PyBase head;
 
 	private PyList list;
-
+	
+	private boolean reduce;
+	
 	public PyObjectEx() {
 		super(types.OBJECTEX);
 		this.head = null;
+		this.reduce = false;
 		this.list = new PyList();
 		this.dict = new PyDict();
+	}
+
+	public PyObjectEx(boolean reduce) {
+		super(types.OBJECTEX);
+		this.head = null;
+		this.reduce = true;
+		this.list = new PyList();
+		this.dict = new PyDict();
+	}
+	
+	public PyBuffer getName() {
+		
+		PyTuple header = this.head.asTuple();
+		PyTuple tuple = header;
+		
+		if (header == null) {
+			throw new RuntimeException("Invalid element: " + this.head.getType());
+		}
+		
+		if (!this.reduce) {
+			tuple = header.get(0).asTuple();
+			if (tuple == null) {
+				throw new RuntimeException("Invalid element: " + header.get(0).getType());
+			}
+		}
+		
+		if (tuple.get(0).isGlobal()) {
+			return tuple.get(0).asGlobal();
+		} else if (tuple.get(0).isBuffer()) {
+			return tuple.get(0).asBuffer();
+		} else if (tuple.get(0).isTuple()) {
+			return tuple.get(0).asTuple().get(0).asBuffer();
+		} else {
+			throw new RuntimeException("Invalid element: " + tuple.get(0).getType());
+		}
 	}
 
 	@Override
