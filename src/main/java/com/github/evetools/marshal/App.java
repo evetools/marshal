@@ -48,11 +48,11 @@ public class App {
 
 		} catch (final Exception e) {
 			System.out.println("Could not decode " + fileName + ".");
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.exit(-3);
 		} catch (final OutOfMemoryError e) {
 			System.out.println("Could not decode " + fileName + ".");
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.exit(-3);
 		}
 

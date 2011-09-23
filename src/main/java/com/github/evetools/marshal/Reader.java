@@ -7,7 +7,6 @@ import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyDBRowDescriptor;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyDouble;
-import com.github.evetools.marshal.python.PyDumpVisitor;
 import com.github.evetools.marshal.python.PyGlobal;
 import com.github.evetools.marshal.python.PyInt;
 import com.github.evetools.marshal.python.PyList;
