@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -118,8 +119,6 @@ public class Reader {
 	}
 
 	private final Buffer buffer;
-
-	private PyBase latest;
 
 	private final IRead[] loadMethods = new IRead[] {
 	/* 0x00 */new IRead() {
@@ -486,6 +485,8 @@ public class Reader {
 	private Buffer sharedBuffer;
 
 	private int type;
+	
+	private Stack<PyBase> objects;
 
 	private Reader(Buffer buffer) throws IOException {
 		this.buffer = buffer;
@@ -648,24 +649,24 @@ public class Reader {
 	private PyBase loadGlobal() throws IOException {
 		final byte[] bytes = this.buffer.readBytes(this.length());
 		PyGlobal global = new PyGlobal(bytes);
-		if (this.latest == null) {
+		PyBase object = this.objects.peek();
+		if (object == null) {
 			throw new IOException("Global loaded but no object present");
 		}
-		this.globals.put(global, this.latest);
-		this.latest = null;
+		this.globals.put(global, object);
 		
 		return global;
 	}
 
 	private PyBase loadInstance() throws IOException {
 		PyObject object = new PyObject();
-		this.latest = object;
+		this.objects.push(object);
 		
 		PyBase head = this.loadPy();
 		object.setHead(head);
 		PyBase content = this.loadPy();
 		object.setContent(content);
-		
+		this.objects.pop();
 		return object;
 	}
 
@@ -741,7 +742,7 @@ public class Reader {
 
 		final PyObjectEx objectex = new PyObjectEx(reduce);
 
-		this.latest = objectex;
+		this.objects.push(objectex);
 
 		objectex.setHead(this.loadPy());
 
@@ -760,6 +761,8 @@ public class Reader {
 		}
 		this.buffer.readByte();
 
+		this.objects.pop();
+		
 		return objectex;
 	}
 
@@ -971,6 +974,7 @@ public class Reader {
 
 		this.shared = new HashMap<Integer, PyBase>(size);
 		this.globals = new HashMap<PyGlobal, PyBase>();
+		this.objects = new Stack<PyBase>();
 
 		final int offset = this.buffer.length() - (size * 4);
 

@@ -44,14 +44,14 @@ public class App {
 			PyBase pyBase = reader.read();
 
 			PyDumpVisitor visitor = new PyDumpVisitor();
-			//pyBase.visit(visitor);
+			pyBase.visit(visitor);
 
 		} catch (final Exception e) {
 			System.out.println("Could not decode " + fileName + ".");
 			//e.printStackTrace();
 			System.exit(-3);
 		} catch (final OutOfMemoryError e) {
-			System.out.println("Could not decode " + fileName + ".");
+			System.out.println("Could not decode [out of memory]" + fileName + ".");
 			//e.printStackTrace();
 			System.exit(-3);
 		}
