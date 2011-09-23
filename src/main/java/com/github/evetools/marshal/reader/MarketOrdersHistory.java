@@ -219,7 +219,7 @@ public class MarketOrdersHistory {
 			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
 		}
 
-		base = dict.get(new PyBuffer("version"));
+		base = dict.get("version");
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
@@ -237,7 +237,7 @@ public class MarketOrdersHistory {
 
 		this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong().getValue());
 
-		base = dict.get(new PyBuffer("lret"));
+		base = dict.get("lret");
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
