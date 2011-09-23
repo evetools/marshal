@@ -11,7 +11,7 @@ import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyObjectEx;
 import com.github.evetools.marshal.python.PyPackedRow;
-import com.github.evetools.marshal.python.PyString;
+import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyTuple;
 import java.io.InputStream;
 
@@ -137,7 +137,7 @@ public class MarketOrdersHistory {
 		PyBase base = null;
 		PyList list = null;
 		PyObjectEx objectEx = null;
-		PyString string = null;
+		PyBuffer string = null;
 
 		if (tuple1 == null) {
 			throw new RuntimeException("Invalid element: " + pyBase.getType());
@@ -149,10 +149,8 @@ public class MarketOrdersHistory {
 			throw new RuntimeException("Invalid element: " + tuple1.get(0).getType());
 		}
 
-		if (tuple2.get(0).isString()) {
-			string = tuple2.get(0).asString();
-		} else if (tuple2.get(0).isBuffer()) {
-			string = new PyString(new String(tuple2.get(0).asBuffer().getValue()));
+		if (tuple2.get(0).isBuffer()) {
+			string = tuple2.get(0).asBuffer();
 		} else {
 			string = null;
 		}
@@ -165,10 +163,8 @@ public class MarketOrdersHistory {
 			throw new RuntimeException("Invalid element content: " + string + " expeced: marketProxy");
 		}
 
-		if (tuple2.get(1).isString()) {
-			string = tuple2.get(1).asString();
-		} else if (tuple2.get(1).isBuffer()) {
-			string = new PyString(new String(tuple2.get(1).asBuffer().getValue()));
+		if (tuple2.get(1).isBuffer()) {
+			string = tuple2.get(1).asBuffer();
 		} else {
 			string = null;
 		}
@@ -223,7 +219,7 @@ public class MarketOrdersHistory {
 			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
 		}
 
-		base = dict.get(new PyString("version"));
+		base = dict.get(new PyBuffer("version"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");
@@ -241,7 +237,7 @@ public class MarketOrdersHistory {
 
 		this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong().getValue());
 
-		base = dict.get(new PyString("lret"));
+		base = dict.get(new PyBuffer("lret"));
 
 		if (base == null) {
 			throw new RuntimeException("version key not found in dict");

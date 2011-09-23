@@ -49,7 +49,7 @@ public class PyDict extends PyBase {
 	}
 
 	public PyBase get(String key) {
-		return this.map.get(new PyString(key));
+		return this.map.get(new PyBuffer(key.getBytes()));
 	}
 
 

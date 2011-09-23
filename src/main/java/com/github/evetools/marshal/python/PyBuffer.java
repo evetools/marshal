@@ -1,5 +1,7 @@
 package com.github.evetools.marshal.python;
 
+import java.util.Arrays;
+
 /**
  * Copyright (C)2011 by Gregor Anders
  * All rights reserved.
@@ -12,16 +14,23 @@ public class PyBuffer extends PyBase {
 
 	private byte[] value;
 
+	public PyBuffer(String string) {
+		super(types.BUFFER);
+		byte[] b = string.getBytes();
+		this.value = new byte[b.length];
+		System.arraycopy(b, 0, this.value, 0, b.length);
+	}
+	
 	public PyBuffer(byte[] bytes) {
 		super(types.BUFFER);
 		this.value = new byte[bytes.length];
 		System.arraycopy(bytes, 0, this.value, 0, bytes.length);
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		final PyString string = new PyString(new String(this.value));
-		return string.equals(obj);
+	
+	protected PyBuffer(types type, byte[] bytes) {
+		super(type);
+		this.value = new byte[bytes.length];
+		System.arraycopy(bytes, 0, this.value, 0, bytes.length);
 	}
 
 	public byte[] getValue() {
@@ -30,8 +39,24 @@ public class PyBuffer extends PyBase {
 
 	@Override
 	public int hashCode() {
-		final PyString string = new PyString(new String(this.value));
-		return string.hashCode();
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Arrays.hashCode(value);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PyBuffer other = (PyBuffer) obj;
+		if (!Arrays.equals(value, other.value))
+			return false;
+		return true;
 	}
 
 	@Override

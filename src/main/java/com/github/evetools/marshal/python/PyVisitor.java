@@ -41,6 +41,4 @@ public interface PyVisitor {
 	boolean visit(PyPackedRow base);
 
 	boolean visit(PyShort base);
-
-	boolean visit(PyString string);
 }

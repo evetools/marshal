@@ -8,10 +8,10 @@ package com.github.evetools.marshal.python;
  * it under the terms of the BSD license (see the file LICENSE.txt
  * included with the distribution).
  */
-public class PyGlobal extends PyString {
+public class PyGlobal extends PyBuffer {
 
-	public PyGlobal(String name) {
-		super(types.GLOBAL, name);
+	public PyGlobal(byte[] bytes) {
+		super(types.GLOBAL, bytes);
 	}
 
 }

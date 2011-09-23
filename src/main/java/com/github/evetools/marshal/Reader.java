@@ -7,6 +7,7 @@ import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyDBRowDescriptor;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyDouble;
+import com.github.evetools.marshal.python.PyDumpVisitor;
 import com.github.evetools.marshal.python.PyGlobal;
 import com.github.evetools.marshal.python.PyInt;
 import com.github.evetools.marshal.python.PyList;
@@ -17,7 +18,6 @@ import com.github.evetools.marshal.python.PyObject;
 import com.github.evetools.marshal.python.PyObjectEx;
 import com.github.evetools.marshal.python.PyPackedRow;
 import com.github.evetools.marshal.python.PyShort;
-import com.github.evetools.marshal.python.PyString;
 import com.github.evetools.marshal.python.PyTuple;
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZStream;
@@ -646,7 +646,7 @@ public class Reader {
 
 	private PyBase loadGlobal() throws IOException {
 		final byte[] bytes = this.buffer.readBytes(this.length());
-		return new PyGlobal(new String(bytes));
+		return new PyGlobal(bytes);
 	}
 
 	private PyBase loadInstance() throws IOException {
@@ -832,7 +832,7 @@ public class Reader {
 		if (sharedPy) {
 			// this is a dirty hack and maybe leads to errors
 			if ((pyBase.isGlobal())
-					&& (pyBase.asGlobal().getValue().endsWith(
+					&& (pyBase.asGlobal().toString().equals(
 							"blue.DBRowDescriptor"))) {
 				this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()),
 						this.latest);
@@ -853,19 +853,20 @@ public class Reader {
 	}
 
 	private PyBase loadString() throws IOException {
-		return new PyString(new String(this.buffer.readBytes(this.length())));
+		return new PyBuffer(this.buffer.readBytes(this.length()));
 	}
 
 	private PyBase loadString0() throws IOException {
-		return new PyString("");
+		byte[] b = {0};
+		return new PyBuffer(b);
 	}
 
 	private PyBase loadString1() throws IOException {
-		return new PyString(new String(this.buffer.readBytes(1)));
+		return new PyBuffer(this.buffer.readBytes(1));
 	}
 
 	private PyBase loadStringRef() throws IOException {
-		return new PyString(Strings.get(this.length()));
+		return new PyBuffer(Strings.get(this.length()).getBytes());
 	}
 
 	private PyBase loadSubStream() throws IOException {
@@ -907,15 +908,16 @@ public class Reader {
 	}
 
 	private PyBase loadUnicode() throws IOException {
-		return new PyString(new String(this.buffer.readBytes(this.length() * 2)));
+		return new PyBuffer(this.buffer.readBytes(this.length() * 2));
 	}
 
 	private PyBase loadUnicode0() throws IOException {
-		return new PyString("");
+		byte[] b = {0};
+		return new PyBuffer(b);
 	}
 
 	private PyBase loadUnicode1() throws IOException {
-		return new PyString(new String(this.buffer.readBytes(2)));
+		return new PyBuffer(this.buffer.readBytes(2));
 	}
 
 	private PyBase loadVarInt() throws IOException {

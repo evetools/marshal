@@ -132,18 +132,6 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isString() {
-        return (this.type == types.STRING);
-    }
-
-    public PyString asString() {
-        if (this.isString()) {
-            return (PyString)this;
-        } else {
-            return null;
-        }
-    }
-
     public boolean isList() {
         return (this.type == types.LIST);
     }

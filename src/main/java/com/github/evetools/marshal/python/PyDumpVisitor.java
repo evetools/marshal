@@ -256,15 +256,4 @@ public class PyDumpVisitor implements PyVisitor {
 
 		return false;
 	}
-
-	@Override
-	public boolean visit(PyString string) {
-
-		if (string != null) {
-			this.print(string);
-			return true;
-		}
-
-		return false;
-	}
 }
