@@ -16,7 +16,7 @@ import java.util.ListIterator;
  */
 public abstract class PyContainer extends PyBase {
 
-	protected List<PyBase> container = new ArrayList<PyBase>();
+	private List<PyBase> container = new ArrayList<PyBase>();
 
 	protected PyContainer(types type) {
 		super(type);

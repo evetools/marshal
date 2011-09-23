@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class PyDict extends PyBase {
 
-	protected Map<PyBase, PyBase> map;
+	private Map<PyBase, PyBase> map;
 
 	public PyDict() {
 		super(types.DICT);
@@ -47,7 +47,7 @@ public class PyDict extends PyBase {
 	public PyBase get(Object key) {
 		return this.map.get(key);
 	}
-	
+
 	public PyBase get(String key) {
 		return this.map.get(new PyString(key));
 	}

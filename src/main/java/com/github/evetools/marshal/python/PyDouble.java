@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyDouble extends PyBase {
 
-	protected double value;
+	private double value;
 
 	public PyDouble(double value) {
 		super(types.DOUBLE);

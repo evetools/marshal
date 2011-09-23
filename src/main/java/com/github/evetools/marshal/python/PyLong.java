@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyLong extends PyBase {
 
-	protected long value;
+	private long value;
 
 	public PyLong(long value) {
 		super(types.INT64);

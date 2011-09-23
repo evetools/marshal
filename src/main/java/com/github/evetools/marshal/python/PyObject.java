@@ -10,9 +10,9 @@ package com.github.evetools.marshal.python;
  */
 public class PyObject extends PyBase {
 
-	protected PyBase content;
+	private PyBase content;
 
-	protected PyBase head;
+	private PyBase head;
 
 	public PyObject(PyBase head, PyBase content) {
 		super(types.OBJECT);

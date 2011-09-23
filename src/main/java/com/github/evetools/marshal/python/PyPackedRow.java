@@ -15,11 +15,11 @@ import java.util.Set;
  */
 public class PyPackedRow extends PyBase {
 
-	protected PyBuffer buffer;
+	private PyBuffer buffer;
 
-	protected PyDict columns;
+	private PyDict columns;
 
-	protected PyBase head;
+	private PyBase head;
 
 	public PyPackedRow(PyBase head, PyBuffer buffer) {
 		super(types.PACKEDROW);

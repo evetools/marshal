@@ -509,7 +509,7 @@ public class Reader {
 		this.buffer = new Buffer(baos.toByteArray());
 	}
 
-	protected PyDBRowDescriptor toDBRowDescriptor(PyBase base)
+	private PyDBRowDescriptor toDBRowDescriptor(PyBase base)
 			throws IOException {
 
 		if (!(base instanceof PyObjectEx)) {
@@ -522,7 +522,7 @@ public class Reader {
 		return new PyDBRowDescriptor(object);
 	}
 
-	protected int length() {
+	private int length() {
 
 		int length = 0;
 
@@ -535,7 +535,7 @@ public class Reader {
 		return length;
 	}
 
-	protected PyBase loadBuffer() throws IOException {
+	private PyBase loadBuffer() throws IOException {
 		final int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
 
@@ -606,12 +606,12 @@ public class Reader {
 		return new PyBuffer(bytes);
 	}
 
-	protected PyBase loadByte() throws IOException {
+	private PyBase loadByte() throws IOException {
 		final byte valueByte = this.buffer.readByte();
 		return new PyByte(valueByte);
 	}
 
-	protected PyBase loadDict() throws IOException {
+	private PyBase loadDict() throws IOException {
 		final int size = this.length();
 
 		PyBase key = null;
@@ -628,52 +628,52 @@ public class Reader {
 		return dict;
 	}
 
-	protected PyBase loadDouble() throws IOException {
+	private PyBase loadDouble() throws IOException {
 		return new PyDouble(this.buffer.readDouble());
 	}
 
-	protected PyBase loadDouble0() throws IOException {
+	private PyBase loadDouble0() throws IOException {
 		return new PyDouble(0);
 	}
 
-	protected PyBase loadError() throws IOException {
+	private PyBase loadError() throws IOException {
 		throw new IOException("ERROR");
 	}
 
-	protected PyBase loadFalse() throws IOException {
+	private PyBase loadFalse() throws IOException {
 		return new PyBool(false);
 	}
 
-	protected PyBase loadGlobal() throws IOException {
+	private PyBase loadGlobal() throws IOException {
 		final byte[] bytes = this.buffer.readBytes(this.length());
 		return new PyGlobal(new String(bytes));
 	}
 
-	protected PyBase loadInstance() throws IOException {
+	private PyBase loadInstance() throws IOException {
 		return new PyObject(this.loadPy(), this.loadPy());
 	}
 
-	protected PyBase loadInt() throws IOException {
+	private PyBase loadInt() throws IOException {
 		return new PyInt(this.buffer.readInt());
 	}
 
-	protected PyBase loadInt0() throws IOException {
+	private PyBase loadInt0() throws IOException {
 		return new PyInt(0);
 	}
 
-	protected PyBase loadInt1() throws IOException {
+	private PyBase loadInt1() throws IOException {
 		return new PyInt(1);
 	}
 
-	protected PyBase loadIntMinus1() throws IOException {
+	private PyBase loadIntMinus1() throws IOException {
 		return new PyInt(-1);
 	}
 
-	protected PyBase loadList() throws IOException {
+	private PyBase loadList() throws IOException {
 		return this.loadList(this.length());
 	}
 
-	protected PyBase loadList(int size) throws IOException {
+	private PyBase loadList(int size) throws IOException {
 		final PyList tuple = new PyList();
 		PyBase base = null;
 		int curSize = size;
@@ -688,32 +688,32 @@ public class Reader {
 		return tuple;
 	}
 
-	protected PyBase loadList0() throws IOException {
+	private PyBase loadList0() throws IOException {
 		return this.loadList(0);
 	}
 
-	protected PyBase loadList1() throws IOException {
+	private PyBase loadList1() throws IOException {
 		return this.loadList(1);
 	}
 
-	protected PyBase loadLong() throws IOException {
+	private PyBase loadLong() throws IOException {
 		return new PyLong(this.buffer.readLong());
 	}
 
-	protected PyBase loadNone() throws IOException {
+	private PyBase loadNone() throws IOException {
 		return new PyNone();
 	}
 
-	protected PyBase loadMarker() throws IOException {
+	private PyBase loadMarker() throws IOException {
 		return new PyMarker();
 	}
 
-	protected PyBase loadNotImplemented() throws IOException {
+	private PyBase loadNotImplemented() throws IOException {
 		throw new IOException("Not implemented: "
 				+ Integer.toHexString(this.type) + " at: " + this.position);
 	}
 
-	protected PyBase loadObjectEx() throws IOException {
+	private PyBase loadObjectEx() throws IOException {
 
 		final PyObjectEx objectex = new PyObjectEx();
 
@@ -739,7 +739,7 @@ public class Reader {
 		return objectex;
 	}
 
-	protected PyBase loadPacked() throws IOException {
+	private PyBase loadPacked() throws IOException {
 
 		final PyBase head = this.loadPy();
 		int size = this.length();
@@ -818,7 +818,7 @@ public class Reader {
 		return base;
 	}
 
-	protected PyBase loadPy() throws IOException {
+	private PyBase loadPy() throws IOException {
 
 		this.position = this.buffer.position();
 
@@ -844,46 +844,46 @@ public class Reader {
 		return pyBase;
 	}
 
-	protected PyBase loadReference() throws IOException {
+	private PyBase loadReference() throws IOException {
 		return this.shared.get(Integer.valueOf(this.length()));
 	}
 
-	protected PyBase loadShort() throws IOException {
+	private PyBase loadShort() throws IOException {
 		return new PyShort(this.buffer.readShort());
 	}
 
-	protected PyBase loadString() throws IOException {
+	private PyBase loadString() throws IOException {
 		return new PyString(new String(this.buffer.readBytes(this.length())));
 	}
 
-	protected PyBase loadString0() throws IOException {
+	private PyBase loadString0() throws IOException {
 		return new PyString("");
 	}
 
-	protected PyBase loadString1() throws IOException {
+	private PyBase loadString1() throws IOException {
 		return new PyString(new String(this.buffer.readBytes(1)));
 	}
 
-	protected PyBase loadStringRef() throws IOException {
+	private PyBase loadStringRef() throws IOException {
 		return new PyString(Strings.get(this.length()));
 	}
 
-	protected PyBase loadSubStream() throws IOException {
+	private PyBase loadSubStream() throws IOException {
 		final int size = this.length();
 		final Buffer buf = new Buffer(this.buffer.readBytes(size));
 		final Reader reader = new Reader(buf);
 		return reader.read();
 	}
 
-	protected PyBase loadTrue() throws IOException {
+	private PyBase loadTrue() throws IOException {
 		return new PyBool(true);
 	}
 
-	protected PyBase loadTuple() throws IOException {
+	private PyBase loadTuple() throws IOException {
 		return this.loadTuple(this.length());
 	}
 
-	protected PyBase loadTuple(int size) throws IOException {
+	private PyBase loadTuple(int size) throws IOException {
 		final PyTuple tuple = new PyTuple();
 		PyBase base = null;
 		int curSize = size;
@@ -898,27 +898,27 @@ public class Reader {
 		return tuple;
 	}
 
-	protected PyBase loadTuple1() throws IOException {
+	private PyBase loadTuple1() throws IOException {
 		return this.loadTuple(1);
 	}
 
-	protected PyBase loadTuple2() throws IOException {
+	private PyBase loadTuple2() throws IOException {
 		return this.loadTuple(2);
 	}
 
-	protected PyBase loadUnicode() throws IOException {
+	private PyBase loadUnicode() throws IOException {
 		return new PyString(new String(this.buffer.readBytes(this.length() * 2)));
 	}
 
-	protected PyBase loadUnicode0() throws IOException {
+	private PyBase loadUnicode0() throws IOException {
 		return new PyString("");
 	}
 
-	protected PyBase loadUnicode1() throws IOException {
+	private PyBase loadUnicode1() throws IOException {
 		return new PyString(new String(this.buffer.readBytes(2)));
 	}
 
-	protected PyBase loadVarInt() throws IOException {
+	private PyBase loadVarInt() throws IOException {
 
 		final int size = this.length();
 
@@ -959,7 +959,7 @@ public class Reader {
 		return base;
 	}
 
-	protected byte[] zerouncompress(byte[] bytes, int size) throws IOException {
+	private byte[] zerouncompress(byte[] bytes, int size) throws IOException {
 
 		final byte[] out = new byte[size + 16];
 		int outpos = 0;

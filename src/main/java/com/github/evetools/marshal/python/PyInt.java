@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyInt extends PyBase {
 
-	protected int value;
+	private int value;
 
 	public PyInt(int value) {
 		super(types.INT32);

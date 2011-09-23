@@ -10,11 +10,11 @@ package com.github.evetools.marshal.python;
  */
 public class PyObjectEx extends PyBase {
 
-	protected PyDict dict;
+	private PyDict dict;
 
-	protected PyBase head;
+	private PyBase head;
 
-	protected PyList list;
+	private PyList list;
 
 	public PyObjectEx() {
 		super(types.OBJECTEX);

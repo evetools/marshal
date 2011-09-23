@@ -12,7 +12,7 @@ import com.google.common.base.Objects;
  */
 public class PyString extends PyBase {
 
-	protected String string;
+	private String string;
 
 	public PyString(String string) {
 		super(types.STRING);

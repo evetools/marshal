@@ -258,7 +258,7 @@ public class MarketOrdersHistory {
 		this.read(objectEx);
 	}
 
-	protected void read(PyObjectEx object) throws Exception {
+	private void read(PyObjectEx object) throws Exception {
 
 		if (object == null) {
 			throw new IllegalArgumentException("invalid PyObjectEx");
@@ -277,7 +277,7 @@ public class MarketOrdersHistory {
 		}
 	}
 
-	protected void read(PyPackedRow object) throws Exception {
+	private void read(PyPackedRow object) throws Exception {
 
 		if (object == null) {
 			throw new IllegalArgumentException("invalid PyPackedRow");

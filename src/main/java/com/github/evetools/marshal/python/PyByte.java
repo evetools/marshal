@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyByte extends PyBase {
 
-	protected byte value;
+	private byte value;
 
 	public PyByte(byte value) {
 		super(types.INT8);

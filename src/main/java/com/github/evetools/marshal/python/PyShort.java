@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyShort extends PyBase {
 
-	protected short value;
+	private short value;
 
 	public PyShort(short value) {
 		super(types.INT16);

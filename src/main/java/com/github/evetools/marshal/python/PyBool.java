@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public class PyBool extends PyBase {
 
-	protected boolean value;
+	private boolean value;
 
 	public PyBool(boolean value) {
 		super(types.BOOL);
