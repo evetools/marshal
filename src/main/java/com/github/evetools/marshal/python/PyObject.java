@@ -102,10 +102,13 @@ public class PyObject extends PyBase {
     public final int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = (prime * result)
-                + ((this.content == null) ? 0 : this.content.hashCode());
-        result = (prime * result)
-                + ((this.head == null) ? 0 : this.head.hashCode());
+        result = (prime * result);
+        if (this.content != null) {
+            result += this.content.hashCode();
+        }
+        if (this.head != null) {
+            result += this.head.hashCode();
+        }
         return result;
     }
 

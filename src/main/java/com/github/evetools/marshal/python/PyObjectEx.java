@@ -9,14 +9,29 @@ package com.github.evetools.marshal.python;
  */
 public class PyObjectEx extends PyBase {
 
+    /**
+     * dict.
+     */
     private PyDict dict;
 
+    /**
+     * head.
+     */
     private PyBase head;
 
+    /**
+     * list.
+     */
     private PyList list;
 
+    /**
+     * reduce style object.
+     */
     private boolean reduce;
 
+    /**
+     * PyObjectEx.
+     */
     public PyObjectEx() {
         super(PyType.OBJECTEX);
         this.head = null;
@@ -25,20 +40,28 @@ public class PyObjectEx extends PyBase {
         this.dict = new PyDict();
     }
 
-    public PyObjectEx(boolean reduce) {
+    /**
+     * PyObjectEx.
+     * @param red reduce style object
+     */
+    public PyObjectEx(final boolean red) {
         super(PyType.OBJECTEX);
         this.head = null;
-        this.reduce = true;
+        this.reduce = red;
         this.list = new PyList();
         this.dict = new PyDict();
     }
 
-    public boolean isReduce() {
+    /**
+     * Is reduce object.
+     * @return reduce object flag
+     */
+    public final boolean isReduce() {
         return reduce;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -73,37 +96,57 @@ public class PyObjectEx extends PyBase {
         return true;
     }
 
-    public PyDict getDict() {
+    /**
+     * Returns dict.
+     * @return dict
+     */
+    public final PyDict getDict() {
         return this.dict;
     }
 
-    public PyBase getHead() {
+    /**
+     * Returns head.
+     * @return head
+     */
+    public final PyBase getHead() {
         return this.head;
     }
 
-    public PyList getList() {
+    /**
+     * Returns list.
+     * @return list
+     */
+    public final PyList getList() {
         return this.list;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = (prime * result)
-                + ((this.dict == null) ? 0 : this.dict.hashCode());
-        result = (prime * result)
-                + ((this.head == null) ? 0 : this.head.hashCode());
-        result = (prime * result)
-                + ((this.list == null) ? 0 : this.list.hashCode());
+        result = (prime * result);
+        if (this.dict != null) {
+            result += this.dict.hashCode();
+        }
+        if (this.head != null) {
+            result += this.head.hashCode();
+        }
+        if (this.list != null) {
+            result += this.list.hashCode();
+        }
         return result;
     }
 
-    public void setHead(PyBase head) {
-        this.head = head;
+    /**
+     * Set head.
+     * @param header head
+     */
+    public final void setHead(final PyBase header) {
+        this.head = header;
     }
 
     @Override
-    public boolean visit(PyVisitor visitor) {
+    public final boolean visit(final PyVisitor visitor) {
         return (visitor.visit(this));
     }
 
