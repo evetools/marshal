@@ -15,228 +15,243 @@ import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyTuple;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class MarketOrderBests {
 
-	private Reader reader;
+    private Reader reader;
 
-	private long regionID;
+    private long regionID;
 
-	private long timestamp;
+    private long timestamp;
 
-	public static class MarketOrderHistory {
+    public static class MarketOrderHistory {
 
-		private double volRemaining;
-		private short typeID;
-		private int stationID;
-		private long price;
-		public double getVolRemaining() {
-			return volRemaining;
-		}
-		public void setVolRemaining(double volRemaining) {
-			this.volRemaining = volRemaining;
-		}
-		public short getTypeID() {
-			return typeID;
-		}
-		public void setTypeID(short typeID) {
-			this.typeID = typeID;
-		}
-		public int getStationID() {
-			return stationID;
-		}
-		public void setStationID(int stationID) {
-			this.stationID = stationID;
-		}
-		public long getPrice() {
-			return price;
-		}
-		public void setPrice(long price) {
-			this.price = price;
-		}
+        private double volRemaining;
+        private short typeID;
+        private int stationID;
+        private long price;
 
+        public double getVolRemaining() {
+            return volRemaining;
+        }
 
-	};
+        public void setVolRemaining(double volRemaining) {
+            this.volRemaining = volRemaining;
+        }
 
-	private Collection<MarketOrderHistory> entries;
+        public short getTypeID() {
+            return typeID;
+        }
 
+        public void setTypeID(short typeID) {
+            this.typeID = typeID;
+        }
 
-	public Reader getReader() {
-		return reader;
-	}
+        public int getStationID() {
+            return stationID;
+        }
 
-	public long getRegionID() {
-		return regionID;
-	}
+        public void setStationID(int stationID) {
+            this.stationID = stationID;
+        }
 
-	public long getTimestamp() {
-		return timestamp;
-	}
+        public long getPrice() {
+            return price;
+        }
 
-	public Collection<MarketOrderHistory> getOrders() {
-		return entries;
-	}
+        public void setPrice(long price) {
+            this.price = price;
+        }
 
-	public MarketOrderBests(InputStream inputStream) throws Exception {
-		this.reader = new Reader(inputStream);
-	}
+    };
 
-	public MarketOrderBests(File file) throws Exception {
-		this.reader = new Reader(file);
-	}
+    private Collection<MarketOrderHistory> entries;
 
-	public void read() throws Exception {
+    public Reader getReader() {
+        return reader;
+    }
 
-		PyBase pyBase = this.reader.read();
+    public long getRegionID() {
+        return regionID;
+    }
 
-		PyTuple tuple1 = pyBase.asTuple();
-		PyTuple tuple2 = null;
-		PyDict dict = null;
-		PyBase base = null;
-		PyList list = null;
-		PyObjectEx objectEx = null;
-		PyBuffer string = null;
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-		if (tuple1 == null) {
-			throw new RuntimeException("Invalid element: " + pyBase.getType());
-		}
+    public Collection<MarketOrderHistory> getOrders() {
+        return entries;
+    }
 
-		tuple2 = tuple1.get(0).asTuple();
+    public MarketOrderBests(InputStream inputStream) throws Exception {
+        this.reader = new Reader(inputStream);
+    }
 
-		if (tuple2 == null) {
-			throw new RuntimeException("Invalid element: " + tuple1.get(0).getType());
-		}
+    public MarketOrderBests(File file) throws Exception {
+        this.reader = new Reader(file);
+    }
 
-		if (tuple2.get(0).isBuffer()) {
-			string = tuple2.get(0).asBuffer();
-		} else {
-			string = null;
-		}
+    public void read() throws Exception {
 
-		if (string == null) {
-			throw new RuntimeException("Invalid element: " + tuple2.get(0).getType());
-		}
+        PyBase pyBase = this.reader.read();
 
-		if (!string.toString().equals("marketProxy")) {
-			throw new RuntimeException("Invalid element content: " + string + " expeced: marketProxy");
-		}
+        PyTuple tuple1 = pyBase.asTuple();
+        PyTuple tuple2 = null;
+        PyDict dict = null;
+        PyBase base = null;
+        PyList list = null;
+        PyObjectEx objectEx = null;
+        PyBuffer string = null;
 
-		if (tuple2.get(1).isBuffer()) {
-			string = tuple2.get(1).asBuffer();
-		} else {
-			string = null;
-		}
+        if (tuple1 == null) {
+            throw new RuntimeException("Invalid element: " + pyBase.getType());
+        }
 
-		if (string == null) {
-			throw new RuntimeException("Invalid element: " + tuple2.get(1).getType());
-		}
+        tuple2 = tuple1.get(0).asTuple();
 
-		if (!string.toString().equals("GetRegionBest")) {
-			throw new RuntimeException("Invalid element content: " + string + " expeced: GetRegionBest");
-		}
+        if (tuple2 == null) {
+            throw new RuntimeException("Invalid element: "
+                    + tuple1.get(0).getType());
+        }
 
-		switch (tuple2.get(2).getType()) {
+        if (tuple2.get(0).isBuffer()) {
+            string = tuple2.get(0).asBuffer();
+        } else {
+            string = null;
+        }
 
-		case INT8:
-			this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
-			break;
-		case INT16:
-			this.regionID = tuple2.get(2).asShort().getValue();
-			break;
-		case INT32:
-			this.regionID = tuple2.get(2).asInt().getValue();
-			break;
-		case INT64:
-			this.regionID = tuple2.get(2).asLong().getValue();
-			break;
-		default:
-			throw new RuntimeException("Invalid element: " + tuple2.getType());
-		}
+        if (string == null) {
+            throw new RuntimeException("Invalid element: "
+                    + tuple2.get(0).getType());
+        }
 
-		dict = tuple1.get(1).asDict();
+        if (!string.toString().equals("marketProxy")) {
+            throw new RuntimeException("Invalid element content: " + string
+                    + " expeced: marketProxy");
+        }
 
-		if (dict == null) {
-			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
-		}
+        if (tuple2.get(1).isBuffer()) {
+            string = tuple2.get(1).asBuffer();
+        } else {
+            string = null;
+        }
 
-		base = dict.get("version");
+        if (string == null) {
+            throw new RuntimeException("Invalid element: "
+                    + tuple2.get(1).getType());
+        }
 
-		if (base == null) {
-			throw new RuntimeException("version key not found in dict");
-		}
+        if (!string.toString().equals("GetRegionBest")) {
+            throw new RuntimeException("Invalid element content: " + string
+                    + " expeced: GetRegionBest");
+        }
 
-		list = base.asList();
+        switch (tuple2.get(2).getType()) {
 
-		if (list == null) {
-			throw new RuntimeException("Invalid element: " + base.getType());
-		}
+            case INT8:
+                this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
+                break;
+            case INT16:
+                this.regionID = tuple2.get(2).asShort().getValue();
+                break;
+            case INT32:
+                this.regionID = tuple2.get(2).asInt().getValue();
+                break;
+            case INT64:
+                this.regionID = tuple2.get(2).asLong().getValue();
+                break;
+            default:
+                throw new RuntimeException("Invalid element: "
+                        + tuple2.getType());
+        }
 
-		if (list.get(0).asLong() == null) {
-			throw new RuntimeException("Invalid element: " + list.get(0).getType());
-		}
+        dict = tuple1.get(1).asDict();
 
-		this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong().getValue());
+        if (dict == null) {
+            throw new RuntimeException("Invalid element: "
+                    + tuple1.get(1).getType());
+        }
 
-		base = dict.get("lret");
+        base = dict.get("version");
 
-		if (base == null) {
-			throw new RuntimeException("version key not found in dict");
-		}
+        if (base == null) {
+            throw new RuntimeException("version key not found in dict");
+        }
 
-		objectEx = base.asObjectEx();
+        list = base.asList();
 
-		if (objectEx == null) {
-			throw new RuntimeException("Invalid element: " + base.getType());
-		}
+        if (list == null) {
+            throw new RuntimeException("Invalid element: " + base.getType());
+        }
 
-		this.entries = new ArrayList<MarketOrderBests.MarketOrderHistory>();
+        if (list.get(0).asLong() == null) {
+            throw new RuntimeException("Invalid element: "
+                    + list.get(0).getType());
+        }
 
-		this.read(objectEx);
-	}
+        this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong()
+                .getValue());
 
-	private void read(PyObjectEx object) throws Exception {
+        base = dict.get("lret");
 
-		if (object == null) {
-			throw new IllegalArgumentException("invalid PyObjectEx");
-		}
+        if (base == null) {
+            throw new RuntimeException("version key not found in dict");
+        }
 
-		PyDict dict = object.getDict();
+        objectEx = base.asObjectEx();
 
-		for (Iterator<PyBase> iterator = dict.keySet().iterator(); iterator.hasNext();) {
-			PyBase type = iterator.next();
+        if (objectEx == null) {
+            throw new RuntimeException("Invalid element: " + base.getType());
+        }
 
-			if (!type.isDBRow()) {
-				throw new RuntimeException("Invalid element: " + type.getType());
-			}
+        this.entries = new ArrayList<MarketOrderBests.MarketOrderHistory>();
 
-			this.read(type.asDBRow());
-		}
-	}
+        this.read(objectEx);
+    }
 
-	private void read(PyDBRow object) throws Exception {
+    private void read(PyObjectEx object) throws Exception {
 
-		if (object == null) {
-			throw new IllegalArgumentException("invalid PyPackedRow");
-		}
+        if (object == null) {
+            throw new IllegalArgumentException("invalid PyObjectEx");
+        }
 
-		PyDict dict = object.getColumns();
+        PyDict dict = object.getDict();
 
-		if (dict == null) {
-			throw new IllegalArgumentException("Empty PyPackedRow");
-		}
+        for (Iterator<PyBase> iterator = dict.keySet().iterator(); iterator
+                .hasNext();) {
+            PyBase type = iterator.next();
 
-		MarketOrderHistory entry = new MarketOrderHistory();
-		entry.setVolRemaining(dict.get("volRemaining").asDouble().getValue());
-		entry.setTypeID(dict.get("typeID").asShort().getValue());
-		entry.setStationID(dict.get("stationID").asInt().getValue());
-		entry.setPrice(dict.get("price").asLong().getValue());
+            if (!type.isDBRow()) {
+                throw new RuntimeException("Invalid element: " + type.getType());
+            }
 
-		this.entries.add(entry);
-	}
+            this.read(type.asDBRow());
+        }
+    }
+
+    private void read(PyDBRow object) throws Exception {
+
+        if (object == null) {
+            throw new IllegalArgumentException("invalid PyPackedRow");
+        }
+
+        PyDict dict = object.getColumns();
+
+        if (dict == null) {
+            throw new IllegalArgumentException("Empty PyPackedRow");
+        }
+
+        MarketOrderHistory entry = new MarketOrderHistory();
+        entry.setVolRemaining(dict.get("volRemaining").asDouble().getValue());
+        entry.setTypeID(dict.get("typeID").asShort().getValue());
+        entry.setStationID(dict.get("stationID").asInt().getValue());
+        entry.setPrice(dict.get("price").asLong().getValue());
+
+        this.entries.add(entry);
+    }
 }

@@ -5,57 +5,78 @@ import com.github.evetools.marshal.python.PyDumpVisitor;
 import java.io.File;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
-public class Dump {
-	private Dump() {
-		throw new AssertionError("Utility class constructor: App should never ne called.");
-	}
+public final class Dump {
 
-	public static void main(String[] args) {
+    /**
+     * -2 exit code.
+     */
+    private static final int EXIT_2 = -2;
 
-		if (args.length != 1) {
-			System.out.println("Please provide a file.");
-			System.exit(-1);
-		}
+    /**
+     * -3 exit code.
+     */
+    private static final int EXIT_3 = -3;
 
-		final String fileName = args[0];
+    /**
+     * Utility class constructor: Dump should never ne called.
+     */
+    private Dump() {
+        throw new AssertionError(
+                "Utility class constructor: Dump should never ne called.");
+    }
 
-		try {
+    /**
+     * Dumps cachefile/bulkdata content.
+     *
+     * @param args
+     *            file
+     */
+    public static void main(final String[] args) {
 
-			final File file = new File(fileName);
+        if (args.length != 1) {
+            System.out.println("Please provide a file.");
+            System.exit(-1);
+        }
 
-			if (!file.exists() || !file.isFile()) {
-				System.out.println("No such file " + fileName + ".");
-				System.exit(-2);
-			}
+        final String fileName = args[0];
 
-			if (!file.canRead()) {
-				System.out.println("Could not read " + fileName + ".");
-				System.exit(-2);
-			}
+        try {
 
-			final Reader reader = new Reader(file);
-			PyBase pyBase = reader.read();
+            final File file = new File(fileName);
 
-			PyDumpVisitor visitor = new PyDumpVisitor();
-			pyBase.visit(visitor);
+            if (!file.exists() || !file.isFile()) {
+                System.out.println("No such file " + fileName + ".");
+                System.exit(EXIT_2);
+            }
 
-		} catch (final Exception e) {
-			System.out.println("Could not decode " + fileName + ".");
-			//e.printStackTrace();
-			System.exit(-3);
-		} catch (final OutOfMemoryError e) {
-			System.out.println("Could not decode [out of memory] " + fileName + ".");
-			//e.printStackTrace();
-			System.exit(-3);
-		}
+            if (!file.canRead()) {
+                System.out.println("Could not read " + fileName + ".");
+                System.exit(EXIT_2);
+            }
 
-		System.exit(0);
-	}
+            final Reader reader = new Reader(file);
+            PyBase pyBase = reader.read();
+
+            PyDumpVisitor visitor = new PyDumpVisitor();
+            pyBase.visit(visitor);
+
+        } catch (final Exception e) {
+            System.out.println("Could not decode " + fileName + ".");
+            // e.printStackTrace();
+            System.exit(EXIT_3);
+        } catch (final OutOfMemoryError e) {
+            System.out.println("Could not decode [out of memory] " + fileName
+                    + ".");
+            // e.printStackTrace();
+            System.exit(EXIT_3);
+        }
+
+        System.exit(0);
+    }
 }

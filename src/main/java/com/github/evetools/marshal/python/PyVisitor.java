@@ -1,47 +1,130 @@
 package com.github.evetools.marshal.python;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public interface PyVisitor {
 
-	boolean visit(PyBase base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyBase base);
 
-	boolean visit(PyBool base1);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyBool base);
 
-	boolean visit(PyBuffer buffer);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyBuffer base);
 
-	boolean visit(PyByte base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyByte base);
 
-	boolean visit(PyContainer container);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyContainer base);
 
-	boolean visit(PyDict container);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyDict base);
 
-	boolean visit(PyDouble base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyDouble base);
 
-	boolean visit(PyGlobal base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyGlobal base);
 
-	boolean visit(PyInt base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyInt base);
 
-	boolean visit(PyLong base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyLong base);
 
-	boolean visit(PyMarker base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyMarker base);
 
-	boolean visit(PyNone base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyNone base);
 
-	boolean visit(PyObject base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyObject base);
 
-	boolean visit(PyObjectEx base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyObjectEx base);
 
-	boolean visit(PyDBRow base);
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyDBRow base);
 
-	boolean visit(PyShort base);
-	
-	boolean visit(PyDBColumn base);
-	
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyShort base);
+
+    /**
+     * Visits Python element. 
+     * @param base PyBase element
+     * @return status
+     */
+    boolean visit(PyDBColumn base);
 }
