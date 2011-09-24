@@ -45,7 +45,7 @@
             <roles>
                 <role>Project Manager</role>
             </roles>
-            <timezone>-1</timezone>
+            <timezone>Europe/Berlin</timezone>
         </developer>
 		<developer>
 			<id>candle</id>
