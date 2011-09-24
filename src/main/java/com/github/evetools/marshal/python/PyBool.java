@@ -54,7 +54,7 @@ public class PyBool extends PyBase {
         final int prime = 31;
         int result = super.hashCode();
         result = (prime * result);
-        if (this.value) { 
+        if (this.value) {
             result += Boolean.valueOf(this.value).hashCode();
         } else {
             result += Boolean.valueOf(!this.value).hashCode();

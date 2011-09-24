@@ -74,7 +74,7 @@ public class PyBuffer extends PyBase {
             return false;
         } else {
             PyBuffer other = (PyBuffer) obj;
-        
+
             if (!Arrays.equals(value, other.value)) {
                 return false;
             }

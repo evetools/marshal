@@ -93,7 +93,7 @@ public class PyDict extends PyBase {
     /**
      * Puts value at key position.
      * @param key key
-     * @param value 
+     * @param value value
      * @return prev value or null
      */
     public final PyBase put(final PyBase key, final PyBase value) {
