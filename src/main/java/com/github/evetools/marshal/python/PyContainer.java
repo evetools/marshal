@@ -13,22 +13,39 @@ import java.util.List;
  */
 public abstract class PyContainer extends PyBase {
 
+    /**
+     * Container.
+     */
     private List<PyBase> container = new ArrayList<PyBase>();
 
-    protected PyContainer(PyType type) {
+    /**
+     * PyContainer.
+     * @param type type
+     */
+    protected PyContainer(final PyType type) {
         super(type);
     }
 
-    public void add(int index, PyBase element) {
+    /**
+     * Add PyBase at position.
+     * @param index index
+     * @param element PyBase
+     */
+    public final void add(final int index, final PyBase element) {
         this.container.add(index, element);
     }
 
-    public boolean add(PyBase e) {
+    /**
+     * Adds PyBase.
+     * @param e PyBase
+     * @return result
+     */
+    public final boolean add(final PyBase e) {
         return this.container.add(e);
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -49,34 +66,49 @@ public abstract class PyContainer extends PyBase {
         return true;
     }
 
-    public PyBase get(int index) {
+    /**
+     * Returns PyBase.
+     * @param index index
+     * @return object
+     */
+    public final PyBase get(final int index) {
         return this.container.get(index);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = (prime * result)
-                + ((this.container == null) ? 0 : this.container.hashCode());
+        result = (prime * result);
+        if (this.container != null) {
+            result += this.container.hashCode();
+        }
         return result;
     }
 
-    public Iterator<PyBase> iterator() {
+    /**
+     * Returns iterator.
+     * @return iterator
+     */
+    public final Iterator<PyBase> iterator() {
         return this.container.iterator();
     }
 
-    public int size() {
+    /**
+     * Returns size.
+     * @return size
+     */
+    public final int size() {
         return this.container.size();
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return this.container.toString();
     }
 
     @Override
-    public boolean visit(PyVisitor visitor) {
+    public boolean visit(final PyVisitor visitor) {
         return (visitor.visit(this));
     }
 
