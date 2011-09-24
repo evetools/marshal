@@ -19,312 +19,343 @@ import com.github.evetools.marshal.Reader.Buffer;
  */
 public class PyDBRowDescriptor extends PyBase {
 
-	public static enum DBColumnSize {
-		BIT64(0) {
-			@Override
-			public int size() {
-				return Long.SIZE / Byte.SIZE;
-			}},
-		BIT32(1) {
-			@Override
-			public int size() {
-				return Integer.SIZE / Byte.SIZE;
-			}},
-		BIT16(2) {
-			@Override
-			public int size() {
-				return Short.SIZE / Byte.SIZE;
-			}},
-		BIT8(3) {
-			@Override
-			public int size() {
-				return Byte.SIZE;
-			}},	
-		BIT1(4) {
-			@Override
-			public int size() {
-				return Byte.SIZE / Byte.SIZE;
-			}},
-		BIT0(5) {
-			@Override
-			public int size() {
-				return 0;
-			}},
-		;
+    public static enum DBColumnSize {
+        BIT64(0) {
+            @Override
+            public int size() {
+                return Long.SIZE / Byte.SIZE;
+            }
+        },
+        BIT32(1) {
+            @Override
+            public int size() {
+                return Integer.SIZE / Byte.SIZE;
+            }
+        },
+        BIT16(2) {
+            @Override
+            public int size() {
+                return Short.SIZE / Byte.SIZE;
+            }
+        },
+        BIT8(3) {
+            @Override
+            public int size() {
+                return Byte.SIZE;
+            }
+        },
+        BIT1(4) {
+            @Override
+            public int size() {
+                return Byte.SIZE / Byte.SIZE;
+            }
+        },
+        BIT0(5) {
+            @Override
+            public int size() {
+                return 0;
+            }
+        },
+        ;
 
-		protected final int type;
+        protected final int type;
 
-		public abstract int size();
-		
-		private DBColumnSize(int type) {
-			this.type = type;
-		}
-		
-		public static DBColumnSize get(int idx) {
-			for (DBColumnSize t : values()) {
-				if (t.type == idx) {
-					return t;
-				}
-			}
-			throw new IllegalArgumentException("message here");
-		}
-	}	
-	
-	public static enum DBColumnTypes {
-		BOOL(11) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT1;
-			}
+        public abstract int size();
 
-			@Override
-			public PyBase read(Buffer buffer) {
-				return null;
-			}},
-		CURRENCY(6) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT64;
-			}
+        private DBColumnSize(int type) {
+            this.type = type;
+        }
 
-			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyLong(buffer.readLong());
-			}},
-		DOUBLE(5) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT64;
-			}
-			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyDouble(buffer.readDouble());
-			}},
-		INT16(2) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT16;
-			}			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyShort(buffer.readShort());
-			}},
-		INT32(3) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT32;
-			}			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyInt(buffer.readInt());
-			}},
-		INT64(20) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT64;
-			}
-			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyLong(buffer.readLong());
-			}},
-		STRING(129) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT0;
-			}			@Override
-			public PyBase read(Buffer buffer) {
-				return null;
-			}},
-		UINT8(17) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT8;
-			}			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyByte(buffer.readByte());
-			}},
-		WINFILETIME(64) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT64;
-			}
-			@Override
-			public PyBase read(Buffer buffer) {
-				return new PyLong(buffer.readLong());
-			}},
-		USTRING(130) {
-			@Override
-			public DBColumnSize size() {
-				return DBColumnSize.BIT0;
-			}
-			@Override
-			public PyBase read(Buffer buffer) {
-				return null;
-			}
-		}
-		;
+        public static DBColumnSize get(int idx) {
+            for (DBColumnSize t : values()) {
+                if (t.type == idx) {
+                    return t;
+                }
+            }
+            throw new IllegalArgumentException("message here");
+        }
+    }
 
-		protected final int type;
+    public static enum DBColumnTypes {
+        BOOL(11) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT1;
+            }
 
-		private DBColumnTypes(int type) {
-			this.type = type;
-		}
-		
-		public int type() {
-			return type;
-		}
-		
-		public abstract DBColumnSize size();
-		
-		public abstract PyBase read(Buffer buffer);
-		
-		public static DBColumnTypes get(int idx) {
-			for (DBColumnTypes t : values()) {
-				if (t.type == idx) {
-					return t;
-				}
-			}
-			throw new IllegalArgumentException("message here");
-		}
-	}
+            @Override
+            public PyBase read(Buffer buffer) {
+                return null;
+            }
+        },
+        CURRENCY(6) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT64;
+            }
 
-	private int size;
-	
-	private List<PyDBColumn> columns;
-	
-	private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap = new TreeMap<DBColumnSize, List<PyDBColumn>>(){
-		
-		private static final long serialVersionUID = 1L;
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyLong(buffer.readLong());
+            }
+        },
+        DOUBLE(5) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT64;
+            }
 
-	{
-		put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>()); // 64
-		put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>()); // 32
-		put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>()); // 16
-		put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>()); // 8
-		put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>()); // bool
-		put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>()); // String
-	}};
-	
-	public PyDBRowDescriptor(PyObjectEx object) throws IOException {
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyDouble(buffer.readDouble());
+            }
+        },
+        INT16(2) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT16;
+            }
 
-		super(PyType.DBROWDESCRIPTOR);
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyShort(buffer.readShort());
+            }
+        },
+        INT32(3) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT32;
+            }
 
-		this.size = 0;
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyInt(buffer.readInt());
+            }
+        },
+        INT64(20) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT64;
+            }
 
-		this.columns = this.init(object);
-	}
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyLong(buffer.readLong());
+            }
+        },
+        STRING(129) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT0;
+            }
 
-	public List<PyDBColumn> getColumns() {
-		return columns;
-	}
+            @Override
+            public PyBase read(Buffer buffer) {
+                return null;
+            }
+        },
+        UINT8(17) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT8;
+            }
 
-	private List<PyDBColumn> init(PyObjectEx object) throws IOException {
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyByte(buffer.readByte());
+            }
+        },
+        WINFILETIME(64) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT64;
+            }
 
-		if (!(object.getHead().isTuple())) {
-			throw new IOException("Invalid Packed Row header");
-		}
+            @Override
+            public PyBase read(Buffer buffer) {
+                return new PyLong(buffer.readLong());
+            }
+        },
+        USTRING(130) {
+            @Override
+            public DBColumnSize size() {
+                return DBColumnSize.BIT0;
+            }
 
-		final PyTuple tuple = object.getHead().asTuple();
+            @Override
+            public PyBase read(Buffer buffer) {
+                return null;
+            }
+        };
 
-		if (!(tuple.get(1).isTuple())) {
-			throw new IOException("Invalid Packed Row header");
-		}
+        protected final int type;
 
-		PyTuple header = tuple.get(1).asTuple();
+        private DBColumnTypes(int type) {
+            this.type = type;
+        }
 
-		if (!(header.get(0).isTuple())) {
-			throw new IOException("Invalid Packed Row header");
-		}
+        public int type() {
+            return type;
+        }
 
-		header = header.get(0).asTuple();
-		int boolcount = 0;
+        public abstract DBColumnSize size();
 
-		for (final Iterator<PyBase> iterator = header.iterator(); iterator
-				.hasNext();) {
+        public abstract PyBase read(Buffer buffer);
 
-			final PyBase type = iterator.next();
+        public static DBColumnTypes get(int idx) {
+            for (DBColumnTypes t : values()) {
+                if (t.type == idx) {
+                    return t;
+                }
+            }
+            throw new IllegalArgumentException("message here");
+        }
+    }
 
-			if (type != null) {
-				
-				if (!(type.isTuple())) {
-					throw new IOException("Invalid DBRowType header type");
-				}
-				
-				final PyTuple info = type.asTuple();
+    private int size;
 
-				int dbtype = 0;
+    private List<PyDBColumn> columns;
 
-				if (info.get(1) instanceof PyByte) {
-					dbtype = (((PyByte) info.get(1)).getValue());
-				} else if (info.get(1) instanceof PyShort) {
-					dbtype = (((PyShort) info.get(1)).getValue());
-				}
+    private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap = new TreeMap<DBColumnSize, List<PyDBColumn>>() {
 
-				DBColumnTypes columnType = DBColumnTypes.get(Integer.valueOf(dbtype));
-								
-				if (columnType == DBColumnTypes.BOOL) {
-					
-					if (boolcount == 0) {
-						size += DBColumnSize.BIT8.size();
-					}
-					boolcount++;
-					if (boolcount == 8) {
-						boolcount = 0;
-					}
-					
-				} else {
-					size += columnType.size().size();
-				}
-				
-				typeMap.get(columnType.size()).add(new PyDBColumn(columnType, info.get(0)));
-			}
-		}
+        private static final long serialVersionUID = 1L;
 
-		return this.createColumns(typeMap);
-	}
-	
-	private List<PyDBColumn> createColumns(SortedMap<DBColumnSize, List<PyDBColumn>> typeMap) {
+        {
+            put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>()); // 64
+            put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>()); // 32
+            put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>()); // 16
+            put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>()); // 8
+            put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>()); // bool
+            put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>()); // String
+        }
+    };
 
-		List<PyDBColumn> elements = new ArrayList<PyDBColumn>();
-		
-		List<PyDBColumn> list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT64);
+    public PyDBRowDescriptor(PyObjectEx object) throws IOException {
 
-		for (final PyDBColumn column : list) {
-				elements.add(column);
-		}
+        super(PyType.DBROWDESCRIPTOR);
 
-		list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT32);
+        this.size = 0;
 
-		for (final PyDBColumn column : list) {
-			elements.add(column);
-		}
+        this.columns = this.init(object);
+    }
 
-		list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT16);
+    public List<PyDBColumn> getColumns() {
+        return columns;
+    }
 
-		for (final PyDBColumn column : list) {
-			elements.add(column);
-		}
+    private List<PyDBColumn> init(PyObjectEx object) throws IOException {
 
-		list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT8);
+        if (!(object.getHead().isTuple())) {
+            throw new IOException("Invalid Packed Row header");
+        }
 
-		for (final PyDBColumn column : list) {
-			elements.add(column);
-		}
+        final PyTuple tuple = object.getHead().asTuple();
 
-		list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT1);
+        if (!(tuple.get(1).isTuple())) {
+            throw new IOException("Invalid Packed Row header");
+        }
 
-		for (final PyDBColumn column : list) {
-			elements.add(column);
-		}
+        PyTuple header = tuple.get(1).asTuple();
 
-		list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT0);
+        if (!(header.get(0).isTuple())) {
+            throw new IOException("Invalid Packed Row header");
+        }
 
-		for (final PyDBColumn column : list) {
-			elements.add(column);
-		}
-		
-		return elements;
-	}
+        header = header.get(0).asTuple();
+        int boolcount = 0;
 
-	public int size() {
-		return this.size;
-	}
+        for (final Iterator<PyBase> iterator = header.iterator(); iterator
+                .hasNext();) {
+
+            final PyBase type = iterator.next();
+
+            if (type != null) {
+
+                if (!(type.isTuple())) {
+                    throw new IOException("Invalid DBRowType header type");
+                }
+
+                final PyTuple info = type.asTuple();
+
+                int dbtype = 0;
+
+                if (info.get(1) instanceof PyByte) {
+                    dbtype = (((PyByte) info.get(1)).getValue());
+                } else if (info.get(1) instanceof PyShort) {
+                    dbtype = (((PyShort) info.get(1)).getValue());
+                }
+
+                DBColumnTypes columnType = DBColumnTypes.get(Integer
+                        .valueOf(dbtype));
+
+                if (columnType == DBColumnTypes.BOOL) {
+
+                    if (boolcount == 0) {
+                        size += DBColumnSize.BIT8.size();
+                    }
+                    boolcount++;
+                    if (boolcount == 8) {
+                        boolcount = 0;
+                    }
+
+                } else {
+                    size += columnType.size().size();
+                }
+
+                typeMap.get(columnType.size()).add(
+                        new PyDBColumn(columnType, info.get(0)));
+            }
+        }
+
+        return this.createColumns(typeMap);
+    }
+
+    private List<PyDBColumn> createColumns(
+            SortedMap<DBColumnSize, List<PyDBColumn>> typeMap) {
+
+        List<PyDBColumn> elements = new ArrayList<PyDBColumn>();
+
+        List<PyDBColumn> list = typeMap
+                .get(PyDBRowDescriptor.DBColumnSize.BIT64);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT32);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT16);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT8);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT1);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT0);
+
+        for (final PyDBColumn column : list) {
+            elements.add(column);
+        }
+
+        return elements;
+    }
+
+    public int size() {
+        return this.size;
+    }
 }

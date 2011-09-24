@@ -1,88 +1,117 @@
 package com.github.evetools.marshal.python;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class PyObject extends PyBase {
 
-	private PyBase content;
+    /**
+     * Content.
+     */
+    private PyBase content;
 
-	private PyBase head;
+    /**
+     * Head.
+     */
+    private PyBase head;
 
-	public PyObject() {
-		super(PyType.OBJECT);
-	}
+    /**
+     * PyObject.
+     */
+    public PyObject() {
+        super(PyType.OBJECT);
+    }
 
-	public PyObject(PyBase head, PyBase content) {
-		super(PyType.OBJECT);
-		this.head = head;
-		this.content = content;
-	}
+    /**
+     * PyObject.
+     * @param header head
+     * @param cont content
+     */
+    public PyObject(final PyBase header, final PyBase cont) {
+        super(PyType.OBJECT);
+        this.head = header;
+        this.content = cont;
+    }
 
-	public void setHead(PyBase head) {
-		this.head = head;
-	}
+    /**
+     * Set head.
+     * @param header head
+     */
+    public final void setHead(final PyBase header) {
+        this.head = header;
+    }
 
-	public void setContent(PyBase content) {
-		this.content = content;
-	}
+    /**
+     * Set content.
+     * @param cont content
+     */
+    public final void setContent(final PyBase cont) {
+        this.content = cont;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		final PyObject other = (PyObject) obj;
-		if (this.content == null) {
-			if (other.content != null) {
-				return false;
-			}
-		} else if (!this.content.equals(other.content)) {
-			return false;
-		}
-		if (this.head == null) {
-			if (other.head != null) {
-				return false;
-			}
-		} else if (!this.head.equals(other.head)) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final PyObject other = (PyObject) obj;
+        if (this.content == null) {
+            if (other.content != null) {
+                return false;
+            }
+        } else if (!this.content.equals(other.content)) {
+            return false;
+        }
+        if (this.head == null) {
+            if (other.head != null) {
+                return false;
+            }
+        } else if (!this.head.equals(other.head)) {
+            return false;
+        }
+        return true;
+    }
 
-	public PyBase getContent() {
-		return this.content;
-	}
+    /**
+     * Returns content.    
+     * @return content
+     */
+    public final PyBase getContent() {
+        return this.content;
+    }
 
-	public PyBase getHead() {
-		return this.head;
-	}
+    /**
+     * Returns head.
+     * @return head
+     */
+    public final PyBase getHead() {
+        return this.head;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = (prime * result)
-				+ ((this.content == null) ? 0 : this.content.hashCode());
-		result = (prime * result)
-				+ ((this.head == null) ? 0 : this.head.hashCode());
-		return result;
-	}
+    @Override
+    public final int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = (prime * result)
+                + ((this.content == null) ? 0 : this.content.hashCode());
+        result = (prime * result)
+                + ((this.head == null) ? 0 : this.head.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean visit(PyVisitor visitor) {
-		return (visitor.visit(this));
-	}
+    @Override
+    public final boolean visit(final PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 
 }

@@ -1,60 +1,76 @@
 package com.github.evetools.marshal.python;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class PyBool extends PyBase {
 
-	private boolean value;
+    /**
+     * Bool value.
+     */
+    private boolean value;
 
-	public PyBool(boolean value) {
-		super(PyType.BOOL);
-		this.value = value;
-	}
+    /**
+     * Bool value.
+     * @param val bool
+     */
+    public PyBool(final boolean val) {
+        super(PyType.BOOL);
+        this.value = val;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		final PyBool other = (PyBool) obj;
-		if (this.value != other.value) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final PyBool other = (PyBool) obj;
+        if (this.value != other.value) {
+            return false;
+        }
+        return true;
+    }
 
-	public boolean getValue() {
-		return this.value;
-	}
+    /**
+     * Returns value.
+     * @return boolean
+     */
+    public final boolean getValue() {
+        return this.value;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = (prime * result) + (this.value ? 1231 : 1237);
-		return result;
-	}
+    @Override
+    public final int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = (prime * result);
+        if (this.value) { 
+            result += Boolean.valueOf(this.value).hashCode();
+        } else {
+            result += Boolean.valueOf(!this.value).hashCode();
+        }
 
-	@Override
-	public String toString() {
-		return Boolean.toString(this.value);
-	}
+        return result;
+    }
 
-	@Override
-	public boolean visit(PyVisitor visitor) {
-		return (visitor.visit(this));
-	}
+    @Override
+    public final String toString() {
+        return Boolean.toString(this.value);
+    }
+
+    @Override
+    public final boolean visit(final PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 
 }

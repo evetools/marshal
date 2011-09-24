@@ -1,28 +1,27 @@
 package com.github.evetools.marshal.python;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public abstract class PyBase {
 
-	public static enum PyType {
-		BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, DBROW, STRING, TUPLE, UNKNOWN, DBCOLUMN
-	};
+    public static enum PyType {
+        BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, DBROW, STRING, TUPLE, UNKNOWN, DBCOLUMN
+    };
 
-	public static long convertWindowsTime(long timeStamp) {
-		 return (timeStamp/10000L) - 11644473600000L;
-	}
+    public static long convertWindowsTime(long timeStamp) {
+        return (timeStamp / 10000L) - 11644473600000L;
+    }
 
-	private PyType type = PyType.UNKNOWN;
+    private PyType type = PyType.UNKNOWN;
 
-	protected PyBase(PyType type) {
-		this.type = type;
-	}
+    protected PyBase(PyType type) {
+        this.type = type;
+    }
 
     public boolean isObject() {
         return (this.type == PyType.OBJECT);
@@ -30,7 +29,7 @@ public abstract class PyBase {
 
     public PyObject asObject() {
         if (this.isObject()) {
-            return (PyObject)this;
+            return (PyObject) this;
         } else {
             return null;
         }
@@ -42,7 +41,7 @@ public abstract class PyBase {
 
     public PyObjectEx asObjectEx() {
         if (this.isObjectEx()) {
-            return (PyObjectEx)this;
+            return (PyObjectEx) this;
         } else {
             return null;
         }
@@ -54,7 +53,7 @@ public abstract class PyBase {
 
     public PyDBRowDescriptor asDBRowDescriptor() {
         if (this.isDBRowDescriptor()) {
-            return (PyDBRowDescriptor)this;
+            return (PyDBRowDescriptor) this;
         } else {
             return null;
         }
@@ -66,7 +65,7 @@ public abstract class PyBase {
 
     public PyDBColumn asDBColumn() {
         if (this.isDBColumn()) {
-            return (PyDBColumn)this;
+            return (PyDBColumn) this;
         } else {
             return null;
         }
@@ -78,7 +77,7 @@ public abstract class PyBase {
 
     public PyDBRow asDBRow() {
         if (this.isDBRow()) {
-            return (PyDBRow)this;
+            return (PyDBRow) this;
         } else {
             return null;
         }
@@ -90,7 +89,7 @@ public abstract class PyBase {
 
     public PyMarker asMarker() {
         if (this.isMarker()) {
-            return (PyMarker)this;
+            return (PyMarker) this;
         } else {
             return null;
         }
@@ -102,7 +101,7 @@ public abstract class PyBase {
 
     public PyNone asNone() {
         if (this.isNone()) {
-            return (PyNone)this;
+            return (PyNone) this;
         } else {
             return null;
         }
@@ -114,7 +113,7 @@ public abstract class PyBase {
 
     public PyLong asLong() {
         if (this.isLong()) {
-            return (PyLong)this;
+            return (PyLong) this;
         } else {
             return null;
         }
@@ -126,7 +125,7 @@ public abstract class PyBase {
 
     public PyInt asInt() {
         if (this.isInt()) {
-            return (PyInt)this;
+            return (PyInt) this;
         } else {
             return null;
         }
@@ -138,7 +137,7 @@ public abstract class PyBase {
 
     public PyShort asShort() {
         if (this.isShort()) {
-            return (PyShort)this;
+            return (PyShort) this;
         } else {
             return null;
         }
@@ -150,7 +149,7 @@ public abstract class PyBase {
 
     public PyByte asByte() {
         if (this.isByte()) {
-            return (PyByte)this;
+            return (PyByte) this;
         } else {
             return null;
         }
@@ -162,7 +161,7 @@ public abstract class PyBase {
 
     public PyList asList() {
         if (this.isList()) {
-            return (PyList)this;
+            return (PyList) this;
         } else {
             return null;
         }
@@ -174,7 +173,7 @@ public abstract class PyBase {
 
     public PyDouble asDouble() {
         if (this.isDouble()) {
-            return (PyDouble)this;
+            return (PyDouble) this;
         } else {
             return null;
         }
@@ -186,98 +185,97 @@ public abstract class PyBase {
 
     public PyDict asDict() {
         if (this.isDict()) {
-            return (PyDict)this;
+            return (PyDict) this;
         } else {
             return null;
         }
     }
 
-	public boolean isBool() {
-		return (this.type == PyType.BOOL);
-	}
+    public boolean isBool() {
+        return (this.type == PyType.BOOL);
+    }
 
-	public PyBool asBool() {
-		if (this.isBool()) {
-			return (PyBool)this;
-		} else {
-			return null;
-		}
-	}
+    public PyBool asBool() {
+        if (this.isBool()) {
+            return (PyBool) this;
+        } else {
+            return null;
+        }
+    }
 
-	public boolean isGlobal() {
-		return (this.type == PyType.GLOBAL);
-	}
+    public boolean isGlobal() {
+        return (this.type == PyType.GLOBAL);
+    }
 
-	public PyGlobal asGlobal() {
-		if (this.isGlobal()) {
-			return (PyGlobal)this;
-		} else {
-			return null;
-		}
-	}
+    public PyGlobal asGlobal() {
+        if (this.isGlobal()) {
+            return (PyGlobal) this;
+        } else {
+            return null;
+        }
+    }
 
-	public boolean isTuple() {
-		return (this.type == PyType.TUPLE);
-	}
+    public boolean isTuple() {
+        return (this.type == PyType.TUPLE);
+    }
 
-	public PyTuple asTuple() {
-		if (this.isTuple()) {
-			return (PyTuple)this;
-		} else {
-			return null;
-		}
-	}
+    public PyTuple asTuple() {
+        if (this.isTuple()) {
+            return (PyTuple) this;
+        } else {
+            return null;
+        }
+    }
 
-	public boolean isBuffer() {
-		return (this.type == PyType.BUFFER);
-	}
+    public boolean isBuffer() {
+        return (this.type == PyType.BUFFER);
+    }
 
-	public PyBuffer asBuffer() {
-		if (this.isBuffer()) {
-			return (PyBuffer)this;
-		} else {
-			return null;
-		}
-	}
+    public PyBuffer asBuffer() {
+        if (this.isBuffer()) {
+            return (PyBuffer) this;
+        } else {
+            return null;
+        }
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final PyBase other = (PyBase) obj;
+        if (this.type != other.type) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		final PyBase other = (PyBase) obj;
-		if (this.type != other.type) {
-			return false;
-		}
-		return true;
-	}
+    public final PyType getType() {
+        return this.type;
+    }
 
-	public final PyType getType() {
-		return this.type;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result)
+                + ((this.type == null) ? 0 : this.type.hashCode());
+        return result;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result)
-				+ ((this.type == null) ? 0 : this.type.hashCode());
-		return result;
-	}
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 
-	@Override
-	public String toString() {
-		return this.getClass().getName();
-	}
-
-	public boolean visit(PyVisitor visitor) {
-		return (visitor.visit(this));
-	}
+    public boolean visit(PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 }

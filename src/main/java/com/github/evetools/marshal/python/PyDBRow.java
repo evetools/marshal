@@ -5,86 +5,85 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class PyDBRow extends PyBase {
 
-	private PyDict columns;
+    private PyDict columns;
 
-	private PyDBRowDescriptor head;
+    private PyDBRowDescriptor head;
 
-	public PyDBRow() {
-		super(PyType.DBROW);
-		this.columns = new PyDict();
-	}
-	
-	public void setHead(PyDBRowDescriptor head) {
-		this.head = head;
-	}
+    public PyDBRow() {
+        super(PyType.DBROW);
+        this.columns = new PyDict();
+    }
 
-	public boolean containsKey(PyBase key) {
-		return this.columns.containsKey(key);
-	}
+    public void setHead(PyDBRowDescriptor head) {
+        this.head = head;
+    }
 
-	public boolean containsValue(PyBase value) {
-		return this.columns.containsValue(value);
-	}
+    public boolean containsKey(PyBase key) {
+        return this.columns.containsKey(key);
+    }
 
-	public Set<Entry<PyBase, PyBase>> entrySet() {
-		return this.columns.entrySet();
-	}
+    public boolean containsValue(PyBase value) {
+        return this.columns.containsValue(value);
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		return this.columns.equals(o);
-	}
+    public Set<Entry<PyBase, PyBase>> entrySet() {
+        return this.columns.entrySet();
+    }
 
-	public PyBase get(PyBase key) {
-		return this.columns.get(key);
-	}
+    @Override
+    public boolean equals(Object o) {
+        return this.columns.equals(o);
+    }
 
-	public PyDict getColumns() {
-		return this.columns;
-	}
+    public PyBase get(PyBase key) {
+        return this.columns.get(key);
+    }
 
-	public PyDBRowDescriptor getHead() {
-		return this.head;
-	}
+    public PyDict getColumns() {
+        return this.columns;
+    }
 
-	@Override
-	public int hashCode() {
-		return this.columns.hashCode();
-	}
+    public PyDBRowDescriptor getHead() {
+        return this.head;
+    }
 
-	public Set<PyBase> keySet() {
-		return this.columns.keySet();
-	}
+    @Override
+    public int hashCode() {
+        return this.columns.hashCode();
+    }
 
-	public PyBase put(PyBase key, PyBase value) {
-		return this.columns.put(key, value);
-	}
+    public Set<PyBase> keySet() {
+        return this.columns.keySet();
+    }
 
-	public int size() {
-		return this.columns.size();
-	}
+    public PyBase put(PyBase key, PyBase value) {
+        return this.columns.put(key, value);
+    }
 
-	@Override
-	public String toString() {
-		return this.columns.toString();
-	}
+    public int size() {
+        return this.columns.size();
+    }
 
-	public Collection<PyBase> values() {
-		return this.columns.values();
-	}
+    @Override
+    public String toString() {
+        return this.columns.toString();
+    }
 
-	@Override
-	public boolean visit(PyVisitor visitor) {
-		return (visitor.visit(this));
-	}
+    public Collection<PyBase> values() {
+        return this.columns.values();
+    }
+
+    @Override
+    public boolean visit(PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 
 }
