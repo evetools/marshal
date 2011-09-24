@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public abstract class PyBase {
 
 	public static enum types {
-		BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, PACKEDROW, STRING, TUPLE, UNKNOWN
+		BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, PACKEDROW, STRING, TUPLE, UNKNOWN, DBCOLUMN
 	};
 
 	public static long convertWindowsTime(long timeStamp) {
@@ -43,6 +43,30 @@ public abstract class PyBase {
     public PyObjectEx asObjectEx() {
         if (this.isObjectEx()) {
             return (PyObjectEx)this;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isDBRowDescriptor() {
+        return (this.type == types.DBROWDESCRIPTOR);
+    }
+
+    public PyDBRowDescriptor asDBRowDescriptor() {
+        if (this.isDBRowDescriptor()) {
+            return (PyDBRowDescriptor)this;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isDBColumn() {
+        return (this.type == types.DBCOLUMN);
+    }
+
+    public PyDBColumn asDBColumn() {
+        if (this.isDBColumn()) {
+            return (PyDBColumn)this;
         } else {
             return null;
         }

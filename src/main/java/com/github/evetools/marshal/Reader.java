@@ -6,7 +6,7 @@ import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyDBRowDescriptor;
 import com.github.evetools.marshal.python.PyDBRowDescriptor.DBColumnTypes;
-import com.github.evetools.marshal.python.PyDBRowDescriptor.PyDBColumn;
+import com.github.evetools.marshal.python.PyDBColumn;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyDouble;
 import com.github.evetools.marshal.python.PyGlobal;
@@ -789,7 +789,7 @@ public class Reader {
 		
 		for (PyDBColumn pyDBColumn : list) {
 
-			if (pyDBColumn.getType() == DBColumnTypes.BOOL) {
+			if (pyDBColumn.getDBType() == DBColumnTypes.BOOL) {
 				
 				if (boolcount == 0) {
 					boolvalue = outbuf.readByte();
@@ -804,10 +804,10 @@ public class Reader {
 					boolcount = 0;
 				}
 				
-			} else if (pyDBColumn.getType() == DBColumnTypes.STRING || pyDBColumn.getType() == DBColumnTypes.USTRING) {
+			} else if (pyDBColumn.getDBType() == DBColumnTypes.STRING || pyDBColumn.getDBType() == DBColumnTypes.USTRING) {
 				base.put(pyDBColumn.getName(), loadPy());
 			} else {
-				base.put(pyDBColumn.getName(), pyDBColumn.getType().read(outbuf));
+				base.put(pyDBColumn.getName(), pyDBColumn.getDBType().read(outbuf));
 			}
 			
 		}

@@ -185,46 +185,6 @@ public class PyDBRowDescriptor extends PyBase {
 			throw new IllegalArgumentException("message here");
 		}
 	}
-	
-	public class PyDBColumn {
-		
-		private PyBase name;
-		
-		private PyBase value;
-		
-		final private DBColumnTypes type;
-
-		public PyDBColumn(DBColumnTypes type) {
-			this.type = type;
-		}
-		
-		public PyDBColumn(DBColumnTypes type, PyBase name) {
-			this.type = type;
-			this.name = name;
-		}
-		
-		public PyBase getName() {
-			return name;
-		}
-
-		public PyBase getValue() {
-			return value;
-		}
-
-		public void setName(PyBase name) {
-			this.name = name;
-		}
-
-		public void setValue(PyBase value) {
-			this.value = value;
-		}
-
-		public DBColumnTypes getType() {
-			return type;
-		}
-		
-		
-	};
 
 	private int size;
 	
@@ -323,9 +283,10 @@ public class PyDBRowDescriptor extends PyBase {
 	
 	private List<PyDBColumn> createColumns(SortedMap<DBColumnSize, List<PyDBColumn>> typeMap) {
 
-		List<PyDBColumn> list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT64);
 		List<PyDBColumn> elements = new ArrayList<PyDBColumn>();
 		
+		List<PyDBColumn> list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT64);
+
 		for (final PyDBColumn column : list) {
 				elements.add(column);
 		}

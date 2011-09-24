@@ -181,6 +181,20 @@ public class PyDumpVisitor implements PyVisitor {
 
 		return false;
 	}
+	
+	@Override
+	public boolean visit(PyDBColumn base1) {
+		if (base1 != null) {
+			this.print(base1.getName());
+			this.pushIndent();
+			this.print(base1.getValue());
+			this.popIndent();
+			return true;
+		}
+
+		return false;
+	}
+
 
 	@Override
 	public boolean visit(PyObject base1) {
