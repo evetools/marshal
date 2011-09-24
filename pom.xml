@@ -40,7 +40,7 @@
 							</descriptorRefs>
 							<archive>
 								<manifest>
-									<mainClass>com.github.evetools.marshal.App</mainClass>
+									<mainClass>com.github.evetools.marshal.Dump</mainClass>
 								</manifest>
 							</archive>
 						</configuration>
