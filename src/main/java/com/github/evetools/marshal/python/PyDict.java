@@ -1,5 +1,6 @@
 package com.github.evetools.marshal.python;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,7 +118,7 @@ public class PyDict extends PyBase {
     }
 
     @Override
-    public final boolean visit(final PyVisitor visitor) {
+    public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
 

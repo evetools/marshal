@@ -1,5 +1,6 @@
 package com.github.evetools.marshal.python;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -140,7 +141,7 @@ public class PyDBRow extends PyBase {
     }
 
     @Override
-    public final boolean visit(final PyVisitor visitor) {
+    public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
 

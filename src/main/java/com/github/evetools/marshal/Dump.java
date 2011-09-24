@@ -63,7 +63,7 @@ public final class Dump {
             final Reader reader = new Reader(file);
             PyBase pyBase = reader.read();
 
-            PyDumpVisitor visitor = new PyDumpVisitor();
+            PyDumpVisitor visitor = new PyDumpVisitor(System.out);
             pyBase.visit(visitor);
 
         } catch (final Exception e) {

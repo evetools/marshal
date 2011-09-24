@@ -1,5 +1,7 @@
 package com.github.evetools.marshal.python;
 
+import java.io.IOException;
+
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
@@ -13,118 +15,135 @@ public interface PyVisitor {
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyBase base);
+    boolean visit(PyBase base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyBool base);
+    boolean visit(PyBool base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyBuffer base);
+    boolean visit(PyBuffer base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyByte base);
+    boolean visit(PyByte base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyContainer base);
+    boolean visit(PyContainer base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyDict base);
+    boolean visit(PyDict base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyDouble base);
+    boolean visit(PyDouble base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyGlobal base);
+    boolean visit(PyGlobal base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyInt base);
+    boolean visit(PyInt base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyLong base);
+    boolean visit(PyLong base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyMarker base);
+    boolean visit(PyMarker base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyNone base);
+    boolean visit(PyNone base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyObject base);
+    boolean visit(PyObject base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyObjectEx base);
+    boolean visit(PyObjectEx base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyDBRow base);
+    boolean visit(PyDBRow base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyShort base);
+    boolean visit(PyShort base) throws IOException;
 
     /**
      * Visits Python element.
      * @param base PyBase element
      * @return status
+     * @throws IOException on error
      */
-    boolean visit(PyDBColumn base);
+    boolean visit(PyDBColumn base) throws IOException;
 }

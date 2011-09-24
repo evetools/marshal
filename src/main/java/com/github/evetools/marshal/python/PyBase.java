@@ -1,5 +1,7 @@
 package com.github.evetools.marshal.python;
 
+import java.io.IOException;
+
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
@@ -534,6 +536,7 @@ public abstract class PyBase {
      * Visit element.
      * @param visitor visitor
      * @return result
+     * @throws IOException on error
      */
-    abstract public boolean visit(PyVisitor visitor);
+    abstract public boolean visit(PyVisitor visitor) throws IOException;
 }

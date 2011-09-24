@@ -485,7 +485,7 @@ public class PyDBRowDescriptor extends PyBase {
     }
 
     @Override
-    public final boolean visit(final PyVisitor visitor) {
+    public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
 }

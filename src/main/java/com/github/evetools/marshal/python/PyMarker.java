@@ -1,5 +1,7 @@
 package com.github.evetools.marshal.python;
 
+import java.io.IOException;
+
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
@@ -22,7 +24,7 @@ public class PyMarker extends PyBase {
     }
 
     @Override
-    public final boolean visit(final PyVisitor visitor) {
+    public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
 
