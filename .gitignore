@@ -3,4 +3,5 @@
 .classpath
 .project
 target/
+src/test/resources/600004.cache2
 nb-configuration.xml

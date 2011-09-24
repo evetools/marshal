@@ -16,11 +16,21 @@ import org.junit.Test;
 public class InvTypesTest {
 
 	@Test
-	public void testRead() throws Exception {
-		InputStream in = InvTypesTest.class.getResourceAsStream("/ce99.cache");
+	public void testRead_Cache() throws Exception {
+		InputStream in = MarketOrdersBestsTest.class.getResourceAsStream("/ce99.cache");
 		assertNotNull(in);
 		InvTypes invTypes = new InvTypes(in);
 		invTypes.read();
 	}
 
+	@Test
+	public void testRead_Bulkdata() throws Exception {
+				
+		InputStream in = MarketOrdersBestsTest.class.getResourceAsStream("/600004.cache2");
+		
+		if (in != null) {
+			InvTypes invTypes = new InvTypes(in);
+			invTypes.read();
+		}
+	}
 }

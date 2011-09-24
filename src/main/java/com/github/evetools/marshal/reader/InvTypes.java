@@ -17,12 +17,11 @@ import com.github.evetools.marshal.python.PyTuple;
 import java.io.InputStream;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class InvTypes {
 
@@ -33,35 +32,35 @@ public class InvTypes {
 	public static class InvType {
 
 		private short raceID;
-		
-		private short marketGroupID;
-		
+
+		private int marketGroupID;
+
 		private boolean published;
-		
+
 		private double mass;
-		
+
 		private String typeName;
-		
+
 		private double volume;
-		
+
 		private double capacity;
-		
+
 		private int portionSize;
-		
-		private short groupID;
-		
+
+		private int groupID;
+
 		private int iconID;
-		
+
 		private int dataID;
-		
+
 		private int graphicID;
-		
+
 		private int soundID;
-		
+
 		private String description;
-		
+
 		private int typeID;
-		
+
 		private double radius;
 
 		private short categoryID;
@@ -69,7 +68,7 @@ public class InvTypes {
 		private double chanceOfDuplicating;
 
 		private short attributeID;
-		
+
 		private long basePrice;
 
 		public short getRaceID() {
@@ -80,11 +79,11 @@ public class InvTypes {
 			this.raceID = raceID;
 		}
 
-		public short getMarketGroupID() {
+		public int getMarketGroupID() {
 			return marketGroupID;
 		}
 
-		public void setMarketGroupID(short marketGroupID) {
+		public void setMarketGroupID(int marketGroupID) {
 			this.marketGroupID = marketGroupID;
 		}
 
@@ -136,11 +135,11 @@ public class InvTypes {
 			this.portionSize = portionSize;
 		}
 
-		public short getGroupID() {
+		public int getGroupID() {
 			return groupID;
 		}
 
-		public void setGroupID(short groupID) {
+		public void setGroupID(int groupID) {
 			this.groupID = groupID;
 		}
 
@@ -268,12 +267,10 @@ public class InvTypes {
 					+ chanceOfDuplicating + ", attributeID=" + attributeID
 					+ ", basePrice=" + basePrice + "]";
 		}
-		
-		
-};
+
+	};
 
 	private Collection<InvType> collection;
-
 
 	public Reader getReader() {
 		return reader;
@@ -305,44 +302,56 @@ public class InvTypes {
 		PyObjectEx objectEx = null;
 		PyBuffer string = null;
 
-		if (tuple1 == null) {
-			throw new RuntimeException("Invalid element: " + pyBase.getType());
-		}
+		if (!pyBase.isObjectEx()) {
+			if (tuple1 == null) {
+				throw new RuntimeException("Invalid element: "
+						+ pyBase.getType());
+			}
 
-		string = tuple1.get(0).asBuffer();
-		
-		if (string == null) {
-			throw new RuntimeException("Invalid element: " + tuple1.get(0).getType());
-		}
+			string = tuple1.get(0).asBuffer();
 
-		if (!string.toString().equals("config.BulkData.types")) {
-			throw new RuntimeException("Invalid element content: " + string + " expeced: config.BulkData.types");
-		}
-		
-		object = tuple1.get(1).asObject();
-		
-		if (object == null) {
-			throw new RuntimeException("Invalid element: " + tuple1.get(1).getType());
-		}
+			if (string == null) {
+				throw new RuntimeException("Invalid element: "
+						+ tuple1.get(0).getType());
+			}
 
-		tuple2 = object.getContent().asTuple();
-		
-		if (tuple2 == null) {
-			throw new RuntimeException("Invalid element: " + object.getContent().getType());
+			if (!string.toString().equals("config.BulkData.types")) {
+				throw new RuntimeException("Invalid element content: " + string
+						+ " expeced: config.BulkData.types");
+			}
+
+			object = tuple1.get(1).asObject();
+
+			if (object == null) {
+				throw new RuntimeException("Invalid element: "
+						+ tuple1.get(1).getType());
+			}
+
+			tuple2 = object.getContent().asTuple();
+
+			if (tuple2 == null) {
+				throw new RuntimeException("Invalid element: "
+						+ object.getContent().getType());
+			}
+
+			tuple1 = tuple2.get(0).asTuple();
+
+			if (tuple1 == null) {
+				throw new RuntimeException("Invalid element: "
+						+ tuple2.get(0).getType());
+			}
+
+			this.timestamp = PyBase.convertWindowsTime(tuple1.get(0).asLong()
+					.getValue());
+
+			objectEx = tuple2.get(4).asObjectEx();
+		} else {
+			objectEx = pyBase.asObjectEx();
 		}
-
-		tuple1 = tuple2.get(0).asTuple();
-		
-		if (tuple1 == null) {
-			throw new RuntimeException("Invalid element: " + tuple2.get(0).getType());
-		}
-
-		this.timestamp = PyBase.convertWindowsTime(tuple1.get(0).asLong().getValue());
-
-		objectEx = tuple2.get(4).asObjectEx();
 		
 		if (objectEx == null) {
-			throw new RuntimeException("Invalid element: " + tuple2.get(4).getType());
+			throw new RuntimeException("Invalid element: "
+					+ tuple2.get(4).getType());
 		}
 
 		this.read(objectEx);
@@ -357,7 +366,7 @@ public class InvTypes {
 		PyList list = object.getList();
 
 		this.collection = new ArrayList<InvTypes.InvType>();
-		
+
 		for (Iterator<PyBase> iterator = list.iterator(); iterator.hasNext();) {
 			PyBase type = (PyBase) iterator.next();
 
@@ -384,14 +393,22 @@ public class InvTypes {
 		InvType item = new InvType();
 
 		item.setRaceID(dict.get("raceID").asByte().getValue());
-		item.setMarketGroupID(dict.get("marketGroupID").asShort().getValue());
+		if (dict.get("marketGroupID").isInt()) {
+			item.setMarketGroupID(dict.get("marketGroupID").asInt().getValue());
+		} else {
+			item.setMarketGroupID(dict.get("marketGroupID").asShort().getValue());
+		}
 		item.setPublished(dict.get("published").asBool().getValue());
 		item.setMass(dict.get("mass").asDouble().getValue());
 		item.setTypeName(dict.get("typeName").asBuffer().toString());
 		item.setVolume(dict.get("volume").asDouble().getValue());
 		item.setCapacity(dict.get("capacity").asDouble().getValue());
 		item.setPortionSize(dict.get("portionSize").asInt().getValue());
-		item.setGroupID(dict.get("groupID").asShort().getValue());
+		if (dict.get("marketGroupID").isInt()) {
+			item.setGroupID(dict.get("groupID").asInt().getValue());
+		} else {
+			item.setGroupID(dict.get("groupID").asShort().getValue());
+		}
 		item.setIconID(dict.get("iconID").asInt().getValue());
 		item.setDataID(dict.get("dataID").asInt().getValue());
 		item.setGraphicID(dict.get("graphicID").asInt().getValue());
@@ -399,11 +416,17 @@ public class InvTypes {
 		item.setDescription(dict.get("description").asBuffer().toString());
 		item.setTypeID(dict.get("typeID").asInt().getValue());
 		item.setRadius(dict.get("radius").asDouble().getValue());
-		item.setCategoryID(dict.get("categoryID").asShort().getValue());
-		item.setChanceOfDuplicating(dict.get("chanceOfDuplicating").asDouble().getValue());
-		item.setAttributeID(dict.get("attributeID").asShort().getValue());
+		if (dict.get("categoryID") != null) {
+			item.setCategoryID(dict.get("categoryID").asShort().getValue());
+		}
+		item.setChanceOfDuplicating(dict.get("chanceOfDuplicating").asDouble()
+				.getValue());
+		if (dict.get("attributeID") != null) {
+			item.setAttributeID(dict.get("attributeID").asShort().getValue());
+		}
 		item.setBasePrice(dict.get("basePrice").asLong().getValue());
-				
+		
+
 		this.collection.add(item);
 	}
 }
