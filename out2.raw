@@ -1,0 +1,2412 @@
+TUPLE [2]
+ TUPLE [3]
+  factory
+  GetMaterialsForTypeWithActivity
+  11394
+ DICT [5]
+  used
+   129601674694937791
+  lret
+   DICT [4]
+    1
+     OBJECT
+      OBJECT-HEADER
+       util.KeyVal
+      OBJECT-CONTENT
+       DICT [3]
+        rawMaterials
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    17
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    3
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [16]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               34
+              quantity
+               1000
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               35
+              quantity
+               400
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               36
+              quantity
+               500
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               37
+              quantity
+               60
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               38
+              quantity
+               22
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               39
+              quantity
+               7
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               40
+              quantity
+               2
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               3828
+              quantity
+               25
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11399
+              quantity
+               30
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11532
+              quantity
+               15
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11537
+              quantity
+               20
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11539
+              quantity
+               90
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11543
+              quantity
+               600
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11549
+              quantity
+               5
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11554
+              quantity
+               60
+              recycle
+               0
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               11557
+              quantity
+               20
+              recycle
+               0
+              activity
+               1
+          OBJECTEX-DICT
+           DICT [0]
+        skills
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             dbutil.CRowset
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 blue.DBRowDescriptor
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [4]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               3380
+              quantity
+               5
+              recycle
+               false
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               3395
+              quantity
+               5
+              recycle
+               false
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11444
+              quantity
+               1
+              recycle
+               false
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11452
+              quantity
+               1
+              recycle
+               false
+              activity
+               1
+          OBJECTEX-DICT
+           DICT [0]
+        extras
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [2]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               597
+              quantity
+               1
+              recycle
+               true
+              activity
+               1
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.95
+              requiredTypeID
+               11478
+              quantity
+               4
+              recycle
+               false
+              activity
+               1
+          OBJECTEX-DICT
+           DICT [0]
+    4
+     OBJECT
+      OBJECT-HEADER
+       util.KeyVal
+      OBJECT-CONTENT
+       DICT [3]
+        rawMaterials
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    17
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    3
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [0]
+          OBJECTEX-DICT
+           DICT [0]
+        skills
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [3]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               3409
+              quantity
+               5
+              recycle
+               false
+              activity
+               4
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11444
+              quantity
+               2
+              recycle
+               false
+              activity
+               4
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11452
+              quantity
+               2
+              recycle
+               false
+              activity
+               4
+          OBJECTEX-DICT
+           DICT [0]
+        extras
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [3]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               3814
+              quantity
+               16
+              recycle
+               false
+              activity
+               4
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               9836
+              quantity
+               8
+              recycle
+               false
+              activity
+               4
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.6
+              requiredTypeID
+               11459
+              quantity
+               2
+              recycle
+               false
+              activity
+               4
+          OBJECTEX-DICT
+           DICT [0]
+    3
+     OBJECT
+      OBJECT-HEADER
+       util.KeyVal
+      OBJECT-CONTENT
+       DICT [3]
+        rawMaterials
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    17
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    3
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [0]
+          OBJECTEX-DICT
+           DICT [0]
+        skills
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [3]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               3403
+              quantity
+               5
+              recycle
+               false
+              activity
+               3
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11444
+              quantity
+               3
+              recycle
+               false
+              activity
+               3
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11452
+              quantity
+               3
+              recycle
+               false
+              activity
+               3
+          OBJECTEX-DICT
+           DICT [0]
+        extras
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [3]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               3814
+              quantity
+               16
+              recycle
+               false
+              activity
+               3
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               9836
+              quantity
+               8
+              recycle
+               false
+              activity
+               3
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.8
+              requiredTypeID
+               11459
+              quantity
+               2
+              recycle
+               false
+              activity
+               3
+          OBJECTEX-DICT
+           DICT [0]
+    5
+     OBJECT
+      OBJECT-HEADER
+       util.KeyVal
+      OBJECT-CONTENT
+       DICT [3]
+        rawMaterials
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    17
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    3
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [0]
+          OBJECTEX-DICT
+           DICT [0]
+        skills
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [2]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11444
+              quantity
+               3
+              recycle
+               false
+              activity
+               5
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.0
+              requiredTypeID
+               11452
+              quantity
+               3
+              recycle
+               false
+              activity
+               5
+          OBJECTEX-DICT
+           DICT [0]
+        extras
+         OBJECTEX
+          OBJECTEX-HEADER
+           TUPLE [2]
+            TUPLE [1]
+             OBJECTEX
+              OBJECTEX-HEADER
+               TUPLE [2]
+                TUPLE [1]
+                 dbutil.CRowset
+                DICT [1]
+                 header
+                  OBJECTEX
+                   OBJECTEX-HEADER
+                    TUPLE [2]
+                     blue.DBRowDescriptor
+                     TUPLE [1]
+                      TUPLE [6]
+                       TUPLE [2]
+                        typeID
+                        3
+                       TUPLE [2]
+                        activity
+                        3
+                       TUPLE [2]
+                        requiredTypeID
+                        3
+                       TUPLE [2]
+                        quantity
+                        3
+                       TUPLE [2]
+                        damagePerJob
+                        5
+                       TUPLE [2]
+                        recycle
+                        11
+                   OBJECTEX-LIST
+                    LIST [0]
+                   OBJECTEX-DICT
+                    DICT [0]
+              OBJECTEX-LIST
+               LIST [4]
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3380
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   3395
+                  quantity
+                   5
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11444
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+                DBRow
+                 DICT [6]
+                  typeID
+                   11394
+                  damagePerJob
+                   0.0
+                  requiredTypeID
+                   11452
+                  quantity
+                   1
+                  recycle
+                   false
+                  activity
+                   1
+              OBJECTEX-DICT
+               DICT [0]
+            DICT [1]
+             header
+              OBJECTEX
+               OBJECTEX-HEADER
+                TUPLE [2]
+                 OBJECTEX
+                  OBJECTEX-HEADER
+                   TUPLE [2]
+                    blue.DBRowDescriptor
+                    TUPLE [1]
+                     TUPLE [6]
+                      TUPLE [2]
+                       typeID
+                       3
+                      TUPLE [2]
+                       activity
+                       3
+                      TUPLE [2]
+                       requiredTypeID
+                       3
+                      TUPLE [2]
+                       quantity
+                       3
+                      TUPLE [2]
+                       damagePerJob
+                       5
+                      TUPLE [2]
+                       recycle
+                       11
+                  OBJECTEX-LIST
+                   LIST [0]
+                  OBJECTEX-DICT
+                   DICT [0]
+                 TUPLE [1]
+                  TUPLE [6]
+                   TUPLE [2]
+                    typeID
+                    3
+                   TUPLE [2]
+                    activity
+                    3
+                   TUPLE [2]
+                    requiredTypeID
+                    3
+                   TUPLE [2]
+                    quantity
+                    3
+                   TUPLE [2]
+                    damagePerJob
+                    5
+                   TUPLE [2]
+                    recycle
+                    11
+               OBJECTEX-LIST
+                LIST [0]
+               OBJECTEX-DICT
+                DICT [0]
+          OBJECTEX-LIST
+           LIST [2]
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               1.0
+              requiredTypeID
+               3812
+              quantity
+               80
+              recycle
+               false
+              activity
+               5
+            DBRow
+             DICT [6]
+              typeID
+               11394
+              damagePerJob
+               0.95
+              requiredTypeID
+               11459
+              quantity
+               4
+              recycle
+               false
+              activity
+               5
+          OBJECTEX-DICT
+           DICT [0]
+  runid
+   129601673511185507
+  rret
+   OBJECT
+    OBJECT-HEADER
+     objectCaching.CachedMethodCallResult
+    OBJECT-CONTENT
+     TUPLE [3]
+      DICT [1]
+       versionCheck
+        TUPLE [3]
+         run
+         run
+         run
+      OBJECT
+       OBJECT-HEADER
+        util.CachedObject
+       OBJECT-CONTENT
+        TUPLE [3]
+         TUPLE [3]
+          Method Call
+          server
+          TUPLE [3]
+           factory
+           GetMaterialsForTypeWithActivity
+           11394
+         735901
+         TUPLE [2]
+          129601359742404328
+          35798
+      None
+  version
+   LIST [2]
+    129601359742404328
+    35798

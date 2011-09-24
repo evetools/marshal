@@ -22,7 +22,7 @@ public class PyList extends PyContainer {
     public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
-    
+
     @Override
     public final int compareTo(final PyBase o) {
         if (o.getType() == this.getType()) {
@@ -32,5 +32,5 @@ public class PyList extends PyContainer {
             return 1;
         }
     }
-    
+
 }

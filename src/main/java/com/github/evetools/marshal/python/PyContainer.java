@@ -106,6 +106,5 @@ public abstract class PyContainer extends PyBase {
     public final String toString() {
         return this.container.toString();
     }
-    
 
 }

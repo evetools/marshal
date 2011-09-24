@@ -144,12 +144,14 @@ public class PyDBRow extends PyBase implements Comparable<PyBase> {
     public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
-    
+
     @Override
     public final int compareTo(final PyBase o) {
         if (o.getType() == this.getType()) {
-            return Integer.valueOf(o.asDBRow().hashCode()).compareTo(
-                    this.hashCode());
+            if (this == o.asDBRow()) {
+                return 0;
+            }
+            return -1;
         } else {
             return 1;
         }

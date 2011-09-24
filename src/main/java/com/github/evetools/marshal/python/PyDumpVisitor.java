@@ -21,12 +21,12 @@ public class PyDumpVisitor implements PyVisitor {
     public PyDumpVisitor(final OutputStream ostream) {
         this.stream = ostream;
     }
-    
+
     /**
      * OutputStream.
      */
     private OutputStream stream;
-    
+
     /**
      * indent.
      */
@@ -52,7 +52,7 @@ public class PyDumpVisitor implements PyVisitor {
      * Space.
      */
     private static final int SPACE = 32;
-    
+
     /**
      * Prints PyBase.
      * @param string string
@@ -146,6 +146,7 @@ public class PyDumpVisitor implements PyVisitor {
             this.print(container.getType().toString() + " [" + container.size()
                     + "]");
             this.pushIndent();
+
             for (final Map.Entry<PyBase, PyBase> entry : container.entrySet()) {
                 entry.getKey().visit(this);
                 this.pushIndent();
