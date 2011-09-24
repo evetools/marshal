@@ -109,7 +109,6 @@ public class ParsingTest {
 
     /**
      * Runs test.
-     * 
      * @throws Exception
      *             on error
      */
@@ -121,7 +120,7 @@ public class ParsingTest {
         PyBase pyBase = reader.read();
         assertNotNull(pyBase);
 
-        File file = File.createTempFile("eve", "decoded");        
+        File file = File.createTempFile("eve", "decoded");
         FileOutputStream ostream = new FileOutputStream(file);
         PyDumpVisitor visitor = new PyDumpVisitor(ostream);
         pyBase.visit(visitor);
