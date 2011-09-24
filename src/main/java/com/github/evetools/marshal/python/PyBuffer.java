@@ -12,6 +12,7 @@ import java.util.Arrays;
  */
 public class PyBuffer extends PyBase {
 
+    
     /**
      * Byte array.
      */
@@ -91,6 +92,15 @@ public class PyBuffer extends PyBase {
     @Override
     public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
+    }
+
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return o.asBuffer().toString().compareTo(this.toString());
+        } else {
+            return 1;
+        }
     }
 
 }

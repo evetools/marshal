@@ -2,10 +2,10 @@ package com.github.evetools.marshal.python;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
@@ -14,19 +14,19 @@ import java.util.Set;
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
  */
-public class PyDict extends PyBase {
+public class PyDict extends PyBase implements Comparable<PyBase> {
 
     /**
      * map container.
      */
-    private Map<PyBase, PyBase> map;
+    private SortedMap<PyBase, PyBase> map;
 
     /**
      * PyDict.
      */
     public PyDict() {
         super(PyType.DICT);
-        this.map = new HashMap<PyBase, PyBase>();
+        this.map = new TreeMap<PyBase, PyBase>();
     }
 
     /**
@@ -122,4 +122,14 @@ public class PyDict extends PyBase {
         return (visitor.visit(this));
     }
 
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return Integer.valueOf(o.asDict().hashCode()).compareTo(
+                    this.hashCode());
+        } else {
+            return 1;
+        }
+    }
+    
 }

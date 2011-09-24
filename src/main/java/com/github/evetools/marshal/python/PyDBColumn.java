@@ -71,4 +71,14 @@ public class PyDBColumn extends PyBase {
     public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
+
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return Integer.valueOf(o.asDBColumn().hashCode()).compareTo(
+                    this.hashCode());
+        } else {
+            return 1;
+        }
+    }
 };

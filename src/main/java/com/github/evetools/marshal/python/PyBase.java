@@ -9,7 +9,7 @@ import java.io.IOException;
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
  */
-public abstract class PyBase {
+public abstract class PyBase  implements Comparable<PyBase> {
 
     /**
      * PyType.

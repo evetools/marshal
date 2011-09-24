@@ -152,4 +152,14 @@ public class PyObjectEx extends PyBase {
         return (visitor.visit(this));
     }
 
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return Integer.valueOf(o.asObjectEx().hashCode()).compareTo(
+                    this.hashCode());
+        } else {
+            return 1;
+        }
+    }
+
 }

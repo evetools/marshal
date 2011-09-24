@@ -69,4 +69,13 @@ public class PyByte extends PyBase {
         return (visitor.visit(this));
     }
 
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return o.asByte().toString().compareTo(this.toString());
+        } else {
+            return 1;
+        }
+    }
+
 }

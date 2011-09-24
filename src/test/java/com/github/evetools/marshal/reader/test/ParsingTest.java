@@ -1,10 +1,19 @@
 package com.github.evetools.marshal.reader.test;
 
 import com.github.evetools.marshal.Reader;
+import com.github.evetools.marshal.python.PyBase;
+import com.github.evetools.marshal.python.PyDumpVisitor;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
 /**
@@ -27,7 +36,30 @@ public class ParsingTest {
         InputStream in = ParsingTest.class.getResourceAsStream("/fd4f.cache");
         assertNotNull(in);
         Reader reader = new Reader(in);
-        assertNotNull(reader.read());
+        PyBase pyBase = reader.read(); 
+        assertNotNull(pyBase);
+        
+        //File file = File.createTempFile("eve", "decoded");
+        File file = new File("/tmp/out.raw");
+        FileOutputStream ostream = new FileOutputStream(file);
+        PyDumpVisitor visitor = new PyDumpVisitor(ostream);
+        pyBase.visit(visitor);
+        ostream.close();
+        
+        InputStream istream = new FileInputStream(file);
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        istream = new DigestInputStream(istream, digest);
+        istream.close();
+        
+        byte[] bytes = digest.digest();
+        
+        System.out.println("bytes: " + bytes.length);
+        
+        for (byte b : bytes) {
+            String formatted = String.format("%02x", b);
+            System.out.print(formatted);
+        }
+        System.out.println("");
     }
 
     /**

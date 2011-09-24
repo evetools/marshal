@@ -68,5 +68,15 @@ public class PyInt extends PyBase {
     public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
+    
+    @Override
+    public final int compareTo(final PyBase o) {
+        if (o.getType() == this.getType()) {
+            return Integer.valueOf(o.asInt().hashCode()).compareTo(
+                    this.hashCode());
+        } else {
+            return 1;
+        }
+    }
 
 }
