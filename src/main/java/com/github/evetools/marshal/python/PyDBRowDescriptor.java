@@ -23,17 +23,17 @@ public class PyDBRowDescriptor extends PyBase {
 		BIT64(0) {
 			@Override
 			public int size() {
-				return Long.SIZE;
+				return Long.SIZE / Byte.SIZE;
 			}},
 		BIT32(1) {
 			@Override
 			public int size() {
-				return Integer.SIZE;
+				return Integer.SIZE / Byte.SIZE;
 			}},
 		BIT16(2) {
 			@Override
 			public int size() {
-				return Short.SIZE;
+				return Short.SIZE / Byte.SIZE;
 			}},
 		BIT8(3) {
 			@Override
@@ -43,7 +43,7 @@ public class PyDBRowDescriptor extends PyBase {
 		BIT1(4) {
 			@Override
 			public int size() {
-				return 1;
+				return Byte.SIZE / Byte.SIZE;
 			}},
 		BIT0(5) {
 			@Override
@@ -229,7 +229,20 @@ public class PyDBRowDescriptor extends PyBase {
 	private int size;
 	
 	private List<PyDBColumn> columns;
+	
+	private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap = new TreeMap<DBColumnSize, List<PyDBColumn>>(){
+		
+		private static final long serialVersionUID = 1L;
 
+	{
+		put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>()); // 64
+		put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>()); // 32
+		put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>()); // 16
+		put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>()); // 8
+		put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>()); // bool
+		put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>()); // String
+	}};
+	
 	public PyDBRowDescriptor(PyObjectEx object) throws IOException {
 
 		super(types.DBROWDESCRIPTOR);
@@ -244,15 +257,6 @@ public class PyDBRowDescriptor extends PyBase {
 	}
 
 	private List<PyDBColumn> init(PyObjectEx object) throws IOException {
-
-		SortedMap<DBColumnSize, List<PyDBColumn>> typeMap = new TreeMap<DBColumnSize, List<PyDBColumn>>();
-		
-		typeMap.put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>()); // 64
-		typeMap.put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>()); // 32
-		typeMap.put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>()); // 16
-		typeMap.put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>()); // 8
-		typeMap.put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>()); // bool
-		typeMap.put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>()); // String
 
 		if (!(object.getHead().isTuple())) {
 			throw new IOException("Invalid Packed Row header");
@@ -299,7 +303,7 @@ public class PyDBRowDescriptor extends PyBase {
 				if (columnType == DBColumnTypes.BOOL) {
 					
 					if (boolcount == 0) {
-						size += columnType.size().size();
+						size += DBColumnSize.BIT8.size();
 					}
 					boolcount++;
 					if (boolcount == 8) {

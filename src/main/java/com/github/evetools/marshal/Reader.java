@@ -944,16 +944,17 @@ public class Reader {
 	public PyBase read() throws IOException {
 
 		this.buffer.readByte();
-		final int size = this.buffer.readInt();
+		int size = this.buffer.readInt();
 
 		this.shared = new HashMap<Integer, PyBase>(size);
 		this.objects = new Stack<PyBase>();
 		this.descriptors = new HashMap<PyBase, PyDBRowDescriptor>(size);
 
-		final int offset = this.buffer.length() - (size * 4);
+		size  = size * (Integer.SIZE / Byte.SIZE);
+		final int offset = this.buffer.length() - (size);
 
 		this.sharedBuffer = new Buffer(
-				this.buffer.peekBytes(offset, (size * 4)));
+				this.buffer.peekBytes(offset, (size)));
 
 		PyBase base = null;
 
