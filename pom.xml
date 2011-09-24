@@ -15,7 +15,7 @@
     <url>https://github.com/evetools/marshal</url>
     <description>EVE Online bulkdata/cachefile Reader</description>
     <inceptionYear>2011</inceptionYear>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <source-version>1.6</source-version>
@@ -47,6 +47,12 @@
             </roles>
             <timezone>-1</timezone>
         </developer>
+		<developer>
+			<id>candle</id>
+			<email>eve-marshal@candle.me.uk</email>
+			<name>Andrew Wheat (Candle)</name>
+			<timezone>GMT</timezone>
+		</developer>
     </developers>
 
     <issueManagement>
@@ -150,7 +156,7 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r09</version>
-        </dependency>   
+        </dependency>
         <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jzlib</artifactId>
