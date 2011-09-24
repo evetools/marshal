@@ -92,7 +92,7 @@ public class PyObject extends PyBase {
     @Override
     public final int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = this.getType().hashCode();
         result = (prime * result);
         if (this.content != null) {
             result += this.content.hashCode();

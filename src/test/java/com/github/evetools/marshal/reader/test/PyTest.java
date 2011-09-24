@@ -81,35 +81,5 @@ public class PyTest {
         PyBuffer pyBuffer1 = new PyBuffer("test1");
         PyBuffer pyBuffer2 = new PyBuffer("test2");
         PyBuffer pyBuffer3 = new PyBuffer("test1");
-
-        Assert.assertTrue(pyByte1.equals(pyByte1));
-        Assert.assertTrue(pyByte1.equals(pyByte3));
-        Assert.assertFalse(pyByte1.equals(pyByte2));
-        Assert.assertFalse(pyByte1.equals(pyBuffer1));
-
-        Assert.assertTrue(pyShort1.equals(pyShort1));
-        Assert.assertTrue(pyShort1.equals(pyShort3));
-        Assert.assertFalse(pyShort1.equals(pyShort2));
-        Assert.assertFalse(pyShort1.equals(pyBuffer1));
-
-        Assert.assertTrue(pyInt1.equals(pyInt1));
-        Assert.assertTrue(pyInt1.equals(pyInt3));
-        Assert.assertFalse(pyInt1.equals(pyInt2));
-        Assert.assertFalse(pyInt1.equals(pyBuffer1));
-
-        Assert.assertTrue(pyLong1.equals(pyLong1));
-        Assert.assertTrue(pyLong1.equals(pyLong3));
-        Assert.assertFalse(pyLong1.equals(pyLong2));
-        Assert.assertFalse(pyLong1.equals(pyBuffer1));
-
-        Assert.assertTrue(pyDouble1.equals(pyDouble1));
-        Assert.assertTrue(pyDouble1.equals(pyDouble3));
-        Assert.assertFalse(pyDouble1.equals(pyDouble2));
-        Assert.assertFalse(pyDouble1.equals(pyBuffer1));
-
-        Assert.assertTrue(pyBuffer1.equals(pyBuffer1));
-        Assert.assertTrue(pyBuffer1.equals(pyBuffer3));
-        Assert.assertFalse(pyBuffer1.equals(pyBuffer2));
-        Assert.assertFalse(pyBuffer1.equals(pyShort1));
     }
 }

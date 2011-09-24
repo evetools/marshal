@@ -32,6 +32,7 @@ public class ParsingTest {
      */
     @Test
     public final void testReadfd4f() throws Exception {
+        
         InputStream in = ParsingTest.class.getResourceAsStream("/fd4f.cache");
         assertNotNull(in);
         Reader reader = new Reader(in);
@@ -64,6 +65,7 @@ public class ParsingTest {
         }
 
         Assert.assertEquals("MD5 missmatch", expected, calculated);
+        
     }
 
     /**
@@ -73,6 +75,7 @@ public class ParsingTest {
      */
     @Test
     public final void testRead67b3() throws Exception {
+        
         InputStream in = ParsingTest.class.getResourceAsStream("/67b3.cache");
         assertNotNull(in);
         Reader reader = new Reader(in);
@@ -114,6 +117,7 @@ public class ParsingTest {
      */
     @Test
     public final void testRead8d17() throws Exception {
+
         InputStream in = ParsingTest.class.getResourceAsStream("/8d17.cache");
         assertNotNull(in);
         Reader reader = new Reader(in);
@@ -146,5 +150,6 @@ public class ParsingTest {
         }
 
         Assert.assertEquals("MD5 missmatch", expected, calculated);
+        
     }
 }

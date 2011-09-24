@@ -1,7 +1,5 @@
 package com.github.evetools.marshal.python;
 
-import java.io.IOException;
-
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
  *
@@ -9,7 +7,7 @@ import java.io.IOException;
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
  */
-public abstract class PyBase  implements Comparable<PyBase> {
+public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
 
     /**
      * PyType.
@@ -473,24 +471,6 @@ public abstract class PyBase  implements Comparable<PyBase> {
         }
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        final PyBase other = (PyBase) obj;
-        if (this.type != other.type) {
-            return false;
-        }
-        return true;
-    }
-
     /**
      * Get Python type.
      * @return type
@@ -498,25 +478,4 @@ public abstract class PyBase  implements Comparable<PyBase> {
     public final PyType getType() {
         return this.type;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result);
-
-        if (this.type != null) {
-            result += this.type.hashCode();
-        }
-
-        return result;
-    }
-
-    /**
-     * Visit element.
-     * @param visitor visitor
-     * @return result
-     * @throws IOException on error
-     */
-    abstract public boolean visit(PyVisitor visitor) throws IOException;
 }

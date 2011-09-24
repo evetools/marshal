@@ -52,7 +52,7 @@ public class PyDouble extends PyBase {
     @Override
     public final int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = this.getType().hashCode();
         long temp;
         temp = Double.doubleToLongBits(this.value);
         result = (prime * result) + (int) (temp ^ (temp >>> Integer.SIZE));

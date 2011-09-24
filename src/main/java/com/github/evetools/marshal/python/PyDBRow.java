@@ -48,11 +48,6 @@ public class PyDBRow extends PyBase implements Comparable<PyBase> {
         return this.columns.entrySet();
     }
 
-    @Override
-    public final boolean equals(final Object o) {
-        return this.columns.equals(o);
-    }
-
     /**
      * Returns value for key.
      * @param key key
@@ -76,11 +71,6 @@ public class PyDBRow extends PyBase implements Comparable<PyBase> {
      */
     public final PyDBRowDescriptor getHead() {
         return this.head;
-    }
-
-    @Override
-    public final int hashCode() {
-        return this.columns.hashCode();
     }
 
     /**

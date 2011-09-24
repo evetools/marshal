@@ -60,7 +60,7 @@ public class PyBuffer extends PyBase {
     @Override
     public final int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = super.getType().hashCode();
         result = prime * result + Arrays.hashCode(value);
         return result;
     }
