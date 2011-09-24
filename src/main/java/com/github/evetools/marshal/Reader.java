@@ -17,9 +17,10 @@ import com.github.evetools.marshal.python.PyMarker;
 import com.github.evetools.marshal.python.PyNone;
 import com.github.evetools.marshal.python.PyObject;
 import com.github.evetools.marshal.python.PyObjectEx;
-import com.github.evetools.marshal.python.PyPackedRow;
+import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyShort;
 import com.github.evetools.marshal.python.PyTuple;
+import com.github.evetools.marshal.Strings;
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZStream;
 import java.io.ByteArrayOutputStream;
@@ -767,7 +768,7 @@ public class Reader {
 		int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
 
-		final PyPackedRow base = new PyPackedRow();
+		final PyDBRow base = new PyDBRow();
 
 		if (!this.descriptors.containsKey(head)) {
 			this.descriptors.put(head, this.toDBRowDescriptor(head));

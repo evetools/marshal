@@ -10,7 +10,7 @@ import com.github.evetools.marshal.python.PyBase;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyObjectEx;
-import com.github.evetools.marshal.python.PyPackedRow;
+import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyTuple;
 import java.io.InputStream;
@@ -359,15 +359,15 @@ public class MarketOrders {
 		for (Iterator<PyBase> iterator = list.iterator(); iterator.hasNext();) {
 			PyBase type = (PyBase) iterator.next();
 
-			if (!type.isPackedRow()) {
+			if (!type.isDBRow()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
 			}
 
-			this.read(type.asPackedRow());
+			this.read(type.asDBRow());
 		}
 	}
 
-	private void read(PyPackedRow object) throws Exception {
+	private void read(PyDBRow object) throws Exception {
 
 		if (object == null) {
 			throw new IllegalArgumentException("invalid PyPackedRow");

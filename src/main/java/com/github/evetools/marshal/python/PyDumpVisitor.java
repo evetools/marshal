@@ -249,7 +249,7 @@ public class PyDumpVisitor implements PyVisitor {
 	}
 
 	@Override
-	public boolean visit(PyPackedRow base1) {
+	public boolean visit(PyDBRow base1) {
 		if (base1 != null) {
 			this.print("DBRow");
 			this.pushIndent();

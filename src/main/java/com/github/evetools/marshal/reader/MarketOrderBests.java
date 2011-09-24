@@ -11,7 +11,7 @@ import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyObjectEx;
-import com.github.evetools.marshal.python.PyPackedRow;
+import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyTuple;
 
 /**
@@ -211,15 +211,15 @@ public class MarketOrderBests {
 		for (Iterator<PyBase> iterator = dict.keySet().iterator(); iterator.hasNext();) {
 			PyBase type = iterator.next();
 
-			if (!type.isPackedRow()) {
+			if (!type.isDBRow()) {
 				throw new RuntimeException("Invalid element: " + type.getType());
 			}
 
-			this.read(type.asPackedRow());
+			this.read(type.asDBRow());
 		}
 	}
 
-	private void read(PyPackedRow object) throws Exception {
+	private void read(PyDBRow object) throws Exception {
 
 		if (object == null) {
 			throw new IllegalArgumentException("invalid PyPackedRow");

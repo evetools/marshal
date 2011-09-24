@@ -38,7 +38,7 @@ public interface PyVisitor {
 
 	boolean visit(PyObjectEx base);
 
-	boolean visit(PyPackedRow base);
+	boolean visit(PyDBRow base);
 
 	boolean visit(PyShort base);
 	

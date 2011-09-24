@@ -13,17 +13,16 @@ import java.util.Set;
  * it under the terms of the BSD license (see the file LICENSE.txt
  * included with the distribution).
  */
-public class PyPackedRow extends PyBase {
+public class PyDBRow extends PyBase {
 
 	private PyDict columns;
 
 	private PyDBRowDescriptor head;
 
-	public PyPackedRow() {
-		super(types.PACKEDROW);
+	public PyDBRow() {
+		super(types.DBROW);
 		this.columns = new PyDict();
 	}
-
 	
 	public void setHead(PyDBRowDescriptor head) {
 		this.head = head;
