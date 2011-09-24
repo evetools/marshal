@@ -10,119 +10,119 @@ package com.github.evetools.marshal.python;
 public interface PyVisitor {
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyBase base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyBool base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyBuffer base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyByte base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyContainer base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyDict base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyDouble base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyGlobal base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyInt base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyLong base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyMarker base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyNone base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyObject base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyObjectEx base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyDBRow base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */
     boolean visit(PyShort base);
 
     /**
-     * Visits Python element. 
+     * Visits Python element.
      * @param base PyBase element
      * @return status
      */

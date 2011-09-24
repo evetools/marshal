@@ -9,25 +9,142 @@ package com.github.evetools.marshal.python;
  */
 public abstract class PyBase {
 
+    /**
+     * PyType.
+     */
     public static enum PyType {
-        BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, DBROW, STRING, TUPLE, UNKNOWN, DBCOLUMN
+        /**
+         * BOOL.
+         */
+        BOOL, 
+        /**
+         * BUFFER.
+         */
+        BUFFER, 
+        /**
+         * CONTAINER.
+         */
+        CONTAINER, 
+        /**
+         * DBROWDESCRIPTOR.
+         */
+        DBROWDESCRIPTOR, 
+        /**
+         * DICT.
+         */
+        DICT, 
+        /**
+         * DOUBLE.
+         */
+        DOUBLE, 
+        /**
+         * GLOBAL.
+         */
+        GLOBAL, 
+        /**
+         * INT16.
+         */
+        INT16, 
+        /**
+         * INT32.
+         */
+        INT32, 
+        /**
+         * INT64.
+         */
+        INT64, 
+        /**
+         * INT8.
+         */
+        INT8, 
+        /**
+         * LIST.
+         */
+        LIST, 
+        /**
+         * MARKER.
+         */
+        MARKER, 
+        /**
+         * NONE.
+         */
+        NONE, 
+        /**
+         * OBJECT.
+         */
+        OBJECT, 
+        /**
+         * OBJECTEX.
+         */
+        OBJECTEX, 
+        /**
+         * DBROW.
+         */
+        DBROW, 
+        /**
+         * STRING.
+         */
+        STRING, 
+        /**
+         * TUPLE.
+         */
+        TUPLE, 
+        /**
+         * UNKNOWN.
+         */
+        UNKNOWN, 
+        /**
+         * DBCOLUMN.
+         */
+        DBCOLUMN
     };
 
-    public static long convertWindowsTime(long timeStamp) {
-        return (timeStamp / 10000L) - 11644473600000L;
+    /**
+     * Windows offset.
+     */
+    private static final long WINDOWSOFFSET = 11644473600000L;
+    
+    /**
+     * Millsec.
+     */
+    private static final long MILLSEC = 10000L;
+    
+    
+    /**
+     * Convert windows timestamp to java millsec.
+     * @param timeStamp timestamp
+     * @return millsec
+     */
+    public static long convertWindowsTime(final long timeStamp) {
+        return (timeStamp / MILLSEC) - WINDOWSOFFSET;
     }
 
+    /**
+     * PyType.
+     */
     private PyType type = PyType.UNKNOWN;
 
-    protected PyBase(PyType type) {
-        this.type = type;
+    /**
+     * PyBase.
+     * @param pyType type
+     */
+    protected PyBase(final PyType pyType) {
+        this.type = pyType;
     }
 
-    public boolean isObject() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isObject() {
         return (this.type == PyType.OBJECT);
     }
 
-    public PyObject asObject() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyObject asObject() {
         if (this.isObject()) {
             return (PyObject) this;
         } else {
@@ -35,11 +152,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isObjectEx() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isObjectEx() {
         return (this.type == PyType.OBJECTEX);
     }
 
-    public PyObjectEx asObjectEx() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyObjectEx asObjectEx() {
         if (this.isObjectEx()) {
             return (PyObjectEx) this;
         } else {
@@ -47,11 +172,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isDBRowDescriptor() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isDBRowDescriptor() {
         return (this.type == PyType.DBROWDESCRIPTOR);
     }
 
-    public PyDBRowDescriptor asDBRowDescriptor() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyDBRowDescriptor asDBRowDescriptor() {
         if (this.isDBRowDescriptor()) {
             return (PyDBRowDescriptor) this;
         } else {
@@ -59,11 +192,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isDBColumn() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isDBColumn() {
         return (this.type == PyType.DBCOLUMN);
     }
 
-    public PyDBColumn asDBColumn() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyDBColumn asDBColumn() {
         if (this.isDBColumn()) {
             return (PyDBColumn) this;
         } else {
@@ -71,11 +212,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isDBRow() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isDBRow() {
         return (this.type == PyType.DBROW);
     }
 
-    public PyDBRow asDBRow() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyDBRow asDBRow() {
         if (this.isDBRow()) {
             return (PyDBRow) this;
         } else {
@@ -83,11 +232,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isMarker() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isMarker() {
         return (this.type == PyType.MARKER);
     }
 
-    public PyMarker asMarker() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyMarker asMarker() {
         if (this.isMarker()) {
             return (PyMarker) this;
         } else {
@@ -95,11 +252,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isNone() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isNone() {
         return (this.type == PyType.NONE);
     }
 
-    public PyNone asNone() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyNone asNone() {
         if (this.isNone()) {
             return (PyNone) this;
         } else {
@@ -107,11 +272,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isLong() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isLong() {
         return (this.type == PyType.INT64);
     }
 
-    public PyLong asLong() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyLong asLong() {
         if (this.isLong()) {
             return (PyLong) this;
         } else {
@@ -119,11 +292,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isInt() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isInt() {
         return (this.type == PyType.INT32);
     }
 
-    public PyInt asInt() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyInt asInt() {
         if (this.isInt()) {
             return (PyInt) this;
         } else {
@@ -131,23 +312,39 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isShort() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isShort() {
         return (this.type == PyType.INT16);
     }
 
-    public PyShort asShort() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyShort asShort() {
         if (this.isShort()) {
             return (PyShort) this;
         } else {
             return null;
         }
     }
-
-    public boolean isByte() {
+    
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isByte() {
         return (this.type == PyType.INT8);
     }
 
-    public PyByte asByte() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyByte asByte() {
         if (this.isByte()) {
             return (PyByte) this;
         } else {
@@ -155,11 +352,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isList() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isList() {
         return (this.type == PyType.LIST);
     }
 
-    public PyList asList() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyList asList() {
         if (this.isList()) {
             return (PyList) this;
         } else {
@@ -167,11 +372,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isDouble() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isDouble() {
         return (this.type == PyType.DOUBLE);
     }
 
-    public PyDouble asDouble() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyDouble asDouble() {
         if (this.isDouble()) {
             return (PyDouble) this;
         } else {
@@ -179,11 +392,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isDict() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isDict() {
         return (this.type == PyType.DICT);
     }
 
-    public PyDict asDict() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyDict asDict() {
         if (this.isDict()) {
             return (PyDict) this;
         } else {
@@ -191,11 +412,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isBool() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isBool() {
         return (this.type == PyType.BOOL);
     }
 
-    public PyBool asBool() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyBool asBool() {
         if (this.isBool()) {
             return (PyBool) this;
         } else {
@@ -203,11 +432,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isGlobal() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isGlobal() {
         return (this.type == PyType.GLOBAL);
     }
 
-    public PyGlobal asGlobal() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyGlobal asGlobal() {
         if (this.isGlobal()) {
             return (PyGlobal) this;
         } else {
@@ -215,11 +452,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isTuple() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isTuple() {
         return (this.type == PyType.TUPLE);
     }
 
-    public PyTuple asTuple() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyTuple asTuple() {
         if (this.isTuple()) {
             return (PyTuple) this;
         } else {
@@ -227,11 +472,19 @@ public abstract class PyBase {
         }
     }
 
-    public boolean isBuffer() {
+    /**
+     * Check for certain object..
+     * @return result
+     */
+    public final boolean isBuffer() {
         return (this.type == PyType.BUFFER);
     }
 
-    public PyBuffer asBuffer() {
+    /**
+     * Pybase as certain PyBase derived class.
+     * @return object
+     */
+    public final PyBuffer asBuffer() {
         if (this.isBuffer()) {
             return (PyBuffer) this;
         } else {
@@ -240,7 +493,7 @@ public abstract class PyBase {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -257,6 +510,10 @@ public abstract class PyBase {
         return true;
     }
 
+    /**
+     * Get Python type.
+     * @return type
+     */
     public final PyType getType() {
         return this.type;
     }
@@ -265,17 +522,19 @@ public abstract class PyBase {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (prime * result)
-                + ((this.type == null) ? 0 : this.type.hashCode());
+        result = (prime * result);
+        
+        if (this.type != null) {
+            result += this.type.hashCode();
+        }
+        
         return result;
     }
 
-    @Override
-    public String toString() {
-        return this.getClass().getName();
-    }
-
-    public boolean visit(PyVisitor visitor) {
-        return (visitor.visit(this));
-    }
+    /**
+     * Visit element.
+     * @param visitor visitor
+     * @return result
+     */
+    abstract public boolean visit(PyVisitor visitor);
 }

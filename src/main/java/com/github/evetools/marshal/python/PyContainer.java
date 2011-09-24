@@ -107,9 +107,4 @@ public abstract class PyContainer extends PyBase {
         return this.container.toString();
     }
 
-    @Override
-    public boolean visit(final PyVisitor visitor) {
-        return (visitor.visit(this));
-    }
-
 }

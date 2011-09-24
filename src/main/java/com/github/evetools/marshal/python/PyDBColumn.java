@@ -38,4 +38,8 @@ public class PyDBColumn extends PyBase {
         return dbtype;
     }
 
+    @Override
+    public final boolean visit(final PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 };

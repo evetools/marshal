@@ -26,7 +26,6 @@ public class PyDumpVisitor implements PyVisitor {
 
     /**
      * Prints PyBase.
-     * 
      * @param base object
      */
     protected final void print(final PyBase base) {
@@ -35,7 +34,6 @@ public class PyDumpVisitor implements PyVisitor {
 
     /**
      * Prints PyBase.
-     * 
      * @param string string
      */
     protected final void print(final String string) {
@@ -102,7 +100,7 @@ public class PyDumpVisitor implements PyVisitor {
             this.print(container.getType().toString() + " [" + container.size()
                     + "]");
             this.pushIndent();
-            for (final Iterator<PyBase> iterator = container.iterator(); 
+            for (final Iterator<PyBase> iterator = container.iterator();
                     iterator.hasNext();) {
                 final PyBase type = iterator.next();
                 if (type != null) {

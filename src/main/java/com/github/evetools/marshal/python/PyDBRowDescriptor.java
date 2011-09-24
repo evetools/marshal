@@ -358,4 +358,9 @@ public class PyDBRowDescriptor extends PyBase {
     public int size() {
         return this.size;
     }
+    
+    @Override
+    public final boolean visit(final PyVisitor visitor) {
+        return (visitor.visit(this));
+    }
 }

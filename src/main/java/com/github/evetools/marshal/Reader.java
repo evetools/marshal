@@ -657,12 +657,12 @@ public class Reader {
     /**
      * Byte mask.
      */
-    public static final int UBYTEMASK = 0xFF;
+    private static final int UBYTEMASK = 0xFF;
 
     /**
      * Byte max.
      */
-    public static final int UBYTEMAX = 255;
+    private static final int UBYTEMAX = 255;
 
     /**
      * Returns length.
@@ -684,7 +684,7 @@ public class Reader {
     /**
      * zlib stream code.
      */
-    public static final int ZLIBCODEMASK = 0x78;
+    private static final int ZLIBCODEMASK = 0x78;
 
     /**
      * Loads PyBuffer.

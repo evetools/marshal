@@ -83,7 +83,7 @@ public class PyObject extends PyBase {
     }
 
     /**
-     * Returns content.    
+     * Returns content.
      * @return content
      */
     public final PyBase getContent() {
