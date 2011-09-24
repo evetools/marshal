@@ -51,7 +51,7 @@ public class Dump {
 			//e.printStackTrace();
 			System.exit(-3);
 		} catch (final OutOfMemoryError e) {
-			System.out.println("Could not decode [out of memory]" + fileName + ".");
+			System.out.println("Could not decode [out of memory] " + fileName + ".");
 			//e.printStackTrace();
 			System.exit(-3);
 		}

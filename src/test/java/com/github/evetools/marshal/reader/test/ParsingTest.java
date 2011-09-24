@@ -40,4 +40,12 @@ public class ParsingTest {
 		Reader reader = new Reader(in);
 		assertNotNull(reader.read());
 	}
+
+	@Test
+	public void testRead_8d17() throws Exception {
+		InputStream in = ParsingTest.class.getResourceAsStream("/8d17.cache");
+		assertNotNull(in);
+		Reader reader = new Reader(in);
+		assertNotNull(reader.read());
+	}
 }

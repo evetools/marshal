@@ -570,15 +570,18 @@ public class Reader {
 
 				while ((zstream.total_out < zlen)
 						&& (zstream.total_in < zlibbytes.length)) {
+					
 					zstream.avail_in = 1;
 					zstream.avail_out = 1;
+					
 					res = zstream.inflate(JZlib.Z_NO_FLUSH);
+					
 					if (res == JZlib.Z_STREAM_END) {
 						success = true;
 						break;
 					}
 
-					if (res == JZlib.Z_DATA_ERROR) {
+					if (res == JZlib.Z_DATA_ERROR || res == JZlib.Z_NEED_DICT) {
 						return new PyBuffer(bytes);
 					}
 				}
