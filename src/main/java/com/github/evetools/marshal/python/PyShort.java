@@ -13,7 +13,7 @@ public class PyShort extends PyBase {
 	private short value;
 
 	public PyShort(short value) {
-		super(types.INT16);
+		super(PyType.INT16);
 		this.value = value;
 	}
 

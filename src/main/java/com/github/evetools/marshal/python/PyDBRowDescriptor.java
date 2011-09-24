@@ -205,7 +205,7 @@ public class PyDBRowDescriptor extends PyBase {
 	
 	public PyDBRowDescriptor(PyObjectEx object) throws IOException {
 
-		super(types.DBROWDESCRIPTOR);
+		super(PyType.DBROWDESCRIPTOR);
 
 		this.size = 0;
 

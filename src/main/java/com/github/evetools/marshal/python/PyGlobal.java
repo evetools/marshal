@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public class PyGlobal extends PyBuffer {
 
 	public PyGlobal(byte[] bytes) {
-		super(types.GLOBAL, bytes);
+		super(PyType.GLOBAL, bytes);
 	}
 
 }

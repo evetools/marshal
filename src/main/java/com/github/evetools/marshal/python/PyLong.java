@@ -13,7 +13,7 @@ public class PyLong extends PyBase {
 	private long value;
 
 	public PyLong(long value) {
-		super(types.INT64);
+		super(PyType.INT64);
 		this.value = value;
 	}
 

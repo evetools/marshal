@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public class PyTuple extends PyContainer {
 
 	public PyTuple() {
-		super(types.TUPLE);
+		super(PyType.TUPLE);
 	}
 
 	@Override

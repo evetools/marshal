@@ -10,7 +10,7 @@ package com.github.evetools.marshal.python;
  */
 public abstract class PyBase {
 
-	public static enum types {
+	public static enum PyType {
 		BOOL, BUFFER, CONTAINER, DBROWDESCRIPTOR, DICT, DOUBLE, GLOBAL, INT16, INT32, INT64, INT8, LIST, MARKER, NONE, OBJECT, OBJECTEX, DBROW, STRING, TUPLE, UNKNOWN, DBCOLUMN
 	};
 
@@ -18,14 +18,14 @@ public abstract class PyBase {
 		 return (timeStamp/10000L) - 11644473600000L;
 	}
 
-	private types type = types.UNKNOWN;
+	private PyType type = PyType.UNKNOWN;
 
-	protected PyBase(types type) {
+	protected PyBase(PyType type) {
 		this.type = type;
 	}
 
     public boolean isObject() {
-        return (this.type == types.OBJECT);
+        return (this.type == PyType.OBJECT);
     }
 
     public PyObject asObject() {
@@ -37,7 +37,7 @@ public abstract class PyBase {
     }
 
     public boolean isObjectEx() {
-        return (this.type == types.OBJECTEX);
+        return (this.type == PyType.OBJECTEX);
     }
 
     public PyObjectEx asObjectEx() {
@@ -49,7 +49,7 @@ public abstract class PyBase {
     }
 
     public boolean isDBRowDescriptor() {
-        return (this.type == types.DBROWDESCRIPTOR);
+        return (this.type == PyType.DBROWDESCRIPTOR);
     }
 
     public PyDBRowDescriptor asDBRowDescriptor() {
@@ -61,7 +61,7 @@ public abstract class PyBase {
     }
 
     public boolean isDBColumn() {
-        return (this.type == types.DBCOLUMN);
+        return (this.type == PyType.DBCOLUMN);
     }
 
     public PyDBColumn asDBColumn() {
@@ -73,7 +73,7 @@ public abstract class PyBase {
     }
 
     public boolean isDBRow() {
-        return (this.type == types.DBROW);
+        return (this.type == PyType.DBROW);
     }
 
     public PyDBRow asDBRow() {
@@ -85,7 +85,7 @@ public abstract class PyBase {
     }
 
     public boolean isMarker() {
-        return (this.type == types.MARKER);
+        return (this.type == PyType.MARKER);
     }
 
     public PyMarker asMarker() {
@@ -97,7 +97,7 @@ public abstract class PyBase {
     }
 
     public boolean isNone() {
-        return (this.type == types.NONE);
+        return (this.type == PyType.NONE);
     }
 
     public PyNone asNone() {
@@ -109,7 +109,7 @@ public abstract class PyBase {
     }
 
     public boolean isLong() {
-        return (this.type == types.INT64);
+        return (this.type == PyType.INT64);
     }
 
     public PyLong asLong() {
@@ -121,7 +121,7 @@ public abstract class PyBase {
     }
 
     public boolean isInt() {
-        return (this.type == types.INT32);
+        return (this.type == PyType.INT32);
     }
 
     public PyInt asInt() {
@@ -133,7 +133,7 @@ public abstract class PyBase {
     }
 
     public boolean isShort() {
-        return (this.type == types.INT16);
+        return (this.type == PyType.INT16);
     }
 
     public PyShort asShort() {
@@ -145,7 +145,7 @@ public abstract class PyBase {
     }
 
     public boolean isByte() {
-        return (this.type == types.INT8);
+        return (this.type == PyType.INT8);
     }
 
     public PyByte asByte() {
@@ -157,7 +157,7 @@ public abstract class PyBase {
     }
 
     public boolean isList() {
-        return (this.type == types.LIST);
+        return (this.type == PyType.LIST);
     }
 
     public PyList asList() {
@@ -169,7 +169,7 @@ public abstract class PyBase {
     }
 
     public boolean isDouble() {
-        return (this.type == types.DOUBLE);
+        return (this.type == PyType.DOUBLE);
     }
 
     public PyDouble asDouble() {
@@ -181,7 +181,7 @@ public abstract class PyBase {
     }
 
     public boolean isDict() {
-        return (this.type == types.DICT);
+        return (this.type == PyType.DICT);
     }
 
     public PyDict asDict() {
@@ -193,7 +193,7 @@ public abstract class PyBase {
     }
 
 	public boolean isBool() {
-		return (this.type == types.BOOL);
+		return (this.type == PyType.BOOL);
 	}
 
 	public PyBool asBool() {
@@ -205,7 +205,7 @@ public abstract class PyBase {
 	}
 
 	public boolean isGlobal() {
-		return (this.type == types.GLOBAL);
+		return (this.type == PyType.GLOBAL);
 	}
 
 	public PyGlobal asGlobal() {
@@ -217,7 +217,7 @@ public abstract class PyBase {
 	}
 
 	public boolean isTuple() {
-		return (this.type == types.TUPLE);
+		return (this.type == PyType.TUPLE);
 	}
 
 	public PyTuple asTuple() {
@@ -229,7 +229,7 @@ public abstract class PyBase {
 	}
 
 	public boolean isBuffer() {
-		return (this.type == types.BUFFER);
+		return (this.type == PyType.BUFFER);
 	}
 
 	public PyBuffer asBuffer() {
@@ -259,7 +259,7 @@ public abstract class PyBase {
 		return true;
 	}
 
-	public final types getType() {
+	public final PyType getType() {
 		return this.type;
 	}
 

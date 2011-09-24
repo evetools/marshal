@@ -13,7 +13,7 @@ public class PyByte extends PyBase {
 	private byte value;
 
 	public PyByte(byte value) {
-		super(types.INT8);
+		super(PyType.INT8);
 		this.value = value;
 	}
 

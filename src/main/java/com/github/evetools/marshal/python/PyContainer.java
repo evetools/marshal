@@ -16,7 +16,7 @@ public abstract class PyContainer extends PyBase {
 
 	private List<PyBase> container = new ArrayList<PyBase>();
 
-	protected PyContainer(types type) {
+	protected PyContainer(PyType type) {
 		super(type);
 	}
 

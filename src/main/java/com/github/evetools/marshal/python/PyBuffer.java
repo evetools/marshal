@@ -15,19 +15,19 @@ public class PyBuffer extends PyBase {
 	private byte[] value;
 
 	public PyBuffer(String string) {
-		super(types.BUFFER);
+		super(PyType.BUFFER);
 		byte[] b = string.getBytes();
 		this.value = new byte[b.length];
 		System.arraycopy(b, 0, this.value, 0, b.length);
 	}
 	
 	public PyBuffer(byte[] bytes) {
-		super(types.BUFFER);
+		super(PyType.BUFFER);
 		this.value = new byte[bytes.length];
 		System.arraycopy(bytes, 0, this.value, 0, bytes.length);
 	}
 	
-	protected PyBuffer(types type, byte[] bytes) {
+	protected PyBuffer(PyType type, byte[] bytes) {
 		super(type);
 		this.value = new byte[bytes.length];
 		System.arraycopy(bytes, 0, this.value, 0, bytes.length);

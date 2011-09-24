@@ -17,12 +17,12 @@ public class PyDBColumn extends PyBase {
 	final private DBColumnTypes dbtype;
 
 	public PyDBColumn(DBColumnTypes type) {
-		super(types.DBCOLUMN);
+		super(PyType.DBCOLUMN);
 		this.dbtype = type;
 	}
 	
 	public PyDBColumn(DBColumnTypes type, PyBase name) {
-		super(types.DBCOLUMN);
+		super(PyType.DBCOLUMN);
 		this.dbtype = type;
 		this.name = name;
 	}

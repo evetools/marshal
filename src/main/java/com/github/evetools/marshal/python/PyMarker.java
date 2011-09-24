@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public class PyMarker extends PyBase {
 
 	public PyMarker() {
-		super(types.MARKER);
+		super(PyType.MARKER);
 	}
 
 	@Override

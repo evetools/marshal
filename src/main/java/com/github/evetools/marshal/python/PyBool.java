@@ -13,7 +13,7 @@ public class PyBool extends PyBase {
 	private boolean value;
 
 	public PyBool(boolean value) {
-		super(types.BOOL);
+		super(PyType.BOOL);
 		this.value = value;
 	}
 

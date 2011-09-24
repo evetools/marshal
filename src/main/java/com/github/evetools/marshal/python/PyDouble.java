@@ -13,7 +13,7 @@ public class PyDouble extends PyBase {
 	private double value;
 
 	public PyDouble(double value) {
-		super(types.DOUBLE);
+		super(PyType.DOUBLE);
 		this.value = value;
 	}
 

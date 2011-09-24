@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public class PyList extends PyContainer {
 
 	public PyList() {
-		super(types.LIST);
+		super(PyType.LIST);
 	}
 
 }

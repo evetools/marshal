@@ -15,11 +15,11 @@ public class PyObject extends PyBase {
 	private PyBase head;
 
 	public PyObject() {
-		super(types.OBJECT);
+		super(PyType.OBJECT);
 	}
 
 	public PyObject(PyBase head, PyBase content) {
-		super(types.OBJECT);
+		super(PyType.OBJECT);
 		this.head = head;
 		this.content = content;
 	}

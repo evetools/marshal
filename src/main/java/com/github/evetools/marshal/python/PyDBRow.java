@@ -19,7 +19,7 @@ public class PyDBRow extends PyBase {
 	private PyDBRowDescriptor head;
 
 	public PyDBRow() {
-		super(types.DBROW);
+		super(PyType.DBROW);
 		this.columns = new PyDict();
 	}
 	

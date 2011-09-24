@@ -19,7 +19,7 @@ public class PyObjectEx extends PyBase {
 	private boolean reduce;
 	
 	public PyObjectEx() {
-		super(types.OBJECTEX);
+		super(PyType.OBJECTEX);
 		this.head = null;
 		this.reduce = false;
 		this.list = new PyList();
@@ -27,7 +27,7 @@ public class PyObjectEx extends PyBase {
 	}
 
 	public PyObjectEx(boolean reduce) {
-		super(types.OBJECTEX);
+		super(PyType.OBJECTEX);
 		this.head = null;
 		this.reduce = true;
 		this.list = new PyList();

@@ -11,7 +11,7 @@ package com.github.evetools.marshal.python;
 public class PyNone extends PyBase {
 
 	public PyNone() {
-		super(types.NONE);
+		super(PyType.NONE);
 	}
 
 	@Override

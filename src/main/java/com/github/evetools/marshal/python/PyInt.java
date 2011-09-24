@@ -13,7 +13,7 @@ public class PyInt extends PyBase {
 	private int value;
 
 	public PyInt(int value) {
-		super(types.INT32);
+		super(PyType.INT32);
 		this.value = value;
 	}
 

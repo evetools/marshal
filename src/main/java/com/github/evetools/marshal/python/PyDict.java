@@ -19,7 +19,7 @@ public class PyDict extends PyBase {
 	private Map<PyBase, PyBase> map;
 
 	public PyDict() {
-		super(types.DICT);
+		super(PyType.DICT);
 		this.map = new HashMap<PyBase, PyBase>();
 	}
 
