@@ -4,37 +4,64 @@ import com.github.evetools.marshal.python.PyDBRowDescriptor.DBColumnTypes;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
- * 
+ *
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
  */
 public class PyDBColumn extends PyBase {
 
+    /**
+     * Name.
+     */
     private PyBase name;
 
-    final private DBColumnTypes dbtype;
+    /**
+     * DBColumnType.
+     */
+    private final DBColumnTypes dbtype;
 
-    public PyDBColumn(DBColumnTypes type) {
+    /**
+     * PyDBColumn.
+     * @param type db type
+     */
+    public PyDBColumn(final DBColumnTypes type) {
         super(PyType.DBCOLUMN);
         this.dbtype = type;
     }
 
-    public PyDBColumn(DBColumnTypes type, PyBase name) {
+    /**
+     * PyDBColumn.
+     * @param type db type
+     * @param columnName column name
+     */
+    public PyDBColumn(final DBColumnTypes type, final PyBase columnName) {
         super(PyType.DBCOLUMN);
         this.dbtype = type;
-        this.name = name;
+        this.name = columnName;
     }
 
-    public PyBase getName() {
+    /**
+     * Returns name.
+     * @return name
+     */
+    public final PyBase getName() {
         return name;
     }
 
-    public void setName(PyBase name) {
-        this.name = name;
+    /**
+     * Sets name.
+     * @param columnName name
+     */
+    public final void setName(final PyBase columnName) {
+        this.name = columnName;
     }
 
-    public DBColumnTypes getDBType() {
+    /**
+     * Returns db type.
+     * @return db type
+     */
+    public final DBColumnTypes getDBType() {
         return dbtype;
     }
 

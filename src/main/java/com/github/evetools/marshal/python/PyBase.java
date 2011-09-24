@@ -2,7 +2,7 @@ package com.github.evetools.marshal.python;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
- * 
+ *
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
@@ -16,83 +16,83 @@ public abstract class PyBase {
         /**
          * BOOL.
          */
-        BOOL, 
+        BOOL,
         /**
          * BUFFER.
          */
-        BUFFER, 
+        BUFFER,
         /**
          * CONTAINER.
          */
-        CONTAINER, 
+        CONTAINER,
         /**
          * DBROWDESCRIPTOR.
          */
-        DBROWDESCRIPTOR, 
+        DBROWDESCRIPTOR,
         /**
          * DICT.
          */
-        DICT, 
+        DICT,
         /**
          * DOUBLE.
          */
-        DOUBLE, 
+        DOUBLE,
         /**
          * GLOBAL.
          */
-        GLOBAL, 
+        GLOBAL,
         /**
          * INT16.
          */
-        INT16, 
+        INT16,
         /**
          * INT32.
          */
-        INT32, 
+        INT32,
         /**
          * INT64.
          */
-        INT64, 
+        INT64,
         /**
          * INT8.
          */
-        INT8, 
+        INT8,
         /**
          * LIST.
          */
-        LIST, 
+        LIST,
         /**
          * MARKER.
          */
-        MARKER, 
+        MARKER,
         /**
          * NONE.
          */
-        NONE, 
+        NONE,
         /**
          * OBJECT.
          */
-        OBJECT, 
+        OBJECT,
         /**
          * OBJECTEX.
          */
-        OBJECTEX, 
+        OBJECTEX,
         /**
          * DBROW.
          */
-        DBROW, 
+        DBROW,
         /**
          * STRING.
          */
-        STRING, 
+        STRING,
         /**
          * TUPLE.
          */
-        TUPLE, 
+        TUPLE,
         /**
          * UNKNOWN.
          */
-        UNKNOWN, 
+        UNKNOWN,
         /**
          * DBCOLUMN.
          */
@@ -103,13 +103,12 @@ public abstract class PyBase {
      * Windows offset.
      */
     private static final long WINDOWSOFFSET = 11644473600000L;
-    
+
     /**
      * Millsec.
      */
     private static final long MILLSEC = 10000L;
-    
-    
+
     /**
      * Convert windows timestamp to java millsec.
      * @param timeStamp timestamp
@@ -331,7 +330,7 @@ public abstract class PyBase {
             return null;
         }
     }
-    
+
     /**
      * Check for certain object..
      * @return result
@@ -523,11 +522,11 @@ public abstract class PyBase {
         final int prime = 31;
         int result = 1;
         result = (prime * result);
-        
+
         if (this.type != null) {
             result += this.type.hashCode();
         }
-        
+
         return result;
     }
 

@@ -11,62 +11,97 @@ import com.github.evetools.marshal.Reader.Buffer;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
- * 
+ *
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
- * 
  */
 public class PyDBRowDescriptor extends PyBase {
 
+    /**
+     * DBColumnSize.
+     */
     public static enum DBColumnSize {
+        /**
+         * BIT64.
+         */
         BIT64(0) {
             @Override
             public int size() {
                 return Long.SIZE / Byte.SIZE;
             }
         },
+        /**
+         * BIT32.
+         */
         BIT32(1) {
             @Override
             public int size() {
                 return Integer.SIZE / Byte.SIZE;
             }
         },
+        /**
+         * BIT16.
+         */
         BIT16(2) {
             @Override
             public int size() {
                 return Short.SIZE / Byte.SIZE;
             }
         },
+        /**
+         * BIT8.
+         */
         BIT8(3) {
             @Override
             public int size() {
                 return Byte.SIZE;
             }
         },
+        /**
+         * BIT1.
+         */
         BIT1(4) {
             @Override
             public int size() {
                 return Byte.SIZE / Byte.SIZE;
             }
         },
+        /**
+         * BIT0.
+         */
         BIT0(5) {
             @Override
             public int size() {
                 return 0;
             }
-        },
-        ;
+        };
 
-        protected final int type;
+        /**
+         * Type.
+         */
+        private final int type;
 
+        /**
+         * Returns size in bytes.
+         * @return bytes
+         */
         public abstract int size();
 
-        private DBColumnSize(int type) {
-            this.type = type;
+        /**
+         * DBColumnSize.
+         * @param dbsizetype db size type
+         */
+        private DBColumnSize(final int dbsizetype) {
+            this.type = dbsizetype;
         }
 
-        public static DBColumnSize get(int idx) {
+        /**
+         * Returns DBColumnSize for db sizs type.
+         * @param idx db size type
+         * @return DBColumnSize
+         */
+        public static DBColumnSize get(final int idx) {
             for (DBColumnSize t : values()) {
                 if (t.type == idx) {
                     return t;
@@ -76,7 +111,13 @@ public class PyDBRowDescriptor extends PyBase {
         }
     }
 
+    /**
+     * DBColumnTypes.
+     */
     public static enum DBColumnTypes {
+        /**
+         * BOOL.
+         */
         BOOL(11) {
             @Override
             public DBColumnSize size() {
@@ -84,10 +125,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return null;
             }
         },
+        /**
+         * CURRENCY.
+         */
         CURRENCY(6) {
             @Override
             public DBColumnSize size() {
@@ -95,10 +139,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyLong(buffer.readLong());
             }
         },
+        /**
+         * DOUBLE.
+         */
         DOUBLE(5) {
             @Override
             public DBColumnSize size() {
@@ -106,10 +153,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyDouble(buffer.readDouble());
             }
         },
+        /**
+         * INT16.
+         */
         INT16(2) {
             @Override
             public DBColumnSize size() {
@@ -117,10 +167,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyShort(buffer.readShort());
             }
         },
+        /**
+         * INT32.
+         */
         INT32(3) {
             @Override
             public DBColumnSize size() {
@@ -128,10 +181,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyInt(buffer.readInt());
             }
         },
+        /**
+         * INT64.
+         */
         INT64(20) {
             @Override
             public DBColumnSize size() {
@@ -139,10 +195,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyLong(buffer.readLong());
             }
         },
+        /**
+         * STRING.
+         */
         STRING(129) {
             @Override
             public DBColumnSize size() {
@@ -150,10 +209,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return null;
             }
         },
+        /**
+         * UINT8.
+         */
         UINT8(17) {
             @Override
             public DBColumnSize size() {
@@ -161,10 +223,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyByte(buffer.readByte());
             }
         },
+        /**
+         * WINFILETIME.
+         */
         WINFILETIME(64) {
             @Override
             public DBColumnSize size() {
@@ -172,10 +237,13 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return new PyLong(buffer.readLong());
             }
         },
+        /**
+         * USTRING.
+         */
         USTRING(130) {
             @Override
             public DBColumnSize size() {
@@ -183,26 +251,51 @@ public class PyDBRowDescriptor extends PyBase {
             }
 
             @Override
-            public PyBase read(Buffer buffer) {
+            public PyBase read(final Buffer buffer) {
                 return null;
             }
         };
 
-        protected final int type;
+        /**
+         * db type.
+         */
+        private final int type;
 
-        private DBColumnTypes(int type) {
-            this.type = type;
+        /**
+         * DBColumnTypes.
+         * @param dbtype db type
+         */
+        private DBColumnTypes(final int dbtype) {
+            this.type = dbtype;
         }
 
+        /**
+         * Returns db type.
+         * @return db type
+         */
         public int type() {
             return type;
         }
 
+        /**
+         * Returns db size.
+         * @return dbsize
+         */
         public abstract DBColumnSize size();
 
+        /**
+         * Read db value from buffer.
+         * @param buffer buffer
+         * @return pybase
+         */
         public abstract PyBase read(Buffer buffer);
 
-        public static DBColumnTypes get(int idx) {
+        /**
+         * Returns db type.
+         * @param idx db type
+         * @return db type
+         */
+        public static DBColumnTypes get(final int idx) {
             for (DBColumnTypes t : values()) {
                 if (t.type == idx) {
                     return t;
@@ -212,11 +305,21 @@ public class PyDBRowDescriptor extends PyBase {
         }
     }
 
+    /**
+     * DBRow size.
+     */
     private int size;
 
+    /**
+     * DBRow columns.
+     */
     private List<PyDBColumn> columns;
 
-    private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap = new TreeMap<DBColumnSize, List<PyDBColumn>>() {
+    /**
+     * DBType map.
+     */
+    private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap =
+            new TreeMap<DBColumnSize, List<PyDBColumn>>() {
 
         private static final long serialVersionUID = 1L;
 
@@ -230,7 +333,12 @@ public class PyDBRowDescriptor extends PyBase {
         }
     };
 
-    public PyDBRowDescriptor(PyObjectEx object) throws IOException {
+    /**
+     * PyDBRowDescriptor.
+     * @param object PyObjectEx
+     * @throws IOException on error
+     */
+    public PyDBRowDescriptor(final PyObjectEx object) throws IOException {
 
         super(PyType.DBROWDESCRIPTOR);
 
@@ -239,11 +347,21 @@ public class PyDBRowDescriptor extends PyBase {
         this.columns = this.init(object);
     }
 
-    public List<PyDBColumn> getColumns() {
+    /**
+     * Returns columns.
+     * @return columns
+     */
+    public final List<PyDBColumn> getColumns() {
         return columns;
     }
 
-    private List<PyDBColumn> init(PyObjectEx object) throws IOException {
+    /**
+     * Initialize.
+     * @param object PyObjectEx
+     * @return columns
+     * @throws IOException on error
+     */
+    private List<PyDBColumn> init(final PyObjectEx object) throws IOException {
 
         if (!(object.getHead().isTuple())) {
             throw new IOException("Invalid Packed Row header");
@@ -294,7 +412,7 @@ public class PyDBRowDescriptor extends PyBase {
                         size += DBColumnSize.BIT8.size();
                     }
                     boolcount++;
-                    if (boolcount == 8) {
+                    if (boolcount == Byte.SIZE) {
                         boolcount = 0;
                     }
 
@@ -307,11 +425,14 @@ public class PyDBRowDescriptor extends PyBase {
             }
         }
 
-        return this.createColumns(typeMap);
+        return this.createColumns();
     }
 
-    private List<PyDBColumn> createColumns(
-            SortedMap<DBColumnSize, List<PyDBColumn>> typeMap) {
+    /**
+     * Create columns according to typeMap.
+     * @return columns
+     */
+    private List<PyDBColumn> createColumns() {
 
         List<PyDBColumn> elements = new ArrayList<PyDBColumn>();
 
@@ -355,10 +476,14 @@ public class PyDBRowDescriptor extends PyBase {
         return elements;
     }
 
-    public int size() {
+    /**
+     * Returns size in bytes.
+     * @return size
+     */
+    public final int size() {
         return this.size;
     }
-    
+
     @Override
     public final boolean visit(final PyVisitor visitor) {
         return (visitor.visit(this));
