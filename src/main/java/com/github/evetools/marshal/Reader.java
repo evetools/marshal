@@ -5,6 +5,8 @@ import com.github.evetools.marshal.python.PyBool;
 import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyDBRowDescriptor;
+import com.github.evetools.marshal.python.PyDBRowDescriptor.DBColumnTypes;
+import com.github.evetools.marshal.python.PyDBRowDescriptor.PyDBColumn;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyDouble;
 import com.github.evetools.marshal.python.PyGlobal;
@@ -28,8 +30,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
@@ -44,7 +46,7 @@ import java.util.Stack;
  */
 public class Reader {
 
-	private static class Buffer {
+	public static class Buffer {
 
 		private final ByteBuffer buffer;
 
@@ -765,80 +767,51 @@ public class Reader {
 		int size = this.length();
 		final byte[] bytes = this.buffer.readBytes(size);
 
-		final PyPackedRow base = new PyPackedRow(head, new PyBuffer(bytes));
+		final PyPackedRow base = new PyPackedRow();
 
 		if (!this.descriptors.containsKey(head)) {
 			this.descriptors.put(head, this.toDBRowDescriptor(head));
 		}
 		
 		PyDBRowDescriptor desc = this.descriptors.get(head);
-
+		base.setHead(desc);
+		
 		size = desc.size();
 
 		final byte[] out = this.zerouncompress(bytes, size);
 
 		final Buffer outbuf = new Buffer(out);
 
-		ArrayList<PyBase> list = desc.getTypeMap().get(Integer.valueOf(0));
-
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
-			if (((PyByte) tuple.get(1)).getValue() == 5) {
-				base.put(tuple.get(0), new PyDouble(outbuf.readDouble()));
-			} else {
-				base.put(tuple.get(0), new PyLong(outbuf.readLong()));
-			}
-		}
-
-		list = desc.getTypeMap().get(Integer.valueOf(1));
-
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
-			base.put(tuple.get(0), new PyInt(outbuf.readInt()));
-		}
-
-		list = desc.getTypeMap().get(Integer.valueOf(2));
-
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
-			base.put(tuple.get(0), new PyShort(outbuf.readShort()));
-		}
-
-		list = desc.getTypeMap().get(Integer.valueOf(3));
-
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
-			base.put(tuple.get(0), new PyByte(outbuf.readByte()));
-		}
-
-		list = desc.getTypeMap().get(Integer.valueOf(4));
-
+		List<PyDBColumn> list = desc.getColumns();
+		
 		int boolcount = 0;
 		int boolvalue = 0;
+		
+		for (PyDBColumn pyDBColumn : list) {
 
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
+			if (pyDBColumn.getType() == DBColumnTypes.BOOL) {
+				
+				if (boolcount == 0) {
+					boolvalue = outbuf.readByte();
+				}
 
-			if (boolcount == 0) {
-				boolvalue = outbuf.readByte();
+				final boolean val = ((boolvalue >> boolcount++) & 0x01) > 0 ? true
+						: false;
+
+				base.put(pyDBColumn.getName(), new PyBool(val));
+
+				if (boolcount == 8) {
+					boolcount = 0;
+				}
+				
+			} else if (pyDBColumn.getType() == DBColumnTypes.STRING || pyDBColumn.getType() == DBColumnTypes.USTRING) {
+				base.put(pyDBColumn.getName(), loadPy());
+			} else {
+				base.put(pyDBColumn.getName(), pyDBColumn.getType().read(outbuf));
 			}
-
-			final boolean val = ((boolvalue >> boolcount++) & 0x01) > 0 ? true
-					: false;
-
-			base.put(tuple.get(0), new PyBool(val));
-
-			if (boolcount == 8) {
-				boolcount = 0;
-			}
+			
 		}
-
-		list = desc.getTypeMap().get(Integer.valueOf(5));
-
-		for (final PyBase pyBase : list) {
-			final PyTuple tuple = pyBase.asTuple();
-			base.put(tuple.get(0), this.loadPy());
-		}
+		
 		return base;
 	}
 

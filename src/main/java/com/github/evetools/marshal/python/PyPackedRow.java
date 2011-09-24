@@ -15,18 +15,20 @@ import java.util.Set;
  */
 public class PyPackedRow extends PyBase {
 
-	private PyBuffer buffer;
-
 	private PyDict columns;
 
-	private PyBase head;
+	private PyDBRowDescriptor head;
 
-	public PyPackedRow(PyBase head, PyBuffer buffer) {
+	public PyPackedRow() {
 		super(types.PACKEDROW);
-		this.head = head;
-		this.buffer = buffer;
 		this.columns = new PyDict();
 	}
+
+	
+	public void setHead(PyDBRowDescriptor head) {
+		this.head = head;
+	}
+
 
 	public void clear() {
 		this.columns.clear();
@@ -53,15 +55,11 @@ public class PyPackedRow extends PyBase {
 		return this.columns.get(key);
 	}
 
-	public PyBuffer getBuffer() {
-		return this.buffer;
-	}
-
 	public PyDict getColumns() {
 		return this.columns;
 	}
 
-	public PyBase getHead() {
+	public PyDBRowDescriptor getHead() {
 		return this.head;
 	}
 
