@@ -348,14 +348,20 @@ public class MarketOrders {
             PyBase type = (PyBase) iterator.next();
 
             if (!type.isObjectEx()) {
-                throw new RuntimeException("Invalid element: " + type.getType());
+                throw new RuntimeException("Invalid element: "
+                        + type.getType());
             }
 
             this.read(type.asObjectEx());
         }
     }
 
-    private void read(PyObjectEx object) throws Exception {
+    /**
+     * Reads db rows.
+     * @param object rows object
+     * @throws Exception on error
+     */
+    private void read(final PyObjectEx object) throws Exception {
 
         if (object == null) {
             throw new IllegalArgumentException("invalid PyObjectEx");
@@ -367,14 +373,20 @@ public class MarketOrders {
             PyBase type = (PyBase) iterator.next();
 
             if (!type.isDBRow()) {
-                throw new RuntimeException("Invalid element: " + type.getType());
+                throw new RuntimeException("Invalid element: "
+                        + type.getType());
             }
 
             this.read(type.asDBRow());
         }
     }
 
-    private void read(PyDBRow object) throws Exception {
+    /**
+     * Reads db row.
+     * @param object db row
+     * @throws Exception on error
+     */
+    private void read(final PyDBRow object) throws Exception {
 
         if (object == null) {
             throw new IllegalArgumentException("invalid PyPackedRow");
