@@ -187,7 +187,7 @@ public class PyDumpVisitor implements PyVisitor {
 		if (base1 != null) {
 			this.print(base1.getName());
 			this.pushIndent();
-			this.print(base1.getValue());
+			this.print(base1.getDBType().name());
 			this.popIndent();
 			return true;
 		}

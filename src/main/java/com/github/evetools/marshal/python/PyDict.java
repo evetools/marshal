@@ -23,10 +23,6 @@ public class PyDict extends PyBase {
 		this.map = new HashMap<PyBase, PyBase>();
 	}
 
-	public void clear() {
-		this.map.clear();
-	}
-
 	public boolean containsKey(PyBase key) {
 		return this.map.containsKey(key);
 	}
@@ -52,14 +48,9 @@ public class PyDict extends PyBase {
 		return this.map.get(new PyBuffer(key.getBytes()));
 	}
 
-
 	@Override
 	public int hashCode() {
 		return this.map.hashCode();
-	}
-
-	public boolean isEmpty() {
-		return this.map.isEmpty();
 	}
 
 	public Set<PyBase> keySet() {
@@ -68,14 +59,6 @@ public class PyDict extends PyBase {
 
 	public PyBase put(PyBase key, PyBase value) {
 		return this.map.put(key, value);
-	}
-
-	public void putAll(Map<? extends PyBase, ? extends PyBase> m) {
-		this.map.putAll(m);
-	}
-
-	public PyBase remove(PyBase key) {
-		return this.map.remove(key);
 	}
 
 	public int size() {

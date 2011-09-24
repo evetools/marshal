@@ -1,10 +1,8 @@
 package com.github.evetools.marshal.python;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Copyright (C)2011 by Gregor Anders
@@ -28,26 +26,6 @@ public abstract class PyContainer extends PyBase {
 
 	public boolean add(PyBase e) {
 		return this.container.add(e);
-	}
-
-	public boolean addAll(Collection<? extends PyBase> c) {
-		return this.container.addAll(c);
-	}
-
-	public boolean addAll(int index, Collection<? extends PyBase> c) {
-		return this.container.addAll(index, c);
-	}
-
-	public void clear() {
-		this.container.clear();
-	}
-
-	public boolean contains(PyBase o) {
-		return this.container.contains(o);
-	}
-
-	public boolean containsAll(Collection<?> c) {
-		return this.container.containsAll(c);
 	}
 
 	@Override
@@ -85,64 +63,12 @@ public abstract class PyContainer extends PyBase {
 		return result;
 	}
 
-	public int indexOf(Object o) {
-		return this.container.indexOf(o);
-	}
-
-	public boolean isEmpty() {
-		return this.container.isEmpty();
-	}
-
 	public Iterator<PyBase> iterator() {
 		return this.container.iterator();
 	}
 
-	public int lastIndexOf(Object o) {
-		return this.container.lastIndexOf(o);
-	}
-
-	public ListIterator<PyBase> listIterator() {
-		return this.container.listIterator();
-	}
-
-	public ListIterator<PyBase> listIterator(int index) {
-		return this.container.listIterator(index);
-	}
-
-	public PyBase remove(int index) {
-		return this.container.remove(index);
-	}
-
-	public boolean remove(PyBase o) {
-		return this.container.remove(o);
-	}
-
-	public boolean removeAll(Collection<?> c) {
-		return this.container.removeAll(c);
-	}
-
-	public boolean retainAll(Collection<?> c) {
-		return this.container.retainAll(c);
-	}
-
-	public PyBase set(int index, PyBase element) {
-		return this.container.set(index, element);
-	}
-
 	public int size() {
 		return this.container.size();
-	}
-
-	public List<PyBase> subList(int fromIndex, int toIndex) {
-		return this.container.subList(fromIndex, toIndex);
-	}
-
-	public Object[] toArray() {
-		return this.container.toArray();
-	}
-
-	public <T> T[] toArray(T[] a) {
-		return this.container.toArray(a);
 	}
 
 	@Override

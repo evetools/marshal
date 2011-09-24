@@ -14,8 +14,6 @@ public class PyDBColumn extends PyBase {
 	
 	private PyBase name;
 	
-	private PyBase value;
-	
 	final private DBColumnTypes dbtype;
 
 	public PyDBColumn(DBColumnTypes type) {
@@ -33,16 +31,8 @@ public class PyDBColumn extends PyBase {
 		return name;
 	}
 
-	public PyBase getValue() {
-		return value;
-	}
-
 	public void setName(PyBase name) {
 		this.name = name;
-	}
-
-	public void setValue(PyBase value) {
-		this.value = value;
 	}
 
 	public DBColumnTypes getDBType() {

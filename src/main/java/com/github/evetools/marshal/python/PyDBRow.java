@@ -1,7 +1,6 @@
 package com.github.evetools.marshal.python;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -26,11 +25,6 @@ public class PyDBRow extends PyBase {
 	
 	public void setHead(PyDBRowDescriptor head) {
 		this.head = head;
-	}
-
-
-	public void clear() {
-		this.columns.clear();
 	}
 
 	public boolean containsKey(PyBase key) {
@@ -67,24 +61,12 @@ public class PyDBRow extends PyBase {
 		return this.columns.hashCode();
 	}
 
-	public boolean isEmpty() {
-		return this.columns.isEmpty();
-	}
-
 	public Set<PyBase> keySet() {
 		return this.columns.keySet();
 	}
 
 	public PyBase put(PyBase key, PyBase value) {
 		return this.columns.put(key, value);
-	}
-
-	public void putAll(Map<? extends PyBase, ? extends PyBase> m) {
-		this.columns.putAll(m);
-	}
-
-	public PyBase remove(PyBase key) {
-		return this.columns.remove(key);
 	}
 
 	public int size() {
