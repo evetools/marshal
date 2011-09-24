@@ -203,16 +203,6 @@ public class PyDumpVisitor implements PyVisitor {
     }
 
     @Override
-    public final boolean visit(final PyMarker base1) throws IOException {
-        if (base1 != null) {
-            this.print(base1);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     public final boolean visit(final PyNone base1) throws IOException {
         if (base1 != null) {
             this.print(base1);

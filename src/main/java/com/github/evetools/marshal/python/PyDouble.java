@@ -33,9 +33,6 @@ public class PyDouble extends PyBase {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyDouble other = (PyDouble) obj;
         if (Double.doubleToLongBits(this.value) != Double
                 .doubleToLongBits(other.value)) {

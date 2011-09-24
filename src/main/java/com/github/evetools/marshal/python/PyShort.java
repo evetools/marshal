@@ -34,9 +34,6 @@ public class PyShort extends PyBase implements Comparable<PyBase> {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyShort other = (PyShort) obj;
         if (this.value != other.value) {
             return false;

@@ -27,15 +27,6 @@ public abstract class PyContainer extends PyBase {
     }
 
     /**
-     * Add PyBase at position.
-     * @param index index
-     * @param element PyBase
-     */
-    public final void add(final int index, final PyBase element) {
-        this.container.add(index, element);
-    }
-
-    /**
      * Adds PyBase.
      * @param e PyBase
      * @return result

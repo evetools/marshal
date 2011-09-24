@@ -33,9 +33,6 @@ public class PyByte extends PyBase {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyByte other = (PyByte) obj;
         if (this.value != other.value) {
             return false;

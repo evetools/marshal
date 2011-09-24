@@ -71,8 +71,6 @@ public class PyBuffer extends PyBase {
             return true;
         } else if (!super.equals(obj)) {
             return false;
-        } else if (getClass() != obj.getClass()) {
-            return false;
         } else {
             PyBuffer other = (PyBuffer) obj;
 

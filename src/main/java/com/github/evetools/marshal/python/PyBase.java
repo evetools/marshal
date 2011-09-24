@@ -237,26 +237,6 @@ public abstract class PyBase  implements Comparable<PyBase> {
      * Check for certain object..
      * @return result
      */
-    public final boolean isMarker() {
-        return (this.type == PyType.MARKER);
-    }
-
-    /**
-     * Pybase as certain PyBase derived class.
-     * @return object
-     */
-    public final PyMarker asMarker() {
-        if (this.isMarker()) {
-            return (PyMarker) this;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Check for certain object..
-     * @return result
-     */
     public final boolean isNone() {
         return (this.type == PyType.NONE);
     }

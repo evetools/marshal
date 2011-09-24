@@ -33,17 +33,6 @@ public class PyObjectEx extends PyBase {
 
     /**
      * PyObjectEx.
-     */
-    public PyObjectEx() {
-        super(PyType.OBJECTEX);
-        this.head = null;
-        this.reduce = false;
-        this.list = new PyList();
-        this.dict = new PyDict();
-    }
-
-    /**
-     * PyObjectEx.
      * @param red reduce style object
      */
     public PyObjectEx(final boolean red) {

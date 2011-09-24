@@ -97,14 +97,6 @@ public interface PyVisitor {
      * @return status
      * @throws IOException on error
      */
-    boolean visit(PyMarker base) throws IOException;
-
-    /**
-     * Visits Python element.
-     * @param base PyBase element
-     * @return status
-     * @throws IOException on error
-     */
     boolean visit(PyNone base) throws IOException;
 
     /**

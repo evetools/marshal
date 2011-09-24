@@ -33,9 +33,6 @@ public class PyInt extends PyBase {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyInt other = (PyInt) obj;
         if (this.value != other.value) {
             return false;

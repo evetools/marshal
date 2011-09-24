@@ -33,9 +33,6 @@ public class PyBool extends PyBase {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyBool other = (PyBool) obj;
         if (this.value != other.value) {
             return false;

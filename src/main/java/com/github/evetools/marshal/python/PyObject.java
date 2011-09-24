@@ -29,17 +29,6 @@ public class PyObject extends PyBase {
     }
 
     /**
-     * PyObject.
-     * @param header head
-     * @param cont content
-     */
-    public PyObject(final PyBase header, final PyBase cont) {
-        super(PyType.OBJECT);
-        this.head = header;
-        this.content = cont;
-    }
-
-    /**
      * Set head.
      * @param header head
      */

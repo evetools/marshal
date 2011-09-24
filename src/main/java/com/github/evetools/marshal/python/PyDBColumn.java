@@ -26,15 +26,6 @@ public class PyDBColumn extends PyBase {
     /**
      * PyDBColumn.
      * @param type db type
-     */
-    public PyDBColumn(final DBColumnTypes type) {
-        super(PyType.DBCOLUMN);
-        this.dbtype = type;
-    }
-
-    /**
-     * PyDBColumn.
-     * @param type db type
      * @param columnName column name
      */
     public PyDBColumn(final DBColumnTypes type, final PyBase columnName) {

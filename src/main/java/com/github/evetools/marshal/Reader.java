@@ -13,7 +13,6 @@ import com.github.evetools.marshal.python.PyGlobal;
 import com.github.evetools.marshal.python.PyInt;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyLong;
-import com.github.evetools.marshal.python.PyMarker;
 import com.github.evetools.marshal.python.PyNone;
 import com.github.evetools.marshal.python.PyObject;
 import com.github.evetools.marshal.python.PyObjectEx;
@@ -473,7 +472,7 @@ public class Reader {
     /* 0x2d */new IRead() {
         @Override
         public PyBase read() throws IOException {
-            return Reader.this.loadMarker();
+            return Reader.this.loadNotImplemented();
         }
     },
     /* 0x2e */new IRead() {
@@ -973,16 +972,6 @@ public class Reader {
      */
     private PyBase loadNone() throws IOException {
         return new PyNone();
-    }
-
-    /**
-     * Loads PyMarker.
-     * @return Python representation
-     * @throws IOException
-     *             on error
-     */
-    private PyBase loadMarker() throws IOException {
-        return new PyMarker();
     }
 
     /**

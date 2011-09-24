@@ -30,24 +30,6 @@ public class PyDict extends PyBase implements Comparable<PyBase> {
     }
 
     /**
-     * Checks for key.
-     * @param key key
-     * @return object or null
-     */
-    public final boolean containsKey(final PyBase key) {
-        return this.map.containsKey(key);
-    }
-
-    /**
-     * Checks for value.
-     * @param value value
-     * @return object or null
-     */
-    public final boolean containsValue(final PyBase value) {
-        return this.map.containsValue(value);
-    }
-
-    /**
      * Returns Set of entries.
      * @return entries
      */

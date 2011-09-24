@@ -41,24 +41,6 @@ public class PyDBRow extends PyBase implements Comparable<PyBase> {
     }
 
     /**
-     * Checks for key.
-     * @param key key
-     * @return object or null
-     */
-    public final boolean containsKey(final PyBase key) {
-        return this.columns.containsKey(key);
-    }
-
-    /**
-     * Checks for value.
-     * @param value value
-     * @return object or null
-     */
-    public final boolean containsValue(final PyBase value) {
-        return this.columns.containsValue(value);
-    }
-
-    /**
      * Returns set of entries.
      * @return entries
      */

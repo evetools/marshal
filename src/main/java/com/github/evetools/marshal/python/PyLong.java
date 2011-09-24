@@ -34,9 +34,6 @@ public class PyLong extends PyBase {
         if (!super.equals(obj)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
         final PyLong other = (PyLong) obj;
         if (this.value != other.value) {
             return false;
