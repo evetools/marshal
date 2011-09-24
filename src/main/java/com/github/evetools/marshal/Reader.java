@@ -38,12 +38,11 @@ import java.util.HashMap;
 import java.util.Stack;
 
 /**
- * Copyright (C)2011 by Gregor Anders
- * All rights reserved.
- *
- * This code is free software; you can redistribute it and/or modify
- * it under the terms of the BSD license (see the file LICENSE.txt
- * included with the distribution).
+ * Copyright (C)2011 by Gregor Anders All rights reserved.
+ * 
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
  */
 public class Reader {
 
@@ -482,13 +481,13 @@ public class Reader {
 	private int position;
 
 	private Map<Integer, PyBase> shared;
-	
+
 	private Map<PyBase, PyDBRowDescriptor> descriptors;
-	
+
 	private Buffer sharedBuffer;
 
 	private int type;
-	
+
 	private Stack<PyBase> objects;
 
 	private Reader(Buffer buffer) throws IOException {
@@ -514,8 +513,7 @@ public class Reader {
 		this.buffer = new Buffer(baos.toByteArray());
 	}
 
-	private PyDBRowDescriptor toDBRowDescriptor(PyBase base)
-			throws IOException {
+	private PyDBRowDescriptor toDBRowDescriptor(PyBase base) throws IOException {
 
 		if (!(base instanceof PyObjectEx)) {
 			throw new IOException("Invalid Packed Row header: "
@@ -585,23 +583,16 @@ public class Reader {
 					}
 				}
 
-				if (zstream.total_out < zlen) {
-					break;
-				}
-
 				if (!success) {
 					zout = null;
 					zlen = zlen * 2;
 				} else {
 					zstream.inflateEnd();
 
-					/*
-					 * for debugging byte[] uncom = new byte[(int)
-					 * zstream.total_out]; for (int loop = 0; loop <
-					 * uncom.length; loop++) { uncom[loop] = zout[loop]; }
-					 */
+					byte[] uncom = new byte[(int) zstream.total_out];
+					System.arraycopy(zout, 0, uncom, 0, uncom.length);
 
-					final Buffer buf = new Buffer(zout);
+					final Buffer buf = new Buffer(uncom);
 					final Reader reader = new Reader(buf);
 
 					return reader.read();
@@ -657,7 +648,7 @@ public class Reader {
 	private PyBase loadInstance() throws IOException {
 		PyObject object = new PyObject();
 		this.objects.push(object);
-		
+
 		PyBase head = this.loadPy();
 		object.setHead(head);
 		PyBase content = this.loadPy();
@@ -770,13 +761,17 @@ public class Reader {
 
 		final PyDBRow base = new PyDBRow();
 
+		if (head == null) {
+			throw new IOException("Invalid PackedRow header");
+		}
+
 		if (!this.descriptors.containsKey(head)) {
 			this.descriptors.put(head, this.toDBRowDescriptor(head));
 		}
-		
+
 		PyDBRowDescriptor desc = this.descriptors.get(head);
 		base.setHead(desc);
-		
+
 		size = desc.size();
 
 		final byte[] out = this.zerouncompress(bytes, size);
@@ -784,14 +779,14 @@ public class Reader {
 		final Buffer outbuf = new Buffer(out);
 
 		List<PyDBColumn> list = desc.getColumns();
-		
+
 		int boolcount = 0;
 		int boolvalue = 0;
-		
+
 		for (PyDBColumn pyDBColumn : list) {
 
 			if (pyDBColumn.getDBType() == DBColumnTypes.BOOL) {
-				
+
 				if (boolcount == 0) {
 					boolvalue = outbuf.readByte();
 				}
@@ -804,15 +799,17 @@ public class Reader {
 				if (boolcount == 8) {
 					boolcount = 0;
 				}
-				
-			} else if (pyDBColumn.getDBType() == DBColumnTypes.STRING || pyDBColumn.getDBType() == DBColumnTypes.USTRING) {
+
+			} else if (pyDBColumn.getDBType() == DBColumnTypes.STRING
+					|| pyDBColumn.getDBType() == DBColumnTypes.USTRING) {
 				base.put(pyDBColumn.getName(), loadPy());
 			} else {
-				base.put(pyDBColumn.getName(), pyDBColumn.getDBType().read(outbuf));
+				base.put(pyDBColumn.getName(),
+						pyDBColumn.getDBType().read(outbuf));
 			}
-			
+
 		}
-		
+
 		return base;
 	}
 
@@ -825,27 +822,32 @@ public class Reader {
 		this.type = magic;
 		this.type = (this.type & 0x3f);
 
+		/*
+		String formatted = String.format("%08d 0x%02x 0x%02x %s", this.position, magic, this.type, sharedPy ? "true" : "false");
+		System.out.println(formatted);
+		*/
+		
 		final PyBase pyBase = this.loadMethods[this.type].read();
 		PyBase pyShared = null;
-		
+
 		if (sharedPy) {
-			
+
 			if (pyBase.isGlobal()) {
 				pyShared = this.objects.peek();
 			} else {
 				pyShared = pyBase;
 			}
 			
-			this.shared.put(Integer.valueOf(this.sharedBuffer.readInt()), pyShared);
+			int pos = Integer.valueOf(this.sharedBuffer.readInt());
+			
+			this.shared.put(pos, pyShared);
 		}
 
 		return pyBase;
 	}
 
 	private PyBase loadReference() throws IOException {
-		PyBase pyBase = this.shared.get(Integer.valueOf(this.length()));
-		
-		return pyBase;
+		return this.shared.get(Integer.valueOf(this.length()));
 	}
 
 	private PyBase loadShort() throws IOException {
@@ -857,7 +859,7 @@ public class Reader {
 	}
 
 	private PyBase loadString0() throws IOException {
-		byte[] b = {0};
+		byte[] b = {};
 		return new PyBuffer(b);
 	}
 
@@ -912,7 +914,7 @@ public class Reader {
 	}
 
 	private PyBase loadUnicode0() throws IOException {
-		byte[] b = {0};
+		byte[] b = { 0 };
 		return new PyBuffer(b);
 	}
 
@@ -951,11 +953,10 @@ public class Reader {
 		this.objects = new Stack<PyBase>();
 		this.descriptors = new HashMap<PyBase, PyDBRowDescriptor>(size);
 
-		size  = size * (Integer.SIZE / Byte.SIZE);
+		size = size * (Integer.SIZE / Byte.SIZE);
 		final int offset = this.buffer.length() - (size);
 
-		this.sharedBuffer = new Buffer(
-				this.buffer.peekBytes(offset, (size)));
+		this.sharedBuffer = new Buffer(this.buffer.peekBytes(offset, (size)));
 
 		PyBase base = null;
 
