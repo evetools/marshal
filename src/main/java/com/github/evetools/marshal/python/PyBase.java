@@ -1,19 +1,27 @@
 package com.github.evetools.marshal.python;
 
 /**
+ * The PyBase as an abstract class wraps a <code>Python</code> or specific
+ * type into a object.
+ * <br>
+ * <br>
  * Copyright (C)2011 by Gregor Anders All rights reserved.
- *
+ * <br>
+ * <br>
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
+ *
+ * @since   0.0.1
  */
 public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
 
     /**
      * Represents the different <tt>Python</tt> or specific types implemented.
      *
-     * Do not change the order. Always append. Order is used in implementation
-     * of compare methods.
+     * Do not change the order.
+     * Always append.
+     * Order is used in implementation of compare methods.
      */
     public static enum PyType {
         /**
@@ -53,7 +61,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
          */
         BUFFER,
         /**
-         * CONTAINER.
+         * ABSTRACT CONTAINER.
          */
         CONTAINER,
         /**
@@ -89,13 +97,13 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
          */
         DBROW,
         /**
-         * STRING.
-         */
-        UNKNOWN,
-        /**
          * DBCOLUMN.
          */
-        DBCOLUMN
+        DBCOLUMN,
+        /**
+         * UNKNOWN.
+         */
+        UNKNOWN
     };
 
     /**
@@ -123,24 +131,37 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     private PyType type = PyType.UNKNOWN;
 
     /**
-     * PyBase.
-     * @param pyType type
+     * Allocates a <code>PyBase</code> object representing the
+     * <code>pyType</code> argument.
+     *
+     * @param   pyType the value of the <code>PyType</code>.
+     * @since   0.0.1
      */
     protected PyBase(final PyType pyType) {
         this.type = pyType;
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#OBJECT}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#OBJECT}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isObject() {
         return (this.type == PyType.OBJECT);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyObject}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#OBJECT}</tt>.
+     *
+     * @return <code>{@link PyObject}</code> if {@link #getType()} is
+     * <tt>{@link PyType#OBJECT}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyObject asObject() {
         if (this.isObject()) {
@@ -151,16 +172,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#OBJECTEX}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#OBJECTEX}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isObjectEx() {
         return (this.type == PyType.OBJECTEX);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyObjectEx}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#OBJECTEX}</tt>.
+     *
+     * @return <code>{@link PyObject}</code> if {@link #getType()} is
+     * <tt>{@link PyType#OBJECTEX}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyObjectEx asObjectEx() {
         if (this.isObjectEx()) {
@@ -171,16 +202,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#DBROWDESCRIPTOR}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#DBROWDESCRIPTOR}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isDBRowDescriptor() {
         return (this.type == PyType.DBROWDESCRIPTOR);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyDBRowDescriptor}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#DBROWDESCRIPTOR}</tt>.
+     *
+     * @return <code>{@link PyDBRowDescriptor}</code> if {@link #getType()} is
+     * <tt>{@link PyType#DBROWDESCRIPTOR}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyDBRowDescriptor asDBRowDescriptor() {
         if (this.isDBRowDescriptor()) {
@@ -191,16 +232,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#DBCOLUMN}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#DBCOLUMN}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isDBColumn() {
         return (this.type == PyType.DBCOLUMN);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyDBColumn}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#DBCOLUMN}</tt>.
+     *
+     * @return <code>{@link PyDBColumn}</code> if {@link #getType()} is
+     * <tt>{@link PyType#DBCOLUMN}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyDBColumn asDBColumn() {
         if (this.isDBColumn()) {
@@ -211,16 +262,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#DBROW}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#DBROW}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isDBRow() {
         return (this.type == PyType.DBROW);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyDBRow}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#DBROW}</tt>.
+     *
+     * @return <code>{@link PyDBRow}</code> if {@link #getType()} is
+     * <tt>{@link PyType#DBROW}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyDBRow asDBRow() {
         if (this.isDBRow()) {
@@ -231,16 +292,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#NONE}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#NONE}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isNone() {
         return (this.type == PyType.NONE);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyNone}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#NONE}</tt>.
+     *
+     * @return <code>{@link PyNone}</code> if {@link #getType()} is
+     * <tt>{@link PyType#NONE}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyNone asNone() {
         if (this.isNone()) {
@@ -251,16 +322,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#INT64}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#INT64}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isLong() {
         return (this.type == PyType.INT64);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyLong}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#INT64}</tt>.
+     *
+     * @return <code>{@link PyLong}</code> if {@link #getType()} is
+     * <tt>{@link PyType#INT64}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyLong asLong() {
         if (this.isLong()) {
@@ -271,16 +352,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#INT32}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#INT32}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isInt() {
         return (this.type == PyType.INT32);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyInt}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#INT32}</tt>.
+     *
+     * @return <code>{@link PyInt}</code> if {@link #getType()} is
+     * <tt>{@link PyType#INT32}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyInt asInt() {
         if (this.isInt()) {
@@ -291,16 +382,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#INT16}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#INT16}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isShort() {
         return (this.type == PyType.INT16);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyShort}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#INT16}</tt>.
+     *
+     * @return <code>{@link PyShort}</code> if {@link #getType()} is
+     * <tt>{@link PyType#INT16}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyShort asShort() {
         if (this.isShort()) {
@@ -311,16 +412,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#INT8}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#INT8}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isByte() {
         return (this.type == PyType.INT8);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyByte}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#INT8}</tt>.
+     *
+     * @return <code>{@link PyByte}</code> if {@link #getType()} is
+     * <tt>{@link PyType#INT8}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyByte asByte() {
         if (this.isByte()) {
@@ -331,16 +442,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#LIST}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#LIST}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isList() {
         return (this.type == PyType.LIST);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyList}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#LIST}</tt>.
+     *
+     * @return <code>{@link PyList}</code> if {@link #getType()} is
+     * <tt>{@link PyType#LIST}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyList asList() {
         if (this.isList()) {
@@ -351,16 +472,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#DOUBLE}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#DOUBLE}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isDouble() {
         return (this.type == PyType.DOUBLE);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyDouble}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#DOUBLE}</tt>.
+     *
+     * @return <code>{@link PyDouble}</code> if {@link #getType()} is
+     * <tt>{@link PyType#DOUBLE}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyDouble asDouble() {
         if (this.isDouble()) {
@@ -371,16 +502,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#DICT}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#DICT}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isDict() {
         return (this.type == PyType.DICT);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyDict}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#DICT}</tt>.
+     *
+     * @return <code>{@link PyDict}</code> if {@link #getType()} is
+     * <tt>{@link PyType#DICT}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyDict asDict() {
         if (this.isDict()) {
@@ -391,16 +532,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#BOOL}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#BOOL}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isBool() {
         return (this.type == PyType.BOOL);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyBool}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#BOOL}</tt>.
+     *
+     * @return <code>{@link PyBool}</code> if {@link #getType()} is
+     * <tt>{@link PyType#BOOL}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyBool asBool() {
         if (this.isBool()) {
@@ -411,16 +562,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#GLOBAL}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#GLOBAL}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isGlobal() {
         return (this.type == PyType.GLOBAL);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyGlobal}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#GLOBAL}</tt>.
+     *
+     * @return <code>{@link PyGlobal}</code> if {@link #getType()} is
+     * <tt>{@link PyType#GLOBAL}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyGlobal asGlobal() {
         if (this.isGlobal()) {
@@ -431,16 +592,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#TUPLE}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#TUPLE}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isTuple() {
         return (this.type == PyType.TUPLE);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyTuple}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#TUPLE}</tt>.
+     *
+     * @return <code>{@link PyTuple}</code> if {@link #getType()} is
+     * <tt>{@link PyType#TUPLE}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyTuple asTuple() {
         if (this.isTuple()) {
@@ -451,16 +622,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object.
-     * @return result
+     * Returns <tt>true</tt> if, and only if, {@link #getType()} is
+     * <tt>{@link PyType#BUFFER}</tt>.
+     *
+     * @return <tt>true</tt> if {@link #getType()} is
+     * <tt>{@link PyType#BUFFER}</tt>, otherwise <tt>false</tt>
+     *
+     * @since 0.0.1
      */
     public final boolean isBuffer() {
         return (this.type == PyType.BUFFER);
     }
 
     /**
-     * PyBase as certain PyBase derived class.
-     * @return object
+     * Returns <code>{@link PyBuffer}</code> if, and only if,
+     * {@link #getType()} is <tt>{@link PyType#BUFFER}</tt>.
+     *
+     * @return <code>{@link PyBuffer}</code> if {@link #getType()} is
+     * <tt>{@link PyType#BUFFER}</tt>, otherwise <tt>null</tt>
+     *
+     * @since 0.0.1
      */
     public final PyBuffer asBuffer() {
         if (this.isBuffer()) {
@@ -471,8 +652,11 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Get Python type.
-     * @return type
+     * Returns <code>{@link PyType}</code> this object represents.
+     *
+     * @return <code>{@link PyType}</code> this object represents
+     *
+     * @since 0.0.1
      */
     public final PyType getType() {
         return this.type;
