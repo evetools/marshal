@@ -72,17 +72,6 @@ public class PyBuffer extends PyBase {
     }
 
     /**
-     * Returns the value of this <tt>PyBuffer</tt> object as a
-     * array of<code>byte</code> primitives.
-     *
-     * @return  the array of <code>byte</code>s value of this object.
-     * @since   0.0.1
-     */
-    public final byte[] bytesValue() {
-        return this.value;
-    }
-
-    /**
      * Returns a hash code for this <tt>PyBuffer</tt> object.
      *
      * @return  the integer this object represents.

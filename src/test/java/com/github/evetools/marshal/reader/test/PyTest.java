@@ -125,9 +125,6 @@ public class PyTest {
 
         Assert.assertFalse(pyBase1.compareTo(pyBase3) == 0);
         Assert.assertFalse(pyBase1.compareTo(pyShort1) == 0);
-
-        PyBuffer pyBase4 = new PyBuffer(pyBase1.bytesValue());
-        Assert.assertEquals(pyBase1, pyBase4);
     }
 
     /**
