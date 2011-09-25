@@ -198,7 +198,7 @@ public class PyDict extends PyBase implements Comparable<PyBase> {
     @Override
     public final int compareTo(final PyBase other) {
         if (other instanceof PyDict) {
-            if (this.map.equals(other)) {
+            if (this.map.equals(((PyDict) other).map)) {
                 return 0;
             } else if (this.map.size()
                     > ((PyDict) other).map.size()) {

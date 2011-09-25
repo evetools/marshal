@@ -168,7 +168,7 @@ public abstract class PyContainer extends PyBase {
     @Override
     public final int compareTo(final PyBase other) {
         if (other.getType() == this.getType()) {
-            if (this.container.equals(other)) {
+            if (this.container.equals(((PyContainer) other).container)) {
                 return 0;
             } else if (this.container.size()
                     > ((PyContainer) other).container.size()) {
