@@ -3,6 +3,7 @@ package com.github.evetools.marshal.python;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,8 +45,8 @@ public class PyDumpVisitor implements PyVisitor {
      * @param base object
      * @throws IOException on error
      */
-    protected final void print(final PyBase base) throws IOException {
-        this.print(base.toString());
+    protected final void println(final PyBase base) throws IOException {
+        this.println(base.toString());
     }
 
     /**
@@ -58,7 +59,7 @@ public class PyDumpVisitor implements PyVisitor {
      * @param string string
      * @throws IOException on error
      */
-    protected final void print(final String string) throws IOException {
+    protected final void println(final String string) throws IOException {
         for (int loop = 0; loop < this.indent; loop++) {
             this.stream.write(SPACE);
         }
@@ -77,7 +78,7 @@ public class PyDumpVisitor implements PyVisitor {
     public final boolean visit(final PyBase base) throws IOException {
 
         if (base != null) {
-            this.print(base.getType().toString());
+            this.println(base.getType().toString());
             return true;
         }
 
@@ -87,7 +88,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyBool base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -98,7 +99,7 @@ public class PyDumpVisitor implements PyVisitor {
     public final boolean visit(final PyBuffer buffer) throws IOException {
 
         if (buffer != null) {
-            this.print(buffer);
+            this.println(buffer);
             return true;
         }
 
@@ -108,7 +109,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyByte base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -120,8 +121,8 @@ public class PyDumpVisitor implements PyVisitor {
 
         if (container != null) {
 
-            this.print(container.getType().toString() + " [" + container.size()
-                    + "]");
+            this.println(container.getType().toString()
+                    + " [" + container.size() + "]");
             this.pushIndent();
             for (final Iterator<PyBase> iterator = container.iterator();
                     iterator.hasNext();) {
@@ -143,8 +144,8 @@ public class PyDumpVisitor implements PyVisitor {
 
         if (container != null) {
 
-            this.print(container.getType().toString() + " [" + container.size()
-                    + "]");
+            this.println(container.getType().toString()
+                    + " [" + container.size() + "]");
             this.pushIndent();
 
             for (final Map.Entry<PyBase, PyBase> entry : container.entrySet()) {
@@ -164,7 +165,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyDouble base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -174,8 +175,8 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyGlobal base1) throws IOException {
         if (base1 != null) {
-            this.print(base1.getType().toString());
-            this.print(base1);
+            this.println(base1.getType().toString());
+            this.println(base1);
             return true;
         }
 
@@ -185,7 +186,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyInt base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -195,7 +196,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyLong base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -205,7 +206,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyNone base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 
@@ -215,10 +216,9 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyDBColumn base1) throws IOException {
         if (base1 != null) {
-            this.print(base1.getName());
-            this.pushIndent();
-            this.print(base1.getDBType().name());
-            this.popIndent();
+            String info = base1.getName().toString() + " ["
+                    + base1.getDBType().name() + "]";
+            this.println(info);
             return true;
         }
 
@@ -229,13 +229,13 @@ public class PyDumpVisitor implements PyVisitor {
     public final boolean visit(final PyObject base1) throws IOException {
 
         if (base1 != null) {
-            this.print(base1.getType().toString());
+            this.println(base1.getType().toString());
             this.pushIndent();
-            this.print(base1.getType().toString() + "-HEADER");
+            this.println(base1.getType().toString() + "-HEADER");
             this.pushIndent();
             base1.getHead().visit(this);
             this.popIndent();
-            this.print(base1.getType().toString() + "-CONTENT");
+            this.println(base1.getType().toString() + "-CONTENT");
             this.pushIndent();
             base1.getContent().visit(this);
             this.popIndent();
@@ -251,20 +251,20 @@ public class PyDumpVisitor implements PyVisitor {
 
         if (base1 != null) {
 
-            this.print(base1.getType().toString());
+            this.println(base1.getType().toString());
             this.pushIndent();
 
-            this.print(base1.getType().toString() + "-HEADER");
+            this.println(base1.getType().toString() + "-HEADER");
             this.pushIndent();
             base1.getHead().visit(this);
             this.popIndent();
 
-            this.print(base1.getType().toString() + "-LIST");
+            this.println(base1.getType().toString() + "-LIST");
             this.pushIndent();
             base1.getList().visit(this);
             this.popIndent();
 
-            this.print(base1.getType().toString() + "-DICT");
+            this.println(base1.getType().toString() + "-DICT");
             this.pushIndent();
             base1.getDict().visit(this);
             this.popIndent();
@@ -280,9 +280,20 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyDBRow base1) throws IOException {
         if (base1 != null) {
-            this.print("DBRow");
+            this.println("DBRow");
             this.pushIndent();
-            base1.getColumns().visit(this);
+            List<PyDBColumn> columns = base1.getColumns();
+            for (PyDBColumn pyDBColumn : columns) {
+                PyBase value = base1.get(pyDBColumn.getName());
+                if (value != null) {
+                    this.pushIndent();
+                    pyDBColumn.visit(this);
+                    this.pushIndent();
+                    value.visit(this);
+                    this.popIndent();
+                    this.popIndent();
+                }
+            }
             this.popIndent();
             return true;
         }
@@ -293,7 +304,7 @@ public class PyDumpVisitor implements PyVisitor {
     @Override
     public final boolean visit(final PyShort base1) throws IOException {
         if (base1 != null) {
-            this.print(base1);
+            this.println(base1);
             return true;
         }
 

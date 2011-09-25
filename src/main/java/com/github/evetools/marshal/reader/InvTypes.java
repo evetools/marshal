@@ -384,48 +384,42 @@ public class InvTypes {
             throw new IllegalArgumentException("Invalid PyDBRow");
         }
 
-        PyDict dict = object.getColumns();
-
-        if (dict == null) {
-            throw new IllegalArgumentException("Empty PyDBRow");
-        }
-
         InvType item = new InvType();
 
-        item.setRaceID(dict.get("raceID").asByte().byteValue());
-        if (dict.get("marketGroupID").isInt()) {
-            item.setMarketGroupID(dict.get("marketGroupID").asInt().intValue());
+        item.setRaceID(object.get("raceID").asByte().byteValue());
+        if (object.get("marketGroupID").isInt()) {
+            item.setMarketGroupID(object.get("marketGroupID").asInt().intValue());
         } else {
-            item.setMarketGroupID(dict.get("marketGroupID").asShort()
+            item.setMarketGroupID(object.get("marketGroupID").asShort()
                     .shortValue());
         }
-        item.setPublished(dict.get("published").asBool().booleanValue());
-        item.setMass(dict.get("mass").asDouble().doubleValue());
-        item.setTypeName(dict.get("typeName").asBuffer().toString());
-        item.setVolume(dict.get("volume").asDouble().doubleValue());
-        item.setCapacity(dict.get("capacity").asDouble().doubleValue());
-        item.setPortionSize(dict.get("portionSize").asInt().intValue());
-        if (dict.get("marketGroupID").isInt()) {
-            item.setGroupID(dict.get("groupID").asInt().intValue());
+        item.setPublished(object.get("published").asBool().booleanValue());
+        item.setMass(object.get("mass").asDouble().doubleValue());
+        item.setTypeName(object.get("typeName").asBuffer().toString());
+        item.setVolume(object.get("volume").asDouble().doubleValue());
+        item.setCapacity(object.get("capacity").asDouble().doubleValue());
+        item.setPortionSize(object.get("portionSize").asInt().intValue());
+        if (object.get("marketGroupID").isInt()) {
+            item.setGroupID(object.get("groupID").asInt().intValue());
         } else {
-            item.setGroupID(dict.get("groupID").asShort().shortValue());
+            item.setGroupID(object.get("groupID").asShort().shortValue());
         }
-        item.setIconID(dict.get("iconID").asInt().intValue());
-        item.setDataID(dict.get("dataID").asInt().intValue());
-        item.setGraphicID(dict.get("graphicID").asInt().intValue());
-        item.setSoundID(dict.get("soundID").asInt().intValue());
-        item.setDescription(dict.get("description").asBuffer().toString());
-        item.setTypeID(dict.get("typeID").asInt().intValue());
-        item.setRadius(dict.get("radius").asDouble().doubleValue());
-        if (dict.get("categoryID") != null) {
-            item.setCategoryID(dict.get("categoryID").asShort().shortValue());
+        item.setIconID(object.get("iconID").asInt().intValue());
+        item.setDataID(object.get("dataID").asInt().intValue());
+        item.setGraphicID(object.get("graphicID").asInt().intValue());
+        item.setSoundID(object.get("soundID").asInt().intValue());
+        item.setDescription(object.get("description").asBuffer().toString());
+        item.setTypeID(object.get("typeID").asInt().intValue());
+        item.setRadius(object.get("radius").asDouble().doubleValue());
+        if (object.get("categoryID") != null) {
+            item.setCategoryID(object.get("categoryID").asShort().shortValue());
         }
-        item.setChanceOfDuplicating(dict.get("chanceOfDuplicating").asDouble()
+        item.setChanceOfDuplicating(object.get("chanceOfDuplicating").asDouble()
                 .doubleValue());
-        if (dict.get("attributeID") != null) {
-            item.setAttributeID(dict.get("attributeID").asShort().shortValue());
+        if (object.get("attributeID") != null) {
+            item.setAttributeID(object.get("attributeID").asShort().shortValue());
         }
-        item.setBasePrice(dict.get("basePrice").asLong().longValue());
+        item.setBasePrice(object.get("basePrice").asLong().longValue());
 
         this.collection.add(item);
     }

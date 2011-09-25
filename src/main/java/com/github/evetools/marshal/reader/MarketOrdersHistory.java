@@ -285,19 +285,13 @@ public class MarketOrdersHistory {
             throw new IllegalArgumentException("invalid PyPackedRow");
         }
 
-        PyDict dict = object.getColumns();
-
-        if (dict == null) {
-            throw new IllegalArgumentException("Empty PyPackedRow");
-        }
-
         MarketOrderHistory entry = new MarketOrderHistory();
-        entry.setAvgPrice(dict.get("avgPrice").asLong().longValue());
-        entry.setHighPrice(dict.get("highPrice").asLong().longValue());
-        entry.setLowPrice(dict.get("lowPrice").asLong().longValue());
-        entry.setOrders(dict.get("orders").asInt().intValue());
-        entry.setVolume(dict.get("volume").asLong().longValue());
-        entry.setHistoryDate(dict.get("historyDate").asLong().longValue());
+        entry.setAvgPrice(object.get("avgPrice").asLong().longValue());
+        entry.setHighPrice(object.get("highPrice").asLong().longValue());
+        entry.setLowPrice(object.get("lowPrice").asLong().longValue());
+        entry.setOrders(object.get("orders").asInt().intValue());
+        entry.setVolume(object.get("volume").asLong().longValue());
+        entry.setHistoryDate(object.get("historyDate").asLong().longValue());
 
         this.entries.add(entry);
     }

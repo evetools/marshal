@@ -240,17 +240,11 @@ public class MarketOrderBests {
             throw new IllegalArgumentException("invalid PyPackedRow");
         }
 
-        PyDict dict = object.getColumns();
-
-        if (dict == null) {
-            throw new IllegalArgumentException("Empty PyPackedRow");
-        }
-
         MarketOrderHistory entry = new MarketOrderHistory();
-        entry.setVolRemaining(dict.get("volRemaining").asDouble().doubleValue());
-        entry.setTypeID(dict.get("typeID").asShort().shortValue());
-        entry.setStationID(dict.get("stationID").asInt().intValue());
-        entry.setPrice(dict.get("price").asLong().longValue());
+        entry.setVolRemaining(object.get("volRemaining").asDouble().doubleValue());
+        entry.setTypeID(object.get("typeID").asShort().shortValue());
+        entry.setStationID(object.get("stationID").asInt().intValue());
+        entry.setPrice(object.get("price").asLong().longValue());
 
         this.entries.add(entry);
     }

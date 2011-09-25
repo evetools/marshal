@@ -5,7 +5,6 @@ import com.github.evetools.marshal.python.PyBool;
 import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyDBRowDescriptor;
-import com.github.evetools.marshal.python.PyDBRowDescriptor.DBColumnTypes;
 import com.github.evetools.marshal.python.PyDBColumn;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyDouble;
@@ -19,6 +18,7 @@ import com.github.evetools.marshal.python.PyObjectEx;
 import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyShort;
 import com.github.evetools.marshal.python.PyTuple;
+import com.github.evetools.marshal.python.PyDBColumn.DBColumnType;
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZStream;
 import java.io.ByteArrayOutputStream;
@@ -1063,8 +1063,6 @@ public class Reader {
         int size = this.length();
         final byte[] bytes = this.buffer.readBytes(size);
 
-        final PyDBRow base = new PyDBRow();
-
         if (head == null) {
             throw new IOException("Invalid PackedRow header");
         }
@@ -1074,7 +1072,7 @@ public class Reader {
         }
 
         PyDBRowDescriptor desc = this.descriptors.get(head);
-        base.setHead(desc);
+        final PyDBRow base = new PyDBRow(desc);
 
         size = desc.size();
 
@@ -1089,7 +1087,7 @@ public class Reader {
 
         for (PyDBColumn pyDBColumn : list) {
 
-            if (pyDBColumn.getDBType() == DBColumnTypes.BOOL) {
+            if (pyDBColumn.getDBType() == DBColumnType.BOOL) {
 
                 if (boolcount == 0) {
                     boolvalue = outbuf.readByte();
@@ -1106,8 +1104,8 @@ public class Reader {
                     boolcount = 0;
                 }
 
-            } else if (pyDBColumn.getDBType() == DBColumnTypes.STRING
-                    || pyDBColumn.getDBType() == DBColumnTypes.USTRING) {
+            } else if (pyDBColumn.getDBType() == DBColumnType.STRING
+                    || pyDBColumn.getDBType() == DBColumnType.USTRING) {
                 base.put(pyDBColumn.getName(), loadPy());
             } else {
                 base.put(pyDBColumn.getName(),

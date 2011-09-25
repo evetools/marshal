@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.github.evetools.marshal.Reader.Buffer;
+import com.github.evetools.marshal.python.PyDBColumn.DBColumnSize;
+import com.github.evetools.marshal.python.PyDBColumn.DBColumnType;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
@@ -18,292 +19,7 @@ import com.github.evetools.marshal.Reader.Buffer;
  */
 public class PyDBRowDescriptor extends PyBase {
 
-    /**
-     * DBColumnSize.
-     */
-    public static enum DBColumnSize {
-        /**
-         * BIT64.
-         */
-        BIT64(0) {
-            @Override
-            public int size() {
-                return Long.SIZE / Byte.SIZE;
-            }
-        },
-        /**
-         * BIT32.
-         */
-        BIT32(1) {
-            @Override
-            public int size() {
-                return Integer.SIZE / Byte.SIZE;
-            }
-        },
-        /**
-         * BIT16.
-         */
-        BIT16(2) {
-            @Override
-            public int size() {
-                return Short.SIZE / Byte.SIZE;
-            }
-        },
-        /**
-         * BIT8.
-         */
-        BIT8(3) {
-            @Override
-            public int size() {
-                return Byte.SIZE;
-            }
-        },
-        /**
-         * BIT1.
-         */
-        BIT1(4) {
-            @Override
-            public int size() {
-                return Byte.SIZE / Byte.SIZE;
-            }
-        },
-        /**
-         * BIT0.
-         */
-        BIT0(5) {
-            @Override
-            public int size() {
-                return 0;
-            }
-        };
 
-        /**
-         * Type.
-         */
-        private final int type;
-
-        /**
-         * Returns size in bytes.
-         * @return bytes
-         */
-        public abstract int size();
-
-        /**
-         * DBColumnSize.
-         * @param dbsizetype db size type
-         */
-        private DBColumnSize(final int dbsizetype) {
-            this.type = dbsizetype;
-        }
-
-        /**
-         * Returns DBColumnSize for db sizs type.
-         * @param idx db size type
-         * @return DBColumnSize
-         */
-        public static DBColumnSize get(final int idx) {
-            for (DBColumnSize t : values()) {
-                if (t.type == idx) {
-                    return t;
-                }
-            }
-            throw new IllegalArgumentException("message here");
-        }
-    }
-
-    /**
-     * DBColumnTypes.
-     */
-    public static enum DBColumnTypes {
-        /**
-         * BOOL.
-         */
-        BOOL(11) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT1;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return null;
-            }
-        },
-        /**
-         * CURRENCY.
-         */
-        CURRENCY(6) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT64;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyLong(buffer.readLong());
-            }
-        },
-        /**
-         * DOUBLE.
-         */
-        DOUBLE(5) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT64;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyDouble(buffer.readDouble());
-            }
-        },
-        /**
-         * INT16.
-         */
-        INT16(2) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT16;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyShort(buffer.readShort());
-            }
-        },
-        /**
-         * INT32.
-         */
-        INT32(3) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT32;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyInt(buffer.readInt());
-            }
-        },
-        /**
-         * INT64.
-         */
-        INT64(20) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT64;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyLong(buffer.readLong());
-            }
-        },
-        /**
-         * STRING.
-         */
-        STRING(129) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT0;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return null;
-            }
-        },
-        /**
-         * UINT8.
-         */
-        UINT8(17) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT8;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyByte(buffer.readByte());
-            }
-        },
-        /**
-         * WINFILETIME.
-         */
-        WINFILETIME(64) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT64;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return new PyLong(buffer.readLong());
-            }
-        },
-        /**
-         * USTRING.
-         */
-        USTRING(130) {
-            @Override
-            public DBColumnSize size() {
-                return DBColumnSize.BIT0;
-            }
-
-            @Override
-            public PyBase read(final Buffer buffer) {
-                return null;
-            }
-        };
-
-        /**
-         * db type.
-         */
-        private final int type;
-
-        /**
-         * DBColumnTypes.
-         * @param dbtype db type
-         */
-        private DBColumnTypes(final int dbtype) {
-            this.type = dbtype;
-        }
-
-        /**
-         * Returns db type.
-         * @return db type
-         */
-        public int type() {
-            return type;
-        }
-
-        /**
-         * Returns db size.
-         * @return dbsize
-         */
-        public abstract DBColumnSize size();
-
-        /**
-         * Read db value from buffer.
-         * @param buffer buffer
-         * @return PyBase
-         */
-        public abstract PyBase read(Buffer buffer);
-
-        /**
-         * Returns db type.
-         * @param idx db type
-         * @return db type
-         */
-        public static DBColumnTypes get(final int idx) {
-            for (DBColumnTypes t : values()) {
-                if (t.type == idx) {
-                    return t;
-                }
-            }
-            throw new IllegalArgumentException("message here");
-        }
-    }
 
     /**
      * DBRow size.
@@ -324,12 +40,12 @@ public class PyDBRowDescriptor extends PyBase {
         private static final long serialVersionUID = 1L;
 
         {
-            put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>()); // 64
-            put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>()); // 32
-            put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>()); // 16
-            put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>()); // 8
-            put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>()); // bool
-            put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>()); // String
+            put(DBColumnSize.BIT64, new ArrayList<PyDBColumn>());
+            put(DBColumnSize.BIT32, new ArrayList<PyDBColumn>());
+            put(DBColumnSize.BIT16, new ArrayList<PyDBColumn>());
+            put(DBColumnSize.BIT8, new ArrayList<PyDBColumn>());
+            put(DBColumnSize.BIT1, new ArrayList<PyDBColumn>());
+            put(DBColumnSize.BIT0, new ArrayList<PyDBColumn>());
         }
     };
 
@@ -403,10 +119,10 @@ public class PyDBRowDescriptor extends PyBase {
                     dbtype = (((PyShort) info.get(1)).shortValue());
                 }
 
-                DBColumnTypes columnType = DBColumnTypes.get(Integer
+                DBColumnType columnType = DBColumnType.get(Integer
                         .valueOf(dbtype));
 
-                if (columnType == DBColumnTypes.BOOL) {
+                if (columnType == DBColumnType.BOOL) {
 
                     if (boolcount == 0) {
                         size += DBColumnSize.BIT8.size();
@@ -437,37 +153,37 @@ public class PyDBRowDescriptor extends PyBase {
         List<PyDBColumn> elements = new ArrayList<PyDBColumn>();
 
         List<PyDBColumn> list = typeMap
-                .get(PyDBRowDescriptor.DBColumnSize.BIT64);
+                .get(DBColumnSize.BIT64);
 
         for (final PyDBColumn column : list) {
             elements.add(column);
         }
 
-        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT32);
+        list = typeMap.get(DBColumnSize.BIT32);
 
         for (final PyDBColumn column : list) {
             elements.add(column);
         }
 
-        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT16);
+        list = typeMap.get(DBColumnSize.BIT16);
 
         for (final PyDBColumn column : list) {
             elements.add(column);
         }
 
-        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT8);
+        list = typeMap.get(DBColumnSize.BIT8);
 
         for (final PyDBColumn column : list) {
             elements.add(column);
         }
 
-        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT1);
+        list = typeMap.get(DBColumnSize.BIT1);
 
         for (final PyDBColumn column : list) {
             elements.add(column);
         }
 
-        list = typeMap.get(PyDBRowDescriptor.DBColumnSize.BIT0);
+        list = typeMap.get(DBColumnSize.BIT0);
 
         for (final PyDBColumn column : list) {
             elements.add(column);

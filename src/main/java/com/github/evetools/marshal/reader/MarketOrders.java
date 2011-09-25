@@ -392,25 +392,19 @@ public class MarketOrders {
             throw new IllegalArgumentException("invalid PyPackedRow");
         }
 
-        PyDict dict = object.getColumns();
-
-        if (dict == null) {
-            throw new IllegalArgumentException("Empty PyPackedRow");
-        }
-
         MarketOrder order = new MarketOrder();
-        order.setBid(dict.get("bid").asBool().booleanValue());
-        order.setTypeID(dict.get("typeID").asInt().intValue());
-        order.setOrderID(dict.get("orderID").asLong().longValue());
-        order.setStationID(dict.get("stationID").asInt().intValue());
-        order.setRegionID(dict.get("regionID").asInt().intValue());
-        order.setPrice(dict.get("price").asLong().longValue());
-        order.setJumps(dict.get("jumps").asInt().intValue());
-        order.setRange(dict.get("range").asShort().shortValue());
-        order.setDuration(dict.get("duration").asShort().shortValue());
-        order.setMinVolume(dict.get("minVolume").asInt().intValue());
-        order.setVolEntered(dict.get("volEntered").asInt().intValue());
-        order.setVolRemaining(dict.get("volRemaining").asDouble().doubleValue());
+        order.setBid(object.get("bid").asBool().booleanValue());
+        order.setTypeID(object.get("typeID").asInt().intValue());
+        order.setOrderID(object.get("orderID").asLong().longValue());
+        order.setStationID(object.get("stationID").asInt().intValue());
+        order.setRegionID(object.get("regionID").asInt().intValue());
+        order.setPrice(object.get("price").asLong().longValue());
+        order.setJumps(object.get("jumps").asInt().intValue());
+        order.setRange(object.get("range").asShort().shortValue());
+        order.setDuration(object.get("duration").asShort().shortValue());
+        order.setMinVolume(object.get("minVolume").asInt().intValue());
+        order.setVolEntered(object.get("volEntered").asInt().intValue());
+        order.setVolRemaining(object.get("volRemaining").asDouble().doubleValue());
 
         this.orders.add(order);
     }
