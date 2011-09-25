@@ -8,25 +8,22 @@ import java.util.List;
 import com.github.evetools.marshal.python.PyBase.PyType;
 
 /**
-* The PyContainer as an abstract class wraps a <code>List</code> of
-* <code>PyBase</code> derived objects. An derived <code>PyContainer</code>
-* type contains a field whose type is a <code>List</code> of
-* <code>PyBase</code>
-* objects.
-* <p>
-* In addition, this class provides methods for accessing a <code>List</code>
-* of <code>PyBase</code> objects.
-* <br>
-* <br>
-* Copyright (C)2011 by Gregor Anders All rights reserved.
-* <br>
-* <br>
-* This code is free software; you can redistribute it and/or modify it under
-* the terms of the BSD license (see the file LICENSE.txt included with the
-* distribution).
-*
-* @since   0.0.1
-*/
+ * The PyContainer as an abstract class wraps a <code>List</code> of
+ * <code>PyBase</code> derived objects. An derived <code>PyContainer</code> type
+ * contains a field whose type is a <code>List</code> of <code>PyBase</code>
+ * objects.
+ * <p>
+ * In addition, this class provides methods for accessing a <code>List</code> of
+ * <code>PyBase</code> objects. <br>
+ * <br>
+ * Copyright (C)2011 by Gregor Anders All rights reserved. <br>
+ * <br>
+ * This code is free software; you can redistribute it and/or modify it under
+ * the terms of the BSD license (see the file LICENSE.txt included with the
+ * distribution).
+ *
+ * @since 0.0.1
+ */
 public abstract class PyContainer extends PyBase {
 
     /**
@@ -64,8 +61,8 @@ public abstract class PyContainer extends PyBase {
      * this object and both share the same <code>PyType</code>.
      *
      * @param   obj   the object to compare with.
-     * @return  <code>true</code> if the <code>PyShort</code> objects represent
-     *          the same value; <code>false</code> otherwise.
+     * @return  <code>true</code> if the <code>PyContainer</code> objects
+     *          represent the same value; <code>false</code> otherwise.
      * @since   0.0.1
      */
     @Override

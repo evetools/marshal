@@ -107,7 +107,7 @@ public class PyNone extends PyBase {
     @Override
     public final int compareTo(final PyBase other) {
         if (other == null || other.getType() == this.getType()) {
-            return 1;
+            return 0;
         } else {
             return other.getType().compareTo(this.getType());
         }
