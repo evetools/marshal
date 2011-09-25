@@ -98,9 +98,9 @@ public class MarketOrderBests {
 
     public void read() throws Exception {
 
-        PyBase pyBase = this.reader.read();
+        PyBase PyBase = this.reader.read();
 
-        PyTuple tuple1 = pyBase.asTuple();
+        PyTuple tuple1 = PyBase.asTuple();
         PyTuple tuple2 = null;
         PyDict dict = null;
         PyBase base = null;
@@ -109,7 +109,7 @@ public class MarketOrderBests {
         PyBuffer string = null;
 
         if (tuple1 == null) {
-            throw new RuntimeException("Invalid element: " + pyBase.getType());
+            throw new RuntimeException("Invalid element: " + PyBase.getType());
         }
 
         tuple2 = tuple1.get(0).asTuple();
@@ -154,16 +154,16 @@ public class MarketOrderBests {
         switch (tuple2.get(2).getType()) {
 
             case INT8:
-                this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
+                this.regionID = tuple2.get(2).asByte().byteValue() & 0xFF;
                 break;
             case INT16:
-                this.regionID = tuple2.get(2).asShort().getValue();
+                this.regionID = tuple2.get(2).asShort().shortValue();
                 break;
             case INT32:
-                this.regionID = tuple2.get(2).asInt().getValue();
+                this.regionID = tuple2.get(2).asInt().intValue();
                 break;
             case INT64:
-                this.regionID = tuple2.get(2).asLong().getValue();
+                this.regionID = tuple2.get(2).asLong().longValue();
                 break;
             default:
                 throw new RuntimeException("Invalid element: "
@@ -195,7 +195,7 @@ public class MarketOrderBests {
         }
 
         this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong()
-                .getValue());
+                .longValue());
 
         base = dict.get("lret");
 
@@ -247,10 +247,10 @@ public class MarketOrderBests {
         }
 
         MarketOrderHistory entry = new MarketOrderHistory();
-        entry.setVolRemaining(dict.get("volRemaining").asDouble().getValue());
-        entry.setTypeID(dict.get("typeID").asShort().getValue());
-        entry.setStationID(dict.get("stationID").asInt().getValue());
-        entry.setPrice(dict.get("price").asLong().getValue());
+        entry.setVolRemaining(dict.get("volRemaining").asDouble().doubleValue());
+        entry.setTypeID(dict.get("typeID").asShort().shortValue());
+        entry.setStationID(dict.get("stationID").asInt().intValue());
+        entry.setPrice(dict.get("price").asLong().longValue());
 
         this.entries.add(entry);
     }

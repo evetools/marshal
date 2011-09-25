@@ -125,9 +125,9 @@ public class MarketOrdersHistory {
 
     public void read() throws Exception {
 
-        PyBase pyBase = this.reader.read();
+        PyBase PyBase = this.reader.read();
 
-        PyTuple tuple1 = pyBase.asTuple();
+        PyTuple tuple1 = PyBase.asTuple();
         PyTuple tuple2 = null;
         PyDict dict = null;
         PyBase base = null;
@@ -136,7 +136,7 @@ public class MarketOrdersHistory {
         PyBuffer string = null;
 
         if (tuple1 == null) {
-            throw new RuntimeException("Invalid element: " + pyBase.getType());
+            throw new RuntimeException("Invalid element: " + PyBase.getType());
         }
 
         tuple2 = tuple1.get(0).asTuple();
@@ -181,16 +181,16 @@ public class MarketOrdersHistory {
         switch (tuple2.get(2).getType()) {
 
             case INT8:
-                this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
+                this.regionID = tuple2.get(2).asByte().byteValue() & 0xFF;
                 break;
             case INT16:
-                this.regionID = tuple2.get(2).asShort().getValue();
+                this.regionID = tuple2.get(2).asShort().shortValue();
                 break;
             case INT32:
-                this.regionID = tuple2.get(2).asInt().getValue();
+                this.regionID = tuple2.get(2).asInt().intValue();
                 break;
             case INT64:
-                this.regionID = tuple2.get(2).asLong().getValue();
+                this.regionID = tuple2.get(2).asLong().longValue();
                 break;
             default:
                 throw new RuntimeException("Invalid element: "
@@ -200,16 +200,16 @@ public class MarketOrdersHistory {
         switch (tuple2.get(3).getType()) {
 
             case INT8:
-                this.typeID = tuple2.get(3).asByte().getValue() & 0xFF;
+                this.typeID = tuple2.get(3).asByte().byteValue() & 0xFF;
                 break;
             case INT16:
-                this.typeID = tuple2.get(3).asShort().getValue();
+                this.typeID = tuple2.get(3).asShort().shortValue();
                 break;
             case INT32:
-                this.typeID = tuple2.get(3).asInt().getValue();
+                this.typeID = tuple2.get(3).asInt().intValue();
                 break;
             case INT64:
-                this.typeID = tuple2.get(3).asLong().getValue();
+                this.typeID = tuple2.get(3).asLong().longValue();
                 break;
             default:
                 throw new RuntimeException("Invalid element: "
@@ -241,7 +241,7 @@ public class MarketOrdersHistory {
         }
 
         this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong()
-                .getValue());
+                .longValue());
 
         base = dict.get("lret");
 
@@ -292,12 +292,12 @@ public class MarketOrdersHistory {
         }
 
         MarketOrderHistory entry = new MarketOrderHistory();
-        entry.setAvgPrice(dict.get("avgPrice").asLong().getValue());
-        entry.setHighPrice(dict.get("highPrice").asLong().getValue());
-        entry.setLowPrice(dict.get("lowPrice").asLong().getValue());
-        entry.setOrders(dict.get("orders").asInt().getValue());
-        entry.setVolume(dict.get("volume").asLong().getValue());
-        entry.setHistoryDate(dict.get("historyDate").asLong().getValue());
+        entry.setAvgPrice(dict.get("avgPrice").asLong().longValue());
+        entry.setHighPrice(dict.get("highPrice").asLong().longValue());
+        entry.setLowPrice(dict.get("lowPrice").asLong().longValue());
+        entry.setOrders(dict.get("orders").asInt().intValue());
+        entry.setVolume(dict.get("volume").asLong().longValue());
+        entry.setHistoryDate(dict.get("historyDate").asLong().longValue());
 
         this.entries.add(entry);
     }

@@ -209,9 +209,9 @@ public class MarketOrders {
 
     public void read() throws Exception {
 
-        PyBase pyBase = this.reader.read();
+        PyBase PyBase = this.reader.read();
 
-        PyTuple tuple1 = pyBase.asTuple();
+        PyTuple tuple1 = PyBase.asTuple();
         PyTuple tuple2 = null;
         PyDict dict = null;
         PyBase base = null;
@@ -219,7 +219,7 @@ public class MarketOrders {
         PyBuffer string = null;
 
         if (tuple1 == null) {
-            throw new RuntimeException("Invalid element: " + pyBase.getType());
+            throw new RuntimeException("Invalid element: " + PyBase.getType());
         }
 
         tuple2 = tuple1.get(0).asTuple();
@@ -264,16 +264,16 @@ public class MarketOrders {
         switch (tuple2.get(2).getType()) {
 
             case INT8:
-                this.regionID = tuple2.get(2).asByte().getValue() & 0xFF;
+                this.regionID = tuple2.get(2).asByte().byteValue() & 0xFF;
                 break;
             case INT16:
-                this.regionID = tuple2.get(2).asShort().getValue();
+                this.regionID = tuple2.get(2).asShort().shortValue();
                 break;
             case INT32:
-                this.regionID = tuple2.get(2).asInt().getValue();
+                this.regionID = tuple2.get(2).asInt().intValue();
                 break;
             case INT64:
-                this.regionID = tuple2.get(2).asLong().getValue();
+                this.regionID = tuple2.get(2).asLong().longValue();
                 break;
             default:
                 throw new RuntimeException("Invalid element: "
@@ -283,16 +283,16 @@ public class MarketOrders {
         switch (tuple2.get(3).getType()) {
 
             case INT8:
-                this.typeID = tuple2.get(3).asByte().getValue() & 0xFF;
+                this.typeID = tuple2.get(3).asByte().byteValue() & 0xFF;
                 break;
             case INT16:
-                this.typeID = tuple2.get(3).asShort().getValue();
+                this.typeID = tuple2.get(3).asShort().shortValue();
                 break;
             case INT32:
-                this.typeID = tuple2.get(3).asInt().getValue();
+                this.typeID = tuple2.get(3).asInt().intValue();
                 break;
             case INT64:
-                this.typeID = tuple2.get(3).asLong().getValue();
+                this.typeID = tuple2.get(3).asLong().longValue();
                 break;
             default:
                 throw new RuntimeException("Invalid element: "
@@ -324,7 +324,7 @@ public class MarketOrders {
         }
 
         this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong()
-                .getValue());
+                .longValue());
 
         base = dict.get("lret");
 
@@ -399,18 +399,18 @@ public class MarketOrders {
         }
 
         MarketOrder order = new MarketOrder();
-        order.setBid(dict.get("bid").asBool().getValue());
-        order.setTypeID(dict.get("typeID").asInt().getValue());
-        order.setOrderID(dict.get("orderID").asLong().getValue());
-        order.setStationID(dict.get("stationID").asInt().getValue());
-        order.setRegionID(dict.get("regionID").asInt().getValue());
-        order.setPrice(dict.get("price").asLong().getValue());
-        order.setJumps(dict.get("jumps").asInt().getValue());
-        order.setRange(dict.get("range").asShort().getValue());
-        order.setDuration(dict.get("duration").asShort().getValue());
-        order.setMinVolume(dict.get("minVolume").asInt().getValue());
-        order.setVolEntered(dict.get("volEntered").asInt().getValue());
-        order.setVolRemaining(dict.get("volRemaining").asDouble().getValue());
+        order.setBid(dict.get("bid").asBool().booleanValue());
+        order.setTypeID(dict.get("typeID").asInt().intValue());
+        order.setOrderID(dict.get("orderID").asLong().longValue());
+        order.setStationID(dict.get("stationID").asInt().intValue());
+        order.setRegionID(dict.get("regionID").asInt().intValue());
+        order.setPrice(dict.get("price").asLong().longValue());
+        order.setJumps(dict.get("jumps").asInt().intValue());
+        order.setRange(dict.get("range").asShort().shortValue());
+        order.setDuration(dict.get("duration").asShort().shortValue());
+        order.setMinVolume(dict.get("minVolume").asInt().intValue());
+        order.setVolEntered(dict.get("volEntered").asInt().intValue());
+        order.setVolRemaining(dict.get("volRemaining").asDouble().doubleValue());
 
         this.orders.add(order);
     }

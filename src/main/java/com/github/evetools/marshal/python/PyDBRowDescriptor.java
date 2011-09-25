@@ -286,7 +286,7 @@ public class PyDBRowDescriptor extends PyBase {
         /**
          * Read db value from buffer.
          * @param buffer buffer
-         * @return pybase
+         * @return PyBase
          */
         public abstract PyBase read(Buffer buffer);
 
@@ -398,9 +398,9 @@ public class PyDBRowDescriptor extends PyBase {
                 int dbtype = 0;
 
                 if (info.get(1) instanceof PyByte) {
-                    dbtype = (((PyByte) info.get(1)).getValue());
+                    dbtype = (((PyByte) info.get(1)).byteValue());
                 } else if (info.get(1) instanceof PyShort) {
-                    dbtype = (((PyShort) info.get(1)).getValue());
+                    dbtype = (((PyShort) info.get(1)).shortValue());
                 }
 
                 DBColumnTypes columnType = DBColumnTypes.get(Integer

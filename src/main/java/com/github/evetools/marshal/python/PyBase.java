@@ -10,37 +10,28 @@ package com.github.evetools.marshal.python;
 public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
 
     /**
-     * PyType.
+     * Represents the different <tt>Python</tt> or specific types implemented.
+     *
+     * Do not change the order. Always append. Order is used in implementation
+     * of compare methods.
      */
     public static enum PyType {
+        /**
+         * NONE.
+         */
+        NONE,
+        /**
+         * MARKER.
+         */
+        MARKER,
         /**
          * BOOL.
          */
         BOOL,
         /**
-         * BUFFER.
+         * INT8.
          */
-        BUFFER,
-        /**
-         * CONTAINER.
-         */
-        CONTAINER,
-        /**
-         * DBROWDESCRIPTOR.
-         */
-        DBROWDESCRIPTOR,
-        /**
-         * DICT.
-         */
-        DICT,
-        /**
-         * DOUBLE.
-         */
-        DOUBLE,
-        /**
-         * GLOBAL.
-         */
-        GLOBAL,
+        INT8,
         /**
          * INT16.
          */
@@ -54,21 +45,29 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
          */
         INT64,
         /**
-         * INT8.
+         * DOUBLE.
          */
-        INT8,
+        DOUBLE,
+        /**
+         * BUFFER.
+         */
+        BUFFER,
+        /**
+         * CONTAINER.
+         */
+        CONTAINER,
         /**
          * LIST.
          */
         LIST,
         /**
-         * MARKER.
+         * TUPLE.
          */
-        MARKER,
+        TUPLE,
         /**
-         * NONE.
+         * DICT.
          */
-        NONE,
+        DICT,
         /**
          * OBJECT.
          */
@@ -78,19 +77,19 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
          */
         OBJECTEX,
         /**
+         * GLOBAL.
+         */
+        GLOBAL,
+        /**
+         * DBROWDESCRIPTOR.
+         */
+        DBROWDESCRIPTOR,
+        /**
          * DBROW.
          */
         DBROW,
         /**
          * STRING.
-         */
-        STRING,
-        /**
-         * TUPLE.
-         */
-        TUPLE,
-        /**
-         * UNKNOWN.
          */
         UNKNOWN,
         /**
@@ -100,26 +99,26 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     };
 
     /**
-     * Windows offset.
+     * Windows offset used to convert WINFILE time.
      */
     private static final long WINDOWSOFFSET = 11644473600000L;
 
     /**
-     * Millsec.
+     * Millsec used to convert WINFILE time.
      */
     private static final long MILLSEC = 10000L;
 
     /**
-     * Convert windows timestamp to java millsec.
-     * @param timeStamp timestamp
-     * @return millsec
+     * Converts WINFILE time to millsec used in JAVA.
+     * @param   timeStamp WINFILE time to convert
+     * @return  millsec
      */
     public static long convertWindowsTime(final long timeStamp) {
         return (timeStamp / MILLSEC) - WINDOWSOFFSET;
     }
 
     /**
-     * PyType.
+     * <code>PyType</code> this object is representing.
      */
     private PyType type = PyType.UNKNOWN;
 
@@ -132,7 +131,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isObject() {
@@ -140,7 +139,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyObject asObject() {
@@ -152,7 +151,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isObjectEx() {
@@ -160,7 +159,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyObjectEx asObjectEx() {
@@ -172,7 +171,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isDBRowDescriptor() {
@@ -180,7 +179,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyDBRowDescriptor asDBRowDescriptor() {
@@ -192,7 +191,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isDBColumn() {
@@ -200,7 +199,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyDBColumn asDBColumn() {
@@ -212,7 +211,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isDBRow() {
@@ -220,7 +219,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyDBRow asDBRow() {
@@ -232,7 +231,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isNone() {
@@ -240,7 +239,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyNone asNone() {
@@ -252,7 +251,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isLong() {
@@ -260,7 +259,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyLong asLong() {
@@ -272,7 +271,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isInt() {
@@ -280,7 +279,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyInt asInt() {
@@ -292,7 +291,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isShort() {
@@ -300,7 +299,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyShort asShort() {
@@ -312,7 +311,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isByte() {
@@ -320,7 +319,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyByte asByte() {
@@ -332,7 +331,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isList() {
@@ -340,7 +339,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyList asList() {
@@ -352,7 +351,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isDouble() {
@@ -360,7 +359,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyDouble asDouble() {
@@ -372,7 +371,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isDict() {
@@ -380,7 +379,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyDict asDict() {
@@ -392,7 +391,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isBool() {
@@ -400,7 +399,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyBool asBool() {
@@ -412,7 +411,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isGlobal() {
@@ -420,7 +419,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyGlobal asGlobal() {
@@ -432,7 +431,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isTuple() {
@@ -440,7 +439,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyTuple asTuple() {
@@ -452,7 +451,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Check for certain object..
+     * Check for certain object.
      * @return result
      */
     public final boolean isBuffer() {
@@ -460,7 +459,7 @@ public abstract class PyBase  implements Comparable<PyBase>, PyVisitable {
     }
 
     /**
-     * Pybase as certain PyBase derived class.
+     * PyBase as certain PyBase derived class.
      * @return object
      */
     public final PyBuffer asBuffer() {

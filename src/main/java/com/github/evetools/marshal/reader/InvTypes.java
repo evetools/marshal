@@ -294,18 +294,18 @@ public class InvTypes {
 
     public void read() throws Exception {
 
-        PyBase pyBase = this.reader.read();
+        PyBase PyBase = this.reader.read();
 
-        PyTuple tuple1 = pyBase.asTuple();
+        PyTuple tuple1 = PyBase.asTuple();
         PyTuple tuple2 = null;
         PyObject object = null;
         PyObjectEx objectEx = null;
         PyBuffer string = null;
 
-        if (!pyBase.isObjectEx()) {
+        if (!PyBase.isObjectEx()) {
             if (tuple1 == null) {
                 throw new RuntimeException("Invalid element: "
-                        + pyBase.getType());
+                        + PyBase.getType());
             }
 
             string = tuple1.get(0).asBuffer();
@@ -342,11 +342,11 @@ public class InvTypes {
             }
 
             this.timestamp = PyBase.convertWindowsTime(tuple1.get(0).asLong()
-                    .getValue());
+                    .longValue());
 
             objectEx = tuple2.get(4).asObjectEx();
         } else {
-            objectEx = pyBase.asObjectEx();
+            objectEx = PyBase.asObjectEx();
         }
 
         if (objectEx == null) {
@@ -392,40 +392,40 @@ public class InvTypes {
 
         InvType item = new InvType();
 
-        item.setRaceID(dict.get("raceID").asByte().getValue());
+        item.setRaceID(dict.get("raceID").asByte().byteValue());
         if (dict.get("marketGroupID").isInt()) {
-            item.setMarketGroupID(dict.get("marketGroupID").asInt().getValue());
+            item.setMarketGroupID(dict.get("marketGroupID").asInt().intValue());
         } else {
             item.setMarketGroupID(dict.get("marketGroupID").asShort()
-                    .getValue());
+                    .shortValue());
         }
-        item.setPublished(dict.get("published").asBool().getValue());
-        item.setMass(dict.get("mass").asDouble().getValue());
+        item.setPublished(dict.get("published").asBool().booleanValue());
+        item.setMass(dict.get("mass").asDouble().doubleValue());
         item.setTypeName(dict.get("typeName").asBuffer().toString());
-        item.setVolume(dict.get("volume").asDouble().getValue());
-        item.setCapacity(dict.get("capacity").asDouble().getValue());
-        item.setPortionSize(dict.get("portionSize").asInt().getValue());
+        item.setVolume(dict.get("volume").asDouble().doubleValue());
+        item.setCapacity(dict.get("capacity").asDouble().doubleValue());
+        item.setPortionSize(dict.get("portionSize").asInt().intValue());
         if (dict.get("marketGroupID").isInt()) {
-            item.setGroupID(dict.get("groupID").asInt().getValue());
+            item.setGroupID(dict.get("groupID").asInt().intValue());
         } else {
-            item.setGroupID(dict.get("groupID").asShort().getValue());
+            item.setGroupID(dict.get("groupID").asShort().shortValue());
         }
-        item.setIconID(dict.get("iconID").asInt().getValue());
-        item.setDataID(dict.get("dataID").asInt().getValue());
-        item.setGraphicID(dict.get("graphicID").asInt().getValue());
-        item.setSoundID(dict.get("soundID").asInt().getValue());
+        item.setIconID(dict.get("iconID").asInt().intValue());
+        item.setDataID(dict.get("dataID").asInt().intValue());
+        item.setGraphicID(dict.get("graphicID").asInt().intValue());
+        item.setSoundID(dict.get("soundID").asInt().intValue());
         item.setDescription(dict.get("description").asBuffer().toString());
-        item.setTypeID(dict.get("typeID").asInt().getValue());
-        item.setRadius(dict.get("radius").asDouble().getValue());
+        item.setTypeID(dict.get("typeID").asInt().intValue());
+        item.setRadius(dict.get("radius").asDouble().doubleValue());
         if (dict.get("categoryID") != null) {
-            item.setCategoryID(dict.get("categoryID").asShort().getValue());
+            item.setCategoryID(dict.get("categoryID").asShort().shortValue());
         }
         item.setChanceOfDuplicating(dict.get("chanceOfDuplicating").asDouble()
-                .getValue());
+                .doubleValue());
         if (dict.get("attributeID") != null) {
-            item.setAttributeID(dict.get("attributeID").asShort().getValue());
+            item.setAttributeID(dict.get("attributeID").asShort().shortValue());
         }
-        item.setBasePrice(dict.get("basePrice").asLong().getValue());
+        item.setBasePrice(dict.get("basePrice").asLong().longValue());
 
         this.collection.add(item);
     }
