@@ -7,32 +7,49 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.github.evetools.marshal.python.PyBase.PyType;
 import com.github.evetools.marshal.python.PyDBColumn.DBColumnSize;
 import com.github.evetools.marshal.python.PyDBColumn.DBColumnType;
 
 /**
+ * The PyDBRowDescriptor class describes  a single database row.
+ * An object of type <code>PyDBRowDescriptor</code> contains a
+ * field whose type is <code>int</code> representing the size of the
+ * uncompressed buffer holding compressed values, a List of
+ * <code>PyDBColumn</code> objects describing each column in a database row
+ * and a SortedMap of <code>DBColumnSize, List<PyDBColumn></code> pairs
+ * used for reading a row from the buffer.
+ * <p>
  * Copyright (C)2011 by Gregor Anders All rights reserved.
- *
+ * <p>
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the BSD license (see the file LICENSE.txt included with the
  * distribution).
+ *
+ * @since   0.0.1
  */
 public class PyDBRowDescriptor extends PyBase {
 
 
-
     /**
-     * DBRow size.
+     * The size of teh uncompressed buffer used for storing numeric or boolean
+     * values.
      */
     private int size;
 
     /**
-     * DBRow columns.
+     * The List of the database rows columns.
      */
     private List<PyDBColumn> columns;
 
     /**
-     * DBType map.
+     * SortedMap used for reading values from Buffer.
+     *
+     * Values are stored in the uncompressed buffer in the order of the byte
+     * size followed by the order of the underlying object.
+     * Boolean values are stored as single bits so one byte holds room for 8
+     * boolean values. String values are not stored in the zero compressed
+     * buffer and are part of the normal buffer though handled by the reader.
      */
     private SortedMap<DBColumnSize, List<PyDBColumn>> typeMap =
             new TreeMap<DBColumnSize, List<PyDBColumn>>() {
@@ -50,9 +67,12 @@ public class PyDBRowDescriptor extends PyBase {
     };
 
     /**
-     * PyDBRowDescriptor.
-     * @param object PyObjectEx
-     * @throws IOException on error
+     * Allocates a <code>PyDBRowDescriptor</code> class representing the
+     * <code>object</code> argument.
+     *
+     * @param   object used to create <code>PyDBRowDescriptor</code>.
+     * @throws  IOException on error
+     * @since   0.0.1
      */
     public PyDBRowDescriptor(final PyObjectEx object) throws IOException {
 
@@ -64,18 +84,57 @@ public class PyDBRowDescriptor extends PyBase {
     }
 
     /**
-     * Returns columns.
-     * @return columns
+     * Returns <code>true</code> if and only if the argument is not
+     * <code>null</code> and is a <code>PyDBRowDescriptor</code> object that
+     * represents the same database row as this object.
+     *
+     * @param   obj   the object to compare with.
+     * @return  <code>true</code> if the <code>PyDBRowDescriptor</code> objects
+     *          represent the same value; <code>false</code> otherwise.
+     * @since   0.0.1
+     */
+    @Override
+    public final boolean equals(final Object obj) {
+        if (obj instanceof PyDBRowDescriptor) {
+            return this.columns.equals(((PyDBRowDescriptor) obj).columns);
+        }
+        return false;
+    }
+
+    /**
+     * Returns a hash code for this <tt>PyDBColumn</tt> object.
+     *
+     * @return  the integer this object represents.
+     * @see     Byte#hashCode()
+     * @see     PyBase#getType()
+     * @see     List#hashCode()
+     * @since   0.0.1
+     */
+    @Override
+    public final int hashCode() {
+        final int prime = 31;
+        return (prime * super.getType().hashCode())
+                + this.columns.hashCode();
+    }
+
+    /**
+     * Returns a List of <code>PyDBColumn</code> objects representing the
+     * columns of a <code>PyDBRow</code> object described by this object.
+     *
+     * @return  List of <code>PyDBColumn</code> objects.
+     * @since   0.0.1
      */
     public final List<PyDBColumn> getColumns() {
         return columns;
     }
 
     /**
-     * Initialize.
-     * @param object PyObjectEx
-     * @return columns
+     * Initialize typeMap for this <code>PyDBRowDescriptor</code> object.
+     * @param object used to create <code>PyDBRowDescriptor</code>
+     * @return List of <code>PyDBColumn</code> objects describing a
+     * <code>PyDBRow</code> object.
      * @throws IOException on error
+     * @since   0.0.1
      */
     private List<PyDBColumn> init(final PyObjectEx object) throws IOException {
 
@@ -106,7 +165,7 @@ public class PyDBRowDescriptor extends PyBase {
             if (type != null) {
 
                 if (!(type.isTuple())) {
-                    throw new IOException("Invalid DBRowType header type");
+                    throw new IOException("Invalid DB column type");
                 }
 
                 final PyTuple info = type.asTuple();
@@ -145,8 +204,12 @@ public class PyDBRowDescriptor extends PyBase {
     }
 
     /**
-     * Create columns according to typeMap.
-     * @return columns
+     * Creates List of <code></code> object representing the
+     * columns of a <code>PyDBRow</code> object described by this object.
+     * The columns are sorted the way they are read from the buffer.
+     * @return List of <code>PyDBColumn</code> objects describing a
+     *          <code>PyDBRow</code> object.
+     * @since   0.0.1
      */
     private List<PyDBColumn> createColumns() {
 
@@ -193,26 +256,79 @@ public class PyDBRowDescriptor extends PyBase {
     }
 
     /**
-     * Returns size in bytes.
-     * @return size
+     * Returns size of the uncompressed buffer holding the numeric and boolean
+     * values described by this object.
+     *
+     * @return size size of the uncompressed buffer holding the numeric and
+     *          boolean values
+     * @since   0.0.1
      */
     public final int size() {
         return this.size;
     }
 
+    /**
+     * Visits this <tt>PyDBRowDescriptor</tt> instance with PyVisitor.
+     *
+     * @param   visitor   visitor used
+     * @return  <code>true</code> if the visit was successful;
+     *          <code>false</code> otherwise.
+     * @throws  IOException if an error occurred
+     * @see     PyVisitable
+     * @since   0.0.1
+     */
     @Override
-    public final boolean visit(final PyVisitor visitor) throws IOException {
+      public final boolean visit(final PyVisitor visitor) throws IOException {
         return (visitor.visit(this));
     }
 
+    /**
+     * Compares this <tt>PyDBColumn</tt> instance with another <tt>PyBase</tt>
+     * instance.
+     *
+     * @param   other the <tt>PyBase</tt> instance to be compared
+     * @return  zero if both objects share the same <tt>PyDBColumn</tt>s;
+     *          a positive value if this object's value is greater
+     *          then the argument's value; and a negative value if
+     *          this object's value is smaller then the argument's value;
+     *          if both objects are of different <tt>PyType</tt> their
+     *          <tt>PyType</tt>'s are compared.
+     * @see     Comparable
+     * @see     PyType
+     * @since   0.0.1
+     */
     @Override
-    public final int compareTo(final PyBase o) {
-        if (o.getType() == this.getType()) {
-            return Integer.valueOf(o.asDBRowDescriptor().hashCode()).compareTo(
-                    this.hashCode());
+    public final int compareTo(final PyBase other) {
+
+        if (other.getType() == this.getType()) {
+
+            boolean same = false;
+
+            List<PyDBColumn> cols1 = this.columns;
+            List<PyDBColumn> cols2 = other.asDBRowDescriptor().columns;
+
+            for (PyDBColumn pyDBColumn1 : cols1) {
+                for (PyDBColumn pyDBColumn2 : cols2) {
+                    if (pyDBColumn1.equals(pyDBColumn2)) {
+                        same = true;
+                        break;
+                    }
+                }
+                if (!same) {
+                    break;
+                }
+                same = false;
+            }
+
+            if (same) {
+                return 0;
+            } else if (this.columns.size()
+                    > other.asDBRowDescriptor().columns.size()) {
+                return 1;
+            }
+            return -1;
         } else {
-            return 1;
+            return other.getType().compareTo(this.getType());
         }
     }
-
 }
