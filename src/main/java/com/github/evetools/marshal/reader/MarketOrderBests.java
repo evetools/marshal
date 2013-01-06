@@ -1,17 +1,19 @@
 package com.github.evetools.marshal.reader;
 
-import java.io.InputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
 import com.github.evetools.marshal.Reader;
 import com.github.evetools.marshal.python.PyBase;
+import com.github.evetools.marshal.python.PyBool;
 import com.github.evetools.marshal.python.PyBuffer;
+import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyDict;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyObjectEx;
-import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyTuple;
 
 /**
@@ -194,7 +196,7 @@ public class MarketOrderBests {
                     + list.get(0).getType());
         }
 
-        this.timestamp = PyBase.convertWindowsTime(list.get(0).asLong()
+        this.timestamp = PyBool.convertWindowsTime(list.get(0).asLong()
                 .longValue());
 
         base = dict.get("lret");

@@ -1,19 +1,18 @@
 package com.github.evetools.marshal.reader.test;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.github.evetools.marshal.python.PyBool;
 import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyByte;
 import com.github.evetools.marshal.python.PyContainer;
 import com.github.evetools.marshal.python.PyDict;
-import com.github.evetools.marshal.python.PyDouble;
 import com.github.evetools.marshal.python.PyInt;
 import com.github.evetools.marshal.python.PyLong;
 import com.github.evetools.marshal.python.PyNone;
 import com.github.evetools.marshal.python.PyShort;
 import com.github.evetools.marshal.python.PyTuple;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.

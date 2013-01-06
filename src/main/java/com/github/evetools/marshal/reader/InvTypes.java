@@ -1,20 +1,20 @@
 package com.github.evetools.marshal.reader;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import com.github.evetools.marshal.Reader;
 import com.github.evetools.marshal.python.PyBase;
-import com.github.evetools.marshal.python.PyDict;
+import com.github.evetools.marshal.python.PyBool;
+import com.github.evetools.marshal.python.PyBuffer;
+import com.github.evetools.marshal.python.PyDBRow;
 import com.github.evetools.marshal.python.PyList;
 import com.github.evetools.marshal.python.PyObject;
 import com.github.evetools.marshal.python.PyObjectEx;
-import com.github.evetools.marshal.python.PyDBRow;
-import com.github.evetools.marshal.python.PyBuffer;
 import com.github.evetools.marshal.python.PyTuple;
-import java.io.InputStream;
 
 /**
  * Copyright (C)2011 by Gregor Anders All rights reserved.
@@ -341,7 +341,7 @@ public class InvTypes {
                         + tuple2.get(0).getType());
             }
 
-            this.timestamp = PyBase.convertWindowsTime(tuple1.get(0).asLong()
+            this.timestamp = PyBool.convertWindowsTime(tuple1.get(0).asLong()
                     .longValue());
 
             objectEx = tuple2.get(4).asObjectEx();
