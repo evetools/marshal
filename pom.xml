@@ -60,13 +60,15 @@
 			</roles>
 			<timezone>Europe/Berlin</timezone>
 		</developer>
-		<developer>
-			<id>candle</id>
+	</developers>
+	
+	<contributors>
+		<contributor>
 			<email>eve-marshal@candle.me.uk</email>
 			<name>Andrew Wheat (Candle)</name>
 			<timezone>GMT</timezone>
-		</developer>
-	</developers>
+		</contributor>
+	</contributors>
 
 	<issueManagement>
 		<system>github</system>
